@@ -41,9 +41,7 @@ export default function App() {
               aria-controls="mobile-drawer"
               onClick={() => setMenuOpen((v) => !v)}
             >
-              <span className="bar" />
-              <span className="bar" />
-              <span className="bar" />
+              <img src="/icons/menu.svg" alt="القائمة" width="24" height="24" />
             </button>
           </div>
         </div>
@@ -86,8 +84,10 @@ export default function App() {
         </>
       )}
       {/* هيرو */}
-      <section className="section" style={{ paddingTop: 40 }}>
+      <section className="section hero" style={{ paddingTop: 40 }}>
         <div className="container grid hero-grid" /* صارت تُضبط من CSS */>
+          {/* الخلفية المتحركة للسيارة */}
+          <div className="bg-car" aria-hidden="true" />
           <div data-aos="fade-up">
             <h1>تكييف سيارات بخبرة وضمان</h1>
             <p>
@@ -127,7 +127,7 @@ export default function App() {
           <h2 data-aos="fade-up" style={{ marginBottom: 18 }}>
             خدماتنا
           </h2>
-          <div className="grid grid-3 grid-services">
+          <div className="grid grid-services">
             {[
               ["تعبئة فريون", "فريون أصلي مع فحص ضغط."],
               ["كشف تهريب", "صبغة/نيتروجين وتحديد مكان التهريب."],
