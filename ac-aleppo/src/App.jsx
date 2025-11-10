@@ -21,14 +21,20 @@ export default function App() {
       {/* شريط علوي */}
       <header className="nav">
         <div className="container wrap">
-          <strong style={{ color: "var(--brand)" }}>العاصمة حلب</strong>
+          <strong style={{ color: "var(--brand)" }}>
+            <img src="images/logo.png" alt="" height="50px" />
+          </strong>
           {/* روابط الدِسك توب */}
           <nav className="links">
             <a href="#services">الخدمات</a>
             <a href="#whyus">لماذا نحن</a>
             <a href="#gallery">أعمالنا</a>
             <a href="#faq">الأسئلة</a>
-            <a href="#contact" className="btn" style={{ marginInlineStart: 8 }}>
+            <a
+              href="#contact"
+              className="btn_1"
+              style={{ marginInlineStart: 8 }}
+            >
               تواصل
             </a>
           </nav>
@@ -71,13 +77,13 @@ export default function App() {
               </a>
               <a
                 href="#contact"
-                className="btn"
+                className="btn_1"
                 onClick={() => setMenuOpen(false)}
               >
                 تواصل
               </a>
               <button className="close" onClick={() => setMenuOpen(false)}>
-                إغلاق القائمة
+                X
               </button>
             </div>
           </nav>
@@ -96,7 +102,7 @@ export default function App() {
             </p>
             <div className="actions" style={{ marginTop: 18 }}>
               <a
-                className="btn"
+                className="btn_1"
                 href={`https://wa.me/${phone.replace(
                   /\D/g,
                   ""
@@ -146,7 +152,11 @@ export default function App() {
       </section>
 
       {/* لماذا نحن */}
-      <section id="whyus" className="section" style={{ background: "#f8fafc" }}>
+      <section
+        id="whyus"
+        className="section"
+        style={{ background: "#070707ff" }}
+      >
         <div className="container">
           <h2 data-aos="fade-up" style={{ marginBottom: 18 }}>
             لماذا تختارنا؟
@@ -187,7 +197,7 @@ export default function App() {
       </section>
 
       {/* الأسئلة الشائعة */}
-      <section id="faq" className="section" style={{ background: "#f8fafc" }}>
+      <section id="faq" className="section" style={{ background: "#070707ff" }}>
         <div className="container">
           <h2 data-aos="fade-up" style={{ marginBottom: 18 }}>
             الأسئلة الشائعة
@@ -281,7 +291,12 @@ export default function App() {
         rel="noreferrer"
         aria-label="تواصل واتساب"
       >
-        واتساب
+        <img
+          src="/icons/whatsapp.svg"
+          alt="واتساب"
+          width="45vw"
+          height="45vw"
+        />
       </a>
     </>
   );
