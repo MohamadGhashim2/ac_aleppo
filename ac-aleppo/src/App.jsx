@@ -7,22 +7,38 @@ export default function App() {
   const [showAll, setShowAll] = useState(false);
 
   const galleryItems = [
-    { src: "/gallery/Blue.png", alt: "صورة قبل/بعد", pos: "50% 40%" },
-    { src: "/gallery/secound.jpg", alt: "تبديل كمبروسر", pos: "center" },
+    { src: "/gallery/Blue.png", alt: " افضل اصلاح في الرياض", pos: "50% 40%" },
+    {
+      src: "/gallery/secound.jpg",
+      alt: "افضل اصلاح سيارات في الرياض",
+      pos: "center",
+    },
     { src: "/gallery/Third.jpg", alt: "كشف تهريب", pos: "60% 50%" },
     { src: "/gallery/Fourth.jpg", alt: "تنظيف الثلاجة", pos: "center" },
     { src: "/gallery/Six.jpg", alt: "فحص إلكتروني", pos: "center" },
     // أضف ما تشاء لاحقًا…
-    { src: "/gallery/Seven.jpg", alt: "خدمة إضافية", pos: "center" },
-    { src: "/gallery/10.jpg", alt: "خدمة إضافية", pos: "center" },
-    { src: "/gallery/11.jpg", alt: "خدمة إضافية", pos: "center" },
-    { src: "/gallery/12.jpg", alt: "خدمة إضافية", pos: "center" },
-    { src: "/gallery/13.jpg", alt: "خدمة إضافية", pos: "center" },
-    { src: "/gallery/14.jpg", alt: "خدمة إضافية", pos: "center" },
-    { src: "/gallery/15.jpg", alt: "خدمة إضافية", pos: "center" },
-    { src: "/gallery/17.jpg", alt: "خدمة إضافية", pos: "center" },
-    { src: "/gallery/18.jpg", alt: "خدمة إضافية", pos: "center" },
-    { src: "/gallery/nine.jpg", alt: "خدمة إضافية", pos: "center" },
+    { src: "/gallery/Seven.jpg", alt: "كامري", pos: "center" },
+    { src: "/gallery/10.jpg", alt: "كورولا يارس", pos: "center" },
+    { src: "/gallery/11.jpg", alt: "النترا سوناتا لكزس", pos: "center" },
+    { src: "/gallery/12.jpg", alt: "مرسيدس اودي", pos: "center" },
+    { src: "/gallery/13.jpg", alt: "مرسيدس اودي", pos: "center" },
+    {
+      src: "/gallery/14.jpg",
+      alt: " ديزل افضل اصلاح سيارات غربي الرياض",
+      pos: "center",
+    },
+    {
+      src: "/gallery/15.jpg",
+      alt: "افضل مصلح مكيفات شرقي الرياض",
+      pos: "center",
+    },
+    {
+      src: "/gallery/17.jpg",
+      alt: "واضف من عندك ايضاً اي شي متعلق بالتكييف",
+      pos: "center",
+    },
+    { src: "/gallery/18.jpg", alt: "تصليح مكيفات", pos: "center" },
+    { src: "/gallery/nine.jpg", alt: "تصليح كمبورسور", pos: "center" },
   ];
   const visibleItems = showAll ? galleryItems : galleryItems.slice(0, 5);
   useEffect(() => {
@@ -66,7 +82,7 @@ export default function App() {
               aria-controls="mobile-drawer"
               onClick={() => setMenuOpen((v) => !v)}
             >
-              <img src="/icons/menu.svg" alt="القائمة" width="24" height="24" />
+              <img src="/icons/menu.svg" alt="ابو حلب" width="24" height="24" />
             </button>
           </div>
         </div>
@@ -146,7 +162,7 @@ export default function App() {
                 rel="noreferrer"
                 aria-label="Snapchat"
               >
-                <img src="/icons/snapchat.svg" alt="" />
+                <img src="/icons/snapchat.svg" alt="ابو حلب صناعية النسيم" />
               </a>
               <a
                 className="social-btn"
@@ -155,7 +171,7 @@ export default function App() {
                 rel="noreferrer"
                 aria-label="Instagram"
               >
-                <img src="/icons/instagram.svg" alt="" />
+                <img src="/icons/instagram.svg" alt="تصليح مكيفات" />
               </a>
               <a
                 className="social-btn"
@@ -164,7 +180,7 @@ export default function App() {
                 rel="noreferrer"
                 aria-label="TikTok"
               >
-                <img src="/icons/tiktok.svg" alt="" />
+                <img src="/icons/tiktok.svg" alt="صناعية  النسيم" />
               </a>
             </div>
           </div>
@@ -219,6 +235,7 @@ export default function App() {
           </div>
         </div>
       </section>
+
       {/* لماذا نحن */}
       <section
         id="whyus"
