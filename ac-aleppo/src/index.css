@@ -1,123 +1,183 @@
+/* ====== 1) الخط المخصص ====== */
 @font-face {
-  font-family: "Ara-Hamah-homs";
-  src: url("/fonts/Ara-Hamah-Homs.woff2") format("woff2");
-  font-weight: 100 900;
-  /* نطاق الأوزان */
+  font-family: "AraHamah";
+  src: url("/fonts/Ara-Hamah/Ara-Hamah-Homs.woff2") format("woff2");
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+000-5FF, U+0600-06FF, U+0750-077F;
-  /* لاتيني + عربي */
 }
+
+/* ====== 2) متغيرات وثيم عام ====== */
 :root {
   --brand: #990b0b;
   --accent: #f57f7f;
-  --dark: #000000;
-  --light: #fffafa;
-  --font-body: "Ara-Hamah-homs";
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --paper: #fffafa;
+
+  --font-body: "AraHamah", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-head: "AraHamah", "Noto Kufi Arabic", "Segoe UI", system-ui, sans-serif;
+
+  /* حجوم مرنة */
+  --h1: clamp(28px, 4.2vw, 40px);
+  --h2: clamp(22px, 3.2vw, 28px);
 }
 
+/* ====== 3) أساسيات ====== */
 * {
   box-sizing: border-box;
 }
 
 html,
 body {
-      font-family: var(--font-body);
-        font-variant-numeric: tabular-nums;
-        /* أرقام أوضح */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale; 
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Kufi Arabic", "Noto Naskh Arabic", sans-serif;
-  background: var(--dark);
-  color: var(--light);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-numeric: tabular-nums;
 }
 
-h1,h2,h3{ font-family: var(--font-head); font-weight: 700; }
-.btn, .nav a{ font-weight: 600; }
-.container {
-  width: min(1200px, 92%);
-  margin-inline: auto;
-}
 h1,
 h2,
 h3 {
+  margin: 8px 0 12px;
   font-family: var(--font-head);
-  font-weight: 700;
+  font-weight: 500;
 }
 
-.btn,
-.nav a {
-  font-weight: 600;
+h1 {
+  font-size: var(--h1);
+  line-height: 1.25;
 }
+
+h2 {
+  font-size: var(--h2);
+
+}
+
+.underline-left {
+  position: relative;
+
+  /* مسافة بين النص والخط */
+}
+
+.underline-left::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  /* بداية العنصر (يدعم RTL/LTR) */
+  bottom: 0;
+  width: 30px;
+  /* طول الخط */
+  height: 3px;
+  /* سماكة الخط */
+  background: var(--brand);
+  border-radius: 999px;
+  /* طرف ناعم */
+}
+
+p {
+  margin: 0 0 8px;
+  line-height: 1.8;
+}
+
+.container {
+  width: min(1200px, 92%);
+  margin-inline: auto;
+
+}
+
 .section {
-  padding: 64px 0;
+  padding: clamp(32px, 6vw, 64px) 0;
+  box-shadow: #1f0c0c33 12px 25px 60px -9px;
 }
 
 .btn {
   display: inline-block;
-
   padding: 12px 18px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--brand);
-  color: var(--light);
+  color: #fff;
   text-decoration: none;
-}
-.btn_1 {
-  display: inline-block;
-  padding: 12px 18px;
-  border-radius: 10px;
-  background:#25D366 ;
-  color: var(--light);
-  text-decoration: none;
+  font-weight: 400;
   text-align: center;
 }
+
+.btn.alt {
+  background: var(--accent);
+  color: #2b2b2b;
+}
+
+.btn.whatsapp {
+  background: rgba(0, 165, 60, 0.767);
+
+}
+
+/* ====== بطاقات وشبكات ====== */
 .card {
-  background:var(--light);
+  background: var(--paper);
+  color: #000;
   border: 1px solid #f1d5d5;
   border-radius: 14px;
-  padding: 18px;
-  color: #000000;
+  padding: 9px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, .04);
+
+
+}
+
+.banner-card {
+  overflow: hidden;
+}
+
+.banner-media {
+
+  display: block;
+  width: 100%;
+  /* عرض كامل للكارد */
+  height: clamp(160px, 30vw, 280px);
+  /* ارتفاع مرن */
+  object-fit: cover;
+  /* يقصّ الزائد ويحافظ على النسبة */
+  object-position: 16% 11%;
+  /* حرّك تركيز القص (X Y) حسب حاجتك */
+  border-radius: 12px;
+  /* يطابق زوايا الكارد */
+  transform: scale(1.1);
 }
 
 
-.grid-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
 
 .grid {
   display: grid;
   gap: 16px;
 }
 
-
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
 .grid-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.whatsapp-fab {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 999;
-  border-radius: 999px;
-  padding: 12px 16px;
-  background: #25D366;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  ;
+/* شبكة الخدمات: 3 دسكتوب → 2 جوال → 1 تحت 380px */
+.grid.grid-services {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+
+
+
+/* ====== هيدر ومنيو جوال ====== */
 .nav {
   position: sticky;
   top: 0;
-  background:#a84a43;
-  border-bottom: 1px solid #443e3e;
   z-index: 50;
+  background: #a60000;
+  border-bottom: 1px solid #443e3e;
 }
 
 .nav .wrap {
@@ -134,50 +194,16 @@ h3 {
 }
 
 .nav a {
- 
-  text-decoration: none;
-  color: #fdfdfd;
-}
-
-.footer {
-  background: #a84a43;
   color: #fff;
-  padding: 28px 0;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-}
-
-.mobile-menu {
-  display: none;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 1.2rem;
 }
 
 .menu-btn {
   display: none;
-  cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 10px;
- 
 }
 
-.mobile-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 12px;
-}
-
-h1,
-h2,
-h3 {
-  margin: 8px 0 12px;
-}
-
-p {
-  line-height: 1.8;
-  margin: 0 0 8px;
-}
 .hamburger {
   display: inline-flex;
   align-items: center;
@@ -185,9 +211,9 @@ p {
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  
-  background: var(--light);
+  background: #fff;
   cursor: pointer;
+  border: 1px solid #b89497;
 }
 
 .hamburger:focus {
@@ -195,65 +221,41 @@ p {
   outline-offset: 2px;
 }
 
-/* لوحة المنيو الجوال */
+
+/* لوحة المنيو */
 .mobile-drawer {
   position: fixed;
   inset-inline: 0;
   top: 64px;
-  /* تحت الهيدر */
-  background: #000000;
+  z-index: 1001;
+  background: #000;
+  color: #fff;
   border-bottom: 1px solid #ada0a0;
   padding: 14px 16px 20px;
-  z-index: 1001;
-  
   box-shadow: 0 12px 22px rgba(0, 0, 0, .08);
-    transform: translateY(-8px);
-      opacity: 0;
-      animation: slideDown .18s ease-out forwards;
-    
+  transform: translateY(-8px);
+  opacity: 0;
+  animation: slideDown .18s ease-out forwards;
 }
-@keyframes slideDown {
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-.backdrop {
-  animation: fadeIn .18s ease-out;
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
 
-  to {
-    opacity: .45;
-  }
-}
 .mobile-drawer a {
   display: block;
   padding: 12px 2px;
+  color: #fff;
   text-decoration: none;
-  color: #ffffff;
- 
-}
-
-.mobile-drawer a:last-child {
-  border-bottom: 0;
 }
 
 .mobile-drawer .close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
   width: 100%;
   padding: 10px 14px;
+  margin-top: 10px;
   border-radius: 10px;
   background: #fd2f2f;
   color: #fff;
-  text-decoration: none;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .backdrop {
@@ -261,135 +263,31 @@ p {
   inset: 0;
   background: rgba(0, 0, 0, .45);
   z-index: 1000;
-}
-/* شبكة الخدمات: 3 أعمدة على الدِسك توب، عمودان على الجوال */
-.grid-services {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  animation: fadeIn .18s ease-out;
 }
 
-@media (max-width: 900px) {
-  .grid-services {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.no-scroll {
+  overflow: hidden;
 }
 
-/* لو شاشات صغيرة جداً وتريدها ترجع لعمود واحد تحت 360px */
-@media (max-width: 320px) {
-  .grid-services {
-    grid-template-columns: 1fr;
-  }
-}
-@media (max-width:900px) {
-  .card {
-    padding: 14px;
-  }
-
-  h2 {
-    font-size: 22px;
-  }
-}
-/* ======= تحسينات الجوال ======= */
-@media (max-width: 900px) {
-  .section {
-    padding: 36px 0;
-  }
-
-  h1 {
-    font-size: 28px;
-    line-height: 1.3;
-  }
-
-  h2 {
-    font-size: 22px;
-  }
-
-  .grid-3,
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-
-  /* كل الشبكات عمود واحد */
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .nav .links {
-    display: none;
-  }
-
-  .menu-btn {
-    display: inline-flex;
-  }
-
-  /* الحاوي لزر الهامبرغر */
-  /* الهيرو عمود واحد */
-  .actions {
-    display: flex;
-    gap: 5px;
-  }
-
-  .no-scroll {
-    overflow: hidden;
-  }
-
-  /* الأزرار تحت بعض */
- 
- 
-  /* الأزرار فل-وِدث */
-  .card {
-    border-radius: 12px;
-  }
-
-  .nav .links {
-    display: none;
-  }
-
-  /* أخفي روابط الدِسك توب */
-  .menu-btn {
-    display: inline-flex;
-  }
-
-  /* أظهر زر القائمة */
-  .mobile-menu {
-    display: block;
-  }
-
-  .mobile-menu[open] {
-    border-bottom: 1px solid #eee;
-  }
-
-  .mobile-panel a {
-    padding: 10px 0;
-    border-bottom: 1px dashed #eee;
-  }
-
-  .mobile-panel a:last-child {
-    border-bottom: 0;
-  }
-
-  .whatsapp-fab {
-    right: 12px;
-    bottom: 12px;
-  }
-}
-/* شبكة الخدمات: 3 أعمدة على الدِسك توب، عمودان على الجوال */
-.grid.grid-services {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-@media (max-width: 900px) {
-  .grid.grid-services {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+@keyframes slideDown {
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
-@media (max-width: 380px) {
-  .grid.grid-services {
-    grid-template-columns: 1fr !important;
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: .45
   }
 }
 
-/* ====== خلفية هيرو مع سيارة متحركة ====== */
+/* ====== هيرو + سيارة متحركة ريسبونسف ====== */
 .hero {
   position: relative;
   overflow: hidden;
@@ -399,74 +297,518 @@ p {
   position: relative;
 }
 
-/* عنصر السيارة */
+.hero-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1.3fr 1fr;
+}
+
+
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+
+
 .bg-car {
   position: absolute;
+  inset-inline-end: 45%;
+  /* يمين في RTL/LTR منطقي */
+  inset-block-end: -80%;
+  /* أسفل */
+  /* بدلاً من vw للموضع، استخدم px/0 لضمان الثبات */
+  /* ازحها قليلًا لو أردت هوامش: inset-inline-end: 12px; inset-block-end: 8px; */
+
+  /* الحجم مرن: */
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: url("/images/car3.png") no-repeat right bottom / contain;
+  pointer-events: none;
   z-index: 0;
 
-  /* مكانها النهائي: يسار وأسفل بشكل مرن */
-  left: clamp(-350px, 1222222vw, -400px);
-  /* يبقيها طالعة شوي من الإطار بشكل متزن */
-  bottom: clamp(-48px, -5vw, -16px);
-  /* مسافة مرنة عن الأسفل */
-
-  /* حجم مرن بلا ميديا */
-  width: clamp(320px, 80vw, 1024px);
-  aspect-ratio: 16/9;
-
-  background: url("/images/car.png") no-repeat center / contain;
-  pointer-events: none;
-
-  /* دخول من خارج اليسار ثم طفو خفيف */
+  /* أنيميشن دخول من اليمين ثم طفو خفيف */
   opacity: 0;
-  transform: translateX(-120vw);
+  transform: translateX(120vw);
   animation:
-    carFromLeft 1.3s cubic-bezier(.18, .9, .2, 1) forwards,
-    carFloat 6s ease-in-out 1.2s infinite alternate;
-  will-change: transform, opacity;
+    carFromRight .9s cubic-bezier(.18, .9, .2, 1) forwards,
+    carFloat 6s ease-in-out 1s infinite alternate;
 }
-/* دخول أولي */
-@keyframes carFromLeft {
+
+
+@keyframes carFromRight {
   0% {
     opacity: 0;
-    transform: translateX(-120vw)
+    transform: translateX(120vw);
   }
 
   60% {
     opacity: .9;
-    transform: translateX(12px)
+    transform: translateX(-12px);
   }
 
+  /* تجاوز بسيط */
   100% {
     opacity: .65;
-    transform: translateX(0)
+    transform: translateX(0);
   }
 }
 
-@keyframes carFloat {
+/* طفو خفيف باتجاه اليمين */
+@keyframes carFloatR {
   0% {
-    transform: translateX(0) translateY(0)
+    transform: translateX(0) translateY(0);
   }
 
   100% {
-    transform: translateX(-4px) translateY(-6px)
+    transform: translateX(-5px) translateY(-7px);
   }
 }
 
-/* تأكد أن المحتوى فوق الخلفية */
-.hero .grid>*:not(.bg-car) {
+
+
+.services-wrap {
+  position: relative;
+  overflow: hidden;
+  /* أي جزء خارج الحاوية يختفي */
+}
+
+/* محتوى خدماتنا فوق السيارة */
+.services-content {
   position: relative;
   z-index: 1;
 }
 
-/* أحجام على الجوال: صغّر وخليها أبعد شوي */
+/* السيارة الديكورية داخل خدماتنا */
+.car-services {
+  position: absolute;
+  left: -10%;
+  /* حرّك أفقياً (عدّل الرقم براحتك) */
+  bottom: -35%;
+  /* حرّك عمودياً (عدّل الرقم براحتك) */
+
+  width: 70%;
+  /* حجم مرن فقط، بدون تأثير على الكروت */
+  aspect-ratio: 16 / 9;
+  background: url("/images/car2.png") no-repeat left bottom / contain;
+
+  opacity: .20;
+  /* شفافية خفيفة */
+  pointer-events: none;
+  /* غير قابلة للنقر */
+  z-index: 0;
+  /* خلف المحتوى */
+
+  /* دخول من اليسار + طفو خفيف (اختياري) */
+
+  animation:
+    carFloatL 6s ease-in-out 1s infinite alternate;
+}
 
 
-/* احترام تفضيل تقليل الحركة */
+.car-services-1 {
+  position: absolute;
+  right: -40%;
+  /* حرّك أفقياً (عدّل الرقم براحتك) */
+  bottom: -80%;
+  /* حرّك عمودياً (عدّل الرقم براحتك) */
+
+  width: 70%;
+  /* حجم مرن فقط، بدون تأثير على الكروت */
+  aspect-ratio: 16 / 9;
+  background: url("/images/car4.png") no-repeat left bottom / contain;
+
+  opacity: .20;
+  /* شفافية خفيفة */
+  pointer-events: none;
+  /* غير قابلة للنقر */
+  z-index: 0;
+  /* خلف المحتوى */
+
+  /* دخول من اليسار + طفو خفيف (اختياري) */
+
+  animation:
+    carFloatL 6s ease-in-out 1s infinite alternate;
+}
+
+.car-services-2 {
+  position: absolute;
+  left: -10%;
+  /* حرّك أفقياً (عدّل الرقم براحتك) */
+  bottom: -15%;
+  /* حرّك عمودياً (عدّل الرقم براحتك) */
+
+  width: 70%;
+  /* حجم مرن فقط، بدون تأثير على الكروت */
+  aspect-ratio: 16 / 9;
+  background: url("/images/car5.png") no-repeat left bottom / contain;
+
+  opacity: .20;
+  /* شفافية خفيفة */
+  pointer-events: none;
+  /* غير قابلة للنقر */
+  z-index: 0;
+  /* خلف المحتوى */
+
+  /* دخول من اليسار + طفو خفيف (اختياري) */
+
+  animation:
+    carFloatL 6s ease-in-out 1s infinite alternate;
+}
+
+/* طفو خفيف باتجاه اليسار */
+@keyframes carFloatL {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  100% {
+    transform: translateX(-5px) translateY(-7px);
+  }
+}
+
+
+/* ====== فوتر ====== */
+.footer {
+  background: #a84a43;
+  color: #fff;
+  padding: 28px 0;
+}
+
+/* ====== زر واتساب عائم ====== */
+.whatsapp-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 999;
+  border-radius: 999px;
+  padding: 0;
+  background: #25D366;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+}
+
+.whatsapp-fab img {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+/* صف أيقونات السوشال */
+.social-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.social-btn {
+  display: grid;
+  place-items: center;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, .01);
+  /* خلفية موحّدة لظهور الأيقونة بوضوح */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .08);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.social-btn img {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, .12);
+}
+
+.social-btn:active {
+  transform: translateY(0);
+}
+
+/* يبقى صف واحد على كل المقاسات؛ لو شاشة ضيقة جدًا يظل مناسبًا */
+
+
+/* بطاقات المعرض */
+.gallery-card {
+  overflow: hidden;
+  padding: 0;
+  height: clamp(10px, 36vw, 350px);
+  /* بدون حشوة لأننا نعرض صورة بالكامل */
+  border-radius: 14px;
+}
+
+.gallery-media {
+  display: block;
+  width: 100%;
+  height: clamp(10px, 36vw, 350px);
+  /* ارتفاع مرن */
+  object-fit: cover;
+
+  /* ركّز القص؛ نعدله لكل صورة من JSX عند الحاجة */
+  border-radius: 14px;
+  /* يطابق زوايا الكارد */
+}
+
+/* تأثير لطيف */
+.gallery-card:hover .gallery-media {
+  transform: scale(1.02);
+  transition: transform .25s ease;
+}
+
+/* بطاقات المعرض (موجودة لديك) */
+/* ... */
+
+/* كرت "عرض المزيد" */
+.more-card, .hide-card{
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  border: 1px dashed #f0b6b6;          /* تمييز بسيط */
+  background: #fffefd;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.more-card:hover, .hide-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0,0,0,.12);
+  border-color: #f09a9a;
+}
+
+.more-card .plus{
+  font-size: clamp(24px, 3.6vw, 36px);
+  line-height: 1;
+  font-weight: 600;
+  color: var(--brand);
+}
+.more-label{
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+/* زر الإخفاء بشكل مختلف بسيط */
+.hide-card{
+  border-style: solid;
+  background: #fff;
+}
+
+
+
+@media (max-width: 1440px) {
+  .bg-car {
+    inset-inline-end: 35%;
+  }
+
+  .car-services {
+    width: 90%;
+  }
+
+  .car-services-2 {
+    width: 90%;
+  }
+
+  .car-services-1 {
+    width: 75%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bg-car {
+    inset-block-end: 20%;
+    inset-inline-end: 15%;
+    width: 120%;
+  }
+
+  .car-services {
+    width: 96%;
+    left: -17%;
+  }
+
+  .car-services-2 {
+    width: 96%;
+    left: -17%;
+  }
+
+  .car-services-1 {
+    width: 80%;
+    right: -50%;
+    bottom: -40%;
+  }
+
+  .actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav .links {
+    display: none;
+  }
+
+  .menu-btn {
+    display: inline-flex;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .bg-car {
+    inset-block-end: 3%;
+    inset-inline-end: -35%;
+    width: 180%;
+  }
+
+  .car-services {
+    width: 110%;
+    bottom: 8%;
+  }
+
+  .car-services-2 {
+    width: 110%;
+    bottom: 8%;
+  }
+
+  .car-services-1 {
+    width: 106%;
+    right: -65%;
+    bottom: -10%;
+  }
+
+  .grid.grid-services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .bg-car {
+    inset-block-end: 8%;
+    inset-inline-end: -70%;
+    width: 240%;
+  }
+
+  .car-services {
+    width: 130%;
+    bottom: 8%;
+  }
+
+  .car-services-2 {
+    width: 130%;
+    bottom: 8%;
+  }
+
+  .car-services-1 {
+    width: 130%;
+    bottom: -25%;
+  }
+}
+
+@media (max-width: 320px) {
+  .bg-car {
+    inset-block-end: 8%;
+    inset-inline-end: -70%;
+    width: 240%;
+  }
+
+  .car-services {
+    width: 350%;
+    bottom: 20%;
+    left: -95%;
+  }
+
+  .car-services-2 {
+    width: 350%;
+    bottom: 20%;
+    left: -95%;
+  }
+
+  .car-services-1 {
+    width: 250%;
+    bottom: -10%;
+    right: -150%;
+  }
+
+  .grid.grid-services {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 @media (prefers-reduced-motion: reduce) {
   .bg-car {
     animation: none;
     opacity: .4;
     transform: none;
   }
+
+  .car-services {
+    animation: none;
+    opacity: .18;
+    transform: none;
+  }
+
+  .car-services-1 {
+    animation: none;
+    opacity: .18;
+    transform: none;
+  }
+
+  .car-services-2 {
+    animation: none;
+    opacity: .18;
+    transform: none;
+  }
+
+}
+/* بطاقات المعرض (موجودة لديك) */
+/* ... */
+
+/* كرت "عرض المزيد" */
+.more-card,
+.hide-card {
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  border: 1px dashed #f0b6b6;
+  /* تمييز بسيط */
+  background: #fffefd;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.more-card:hover,
+.hide-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, .12);
+  border-color: #f09a9a;
+}
+
+.more-card .plus {
+  font-size: clamp(24px, 3.6vw, 36px);
+  line-height: 1;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.more-label {
+  font-weight: 500;
+  color: #333;
+}
+
+/* زر الإخفاء بشكل مختلف بسيط */
+.hide-card {
+  border-style: solid;
+  background: #fff;
 }
