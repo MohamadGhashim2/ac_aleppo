@@ -108,11 +108,12 @@ p {
 
 .btn.alt {
   background: var(--accent);
-  color: #2b2b2b;
+  color: #000000;
+  opacity: 0.95;
 }
 
 .btn.whatsapp {
-  background: rgba(0, 165, 60, 0.767);
+  background: rgba(0, 165, 60, 0.95);
 
 }
 
@@ -506,7 +507,7 @@ p {
   /* شفافية خفيفة */
   pointer-events: none;
   /* غير قابلة للنقر */
-  z-index: ;
+  z-index: 0 ;
   /* خلف المحتوى */
 
   /*    +طفو خفيف (اختياري) */
