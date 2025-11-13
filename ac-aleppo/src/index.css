@@ -68,7 +68,7 @@ h2 {
   content: "";
   position: absolute;
   inset-inline-start: 0;
-  /* بداية العنصر (يدعم RTL/LTR) */
+
   bottom: 0;
   width: 30px;
   /* طول الخط */
@@ -118,14 +118,19 @@ p {
 
 /* ====== بطاقات وشبكات ====== */
 .card {
-  background: var(--paper);
-  color: #000;
+  background: rgba(255, 251, 251, 0.863);
+  color: #000000;
   border: 1px solid #f1d5d5;
   border-radius: 14px;
   padding: 9px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, .04);
+  font-size: 1.1rem;
+  ;
 
+}
 
+.contact-section {
+  font-size: 1.3rem;
 }
 
 .banner-card {
@@ -136,15 +141,15 @@ p {
 
   display: block;
   width: 100%;
-  /* عرض كامل للكارد */
+
   height: clamp(160px, 30vw, 280px);
-  /* ارتفاع مرن */
+
   object-fit: cover;
-  /* يقصّ الزائد ويحافظ على النسبة */
+
   object-position: 16% 11%;
-  /* حرّك تركيز القص (X Y) حسب حاجتك */
+
   border-radius: 12px;
-  /* يطابق زوايا الكارد */
+
   transform: scale(1.1);
 }
 
@@ -311,22 +316,79 @@ p {
   flex-wrap: wrap;
 }
 
+.offer-badge {
+  position: relative;
+  overflow: visible;
+  background-color: #fffd99;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  margin-bottom: 3%;
+  color: #0c0c0c;
+  border-bottom: #990b0b 1px solid;
+  border-left: #990b0b 1px solid;
+  text-align: center;
+
+  box-shadow: 0px 4px 10px rgba(77, 73, 22, 0.4);
+}
 
 
+.offer-badge-price {
+  font-size: 2.8rem;
+  font-weight: 600;
+  animation: float 1s ease-in-out 1s infinite alternate;
+}
+
+.offer-badge-price h3 span {
+  font-size: 1rem;
+}
+
+.offer-badge-text-title {
+  font-size: 3rem;
+  font-weight: 500;
+  margin-top: -6%;
+}
+
+.offer-image {
+  position: absolute;
+  top: -12vw;
+
+  inset-inline-start: 80%;
+
+  width: 16vw;
+  height: auto;
+  transform: rotate(-2deg);
+  /* ميلان بسيط يعطي إحساس ملصق */
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+  /* ما تتأثر بالكليك */
+}
+
+
+@keyframes float {
+  0% {
+    transform: scale(1) translatey(-70%);
+
+  }
+
+  100% {
+    transform: scale(1.2)translatey(-70%);
+  }
+}
 
 .bg-car {
   position: absolute;
   inset-inline-end: 45%;
-  /* يمين في RTL/LTR منطقي */
+
   inset-block-end: -80%;
   /* أسفل */
-  /* بدلاً من vw للموضع، استخدم px/0 لضمان الثبات */
-  /* ازحها قليلًا لو أردت هوامش: inset-inline-end: 12px; inset-block-end: 8px; */
+
+
 
   /* الحجم مرن: */
   width: 100%;
   aspect-ratio: 16/9;
-  background: url("/images/car3.png") no-repeat right bottom / contain;
+  background: url("/images/Best-repairs-in-East-Riyadh.png") no-repeat right bottom / contain;
   pointer-events: none;
   z-index: 0;
 
@@ -385,15 +447,12 @@ p {
 /* السيارة الديكورية داخل خدماتنا */
 .car-services {
   position: absolute;
-  left: -10%;
-  /* حرّك أفقياً (عدّل الرقم براحتك) */
-  bottom: -35%;
-  /* حرّك عمودياً (عدّل الرقم براحتك) */
-
-  width: 70%;
+  width: 78em;
+  bottom: -11em;
+  left: -10em;
   /* حجم مرن فقط، بدون تأثير على الكروت */
   aspect-ratio: 16 / 9;
-  background: url("/images/car2.png") no-repeat left bottom / contain;
+  background: url("/images/Air-conditioning-repair.png") no-repeat left bottom / contain;
 
   opacity: .20;
   /* شفافية خفيفة */
@@ -411,15 +470,15 @@ p {
 
 .car-services-1 {
   position: absolute;
-  right: -40%;
-  /* حرّك أفقياً (عدّل الرقم براحتك) */
-  bottom: -80%;
-  /* حرّك عمودياً (عدّل الرقم براحتك) */
+  right: -44em;
 
-  width: 70%;
+  bottom: -16em;
+
+
+  width: 90em;
   /* حجم مرن فقط، بدون تأثير على الكروت */
   aspect-ratio: 16 / 9;
-  background: url("/images/car4.png") no-repeat left bottom / contain;
+  background: url("/images/Mercedes-air-conditioning-pecialist.png") no-repeat left bottom / contain;
 
   opacity: .20;
   /* شفافية خفيفة */
@@ -428,7 +487,7 @@ p {
   z-index: 0;
   /* خلف المحتوى */
 
-  /* دخول من اليسار + طفو خفيف (اختياري) */
+
 
   animation:
     carFloatL 6s ease-in-out 1s infinite alternate;
@@ -436,24 +495,21 @@ p {
 
 .car-services-2 {
   position: absolute;
-  left: -10%;
-  /* حرّك أفقياً (عدّل الرقم براحتك) */
-  bottom: -15%;
-  /* حرّك عمودياً (عدّل الرقم براحتك) */
-
-  width: 70%;
+  width: 78em;
+  bottom: -11em;
+  left: -10em;
   /* حجم مرن فقط، بدون تأثير على الكروت */
   aspect-ratio: 16 / 9;
-  background: url("/images/car5.png") no-repeat left bottom / contain;
+  background: url("/images/Air-conditioning-repairman.png") no-repeat left bottom / contain;
 
   opacity: .20;
   /* شفافية خفيفة */
   pointer-events: none;
   /* غير قابلة للنقر */
-  z-index: 0;
+  z-index: ;
   /* خلف المحتوى */
 
-  /* دخول من اليسار + طفو خفيف (اختياري) */
+  /*    +طفو خفيف (اختياري) */
 
   animation:
     carFloatL 6s ease-in-out 1s infinite alternate;
@@ -553,7 +609,6 @@ p {
   /* ارتفاع مرن */
   object-fit: cover;
 
-  /* ركّز القص؛ نعدله لكل صورة من JSX عند الحاجة */
   border-radius: 14px;
   /* يطابق زوايا الكارد */
 }
@@ -564,61 +619,83 @@ p {
   transition: transform .25s ease;
 }
 
-/* بطاقات المعرض (موجودة لديك) */
+/* بطاقات المعرض ( ) */
 /* ... */
 
 /* كرت "عرض المزيد" */
-.more-card, .hide-card{
+.more-card,
+.hide-card {
   display: grid;
   place-items: center;
   gap: 6px;
   cursor: pointer;
   user-select: none;
-  border: 1px dashed #f0b6b6;          /* تمييز بسيط */
-  background: #fffefd;
+  border: 1px dashed #f0b6b6;
+  z-index: 1;
+
+  /* تمييز بسيط */
+  background: rgba(255, 255, 255, 0.534);
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
-.more-card:hover, .hide-card:hover{
+
+.more-card:hover,
+.hide-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 18px rgba(0,0,0,.12);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, .12);
   border-color: #f09a9a;
+  opacity: 1;
 }
 
-.more-card .plus{
+.more-card .plus {
   font-size: clamp(24px, 3.6vw, 36px);
   line-height: 1;
   font-weight: 600;
   color: var(--brand);
 }
-.more-label{
-  font-weight: 900;
-  font-size: 1.3rem;
-  color: #333;
+
+.more-label {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #000000;
 }
 
 /* زر الإخفاء بشكل مختلف بسيط */
-.hide-card{
+.hide-card {
   border-style: solid;
   background: #fff;
 }
 
-
-
-@media (max-width: 1440px) {
+@media (max-width: 1536px) {
   .bg-car {
     inset-inline-end: 35%;
   }
 
-  .car-services {
-    width: 90%;
+  .car-services-2 {
+  width: 78em;
+    bottom: -11em;
+    left: -10em;
+  }
+  .car-services-1 {
+    right: -44em;
+    bottom: -14em;
+    width: 80em;
+  }
+}
+
+@media (max-width: 1280px) {
+  .bg-car {
+    inset-inline-end: 35%;
   }
 
-  .car-services-2 {
-    width: 90%;
+  .offer-image {
+    top: -16vw;
+    inset-inline-start: 80%;
+    width: 23%;
   }
 
   .car-services-1 {
-    width: 75%;
+    right: -49em;
+    bottom: -13em;
   }
 }
 
@@ -630,19 +707,16 @@ p {
   }
 
   .car-services {
-    width: 96%;
-    left: -17%;
+    width: 78em;
+    bottom: -11em;
+    left: -10em;
   }
 
-  .car-services-2 {
-    width: 96%;
-    left: -17%;
-  }
 
   .car-services-1 {
-    width: 80%;
-    right: -50%;
-    bottom: -40%;
+    right: -47em;
+    bottom: -12em;
+    width: 75em;
   }
 
   .actions .btn {
@@ -660,10 +734,17 @@ p {
 
   .hero-grid {
     grid-template-columns: 1fr;
+
+  }
+
+  .offer-image {
+    top: -20vw;
+    inset-inline-start: 68vw;
+    width: 29%;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .bg-car {
     inset-block-end: 3%;
     inset-inline-end: -35%;
@@ -671,23 +752,28 @@ p {
   }
 
   .car-services {
-    width: 110%;
-    bottom: 8%;
+    width: 72em;
+    bottom: -9em;
+    left: -12em;
   }
 
   .car-services-2 {
-    width: 110%;
-    bottom: 8%;
+    width: 72em;
+    bottom: -9em;
+    left: -12em;
   }
 
   .car-services-1 {
-    width: 106%;
-    right: -65%;
-    bottom: -10%;
+    bottom: -11em;
+    width: 78em;
   }
 
   .grid.grid-services {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .offer-image {
+    width: 35%;
   }
 }
 
@@ -699,48 +785,95 @@ p {
   }
 
   .car-services {
-    width: 130%;
-    bottom: 8%;
+    width: 67em;
+    bottom: -6em;
+    left: -11em;
   }
 
   .car-services-2 {
-    width: 130%;
-    bottom: 8%;
+    width: 67em;
+    bottom: -6em;
+    left: -11em;
   }
 
   .car-services-1 {
-    width: 130%;
-    bottom: -25%;
+    right: -47em;
+    bottom: -10em;
+    width: 74em;
+  }
+
+  .offer-badge-text-title {
+    font-size: 2rem;
+
+    margin-top: -10%;
+  }
+
+  .offer-image {
+    top: -22vw;
+    right: 70vw;
   }
 }
 
-@media (max-width: 320px) {
-  .bg-car {
-    inset-block-end: 8%;
-    inset-inline-end: -70%;
-    width: 240%;
-  }
+@media (max-width: 475px) {
+  
 
   .car-services {
-    width: 350%;
-    bottom: 20%;
-    left: -95%;
+    width: 65em;
+    bottom: 0.1em;
+    left: -15em;
   }
 
   .car-services-2 {
-    width: 350%;
-    bottom: 20%;
-    left: -95%;
+    width: 65em;
+    bottom: 0.1em;
+    left: -15em;
   }
 
   .car-services-1 {
-    width: 250%;
-    bottom: -10%;
-    right: -150%;
+    bottom: -9em;
+    width: 72em;
+  }
+
+  .offer-badge-text-title {
+    font-size: 1.7rem;
+
+    margin-top: -10%;
+  }
+
+  .offer-badge-text {
+    font-size: 1rem;
+  }
+
+  .offer-image {
+   
+    width: 9rem;
+  }
+
+}
+
+@media (max-width: 320px) {
+  
+  .car-services {
+    bottom: 19em;
+    left: -20em;
+  }
+
+  .car-services-2 {
+    
+    bottom: 19em;
+    left: -20em;
+  }
+
+  .car-services-1 {
+    width: 67em;
   }
 
   .grid.grid-services {
     grid-template-columns: 1fr;
+  }
+
+  .offer-image {
+    display: none;
   }
 }
 
@@ -770,45 +903,4 @@ p {
     transform: none;
   }
 
-}
-/* بطاقات المعرض (موجودة لديك) */
-/* ... */
-
-/* كرت "عرض المزيد" */
-.more-card,
-.hide-card {
-  display: grid;
-  place-items: center;
-  gap: 6px;
-  cursor: pointer;
-  user-select: none;
-  border: 1px dashed #f0b6b6;
-  /* تمييز بسيط */
-  background: #fffefd;
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-}
-
-.more-card:hover,
-.hide-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 18px rgba(0, 0, 0, .12);
-  border-color: #f09a9a;
-}
-
-.more-card .plus {
-  font-size: clamp(24px, 3.6vw, 36px);
-  line-height: 1;
-  font-weight: 600;
-  color: var(--brand);
-}
-
-.more-label {
-  font-weight: 500;
-  color: #333;
-}
-
-/* زر الإخفاء بشكل مختلف بسيط */
-.hide-card {
-  border-style: solid;
-  background: #fff;
 }

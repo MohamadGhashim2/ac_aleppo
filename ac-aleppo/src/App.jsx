@@ -6,41 +6,62 @@ export default function App() {
   const waText = "مرحباً، أريد الاستفسار عن خدمة تكييف السيارات";
   const [showAll, setShowAll] = useState(false);
 
+  // ⏱️ حالة العدّاد
+
+  // ⏱️ منطق العدّاد 30 دقيقة مع localStorage
+
   const galleryItems = [
-    { src: "/gallery/Blue.png", alt: " افضل اصلاح في الرياض", pos: "50% 40%" },
     {
-      src: "/gallery/secound.jpg",
+      src: "gallery/ابو-حلب.jpg",
+      alt: " افضل اصلاح في الرياض",
+      pos: "50% 40%",
+    },
+    {
+      src: "/gallery/افضل-مصلح.jpg",
       alt: "افضل اصلاح سيارات في الرياض",
       pos: "center",
     },
-    { src: "/gallery/Third.jpg", alt: "كشف تهريب", pos: "60% 50%" },
-    { src: "/gallery/Fourth.jpg", alt: "تنظيف الثلاجة", pos: "center" },
-    { src: "/gallery/Six.jpg", alt: "فحص إلكتروني", pos: "center" },
-    // أضف ما تشاء لاحقًا…
-    { src: "/gallery/Seven.jpg", alt: "كامري", pos: "center" },
-    { src: "/gallery/10.jpg", alt: "كورولا يارس", pos: "center" },
-    { src: "/gallery/11.jpg", alt: "النترا سوناتا لكزس", pos: "center" },
-    { src: "/gallery/12.jpg", alt: "مرسيدس اودي", pos: "center" },
-    { src: "/gallery/13.jpg", alt: "مرسيدس اودي", pos: "center" },
+    { src: "/gallery/العاصمة-حلب.jpg", alt: "كشف تهريب", pos: "60% 50%" },
+    { src: "/gallery/النترا.jpg", alt: "تنظيف الثلاجة", pos: "center" },
     {
-      src: "/gallery/14.jpg",
+      src: "/gallery/فحص-فريون-جهاز.png",
+      alt: "كامري",
+      pos: "center",
+    },
+    {
+      src: "/gallery/تصليح-كمبروسر-كورولا.jpg",
+      alt: "فحص إلكتروني",
+      pos: "center",
+    },
+    { src: "/gallery/تغيير-فريون.jpg", alt: "كورولا يارس", pos: "center" },
+    {
+      src: "/gallery/جيمس-مكيفات.jpg",
+      alt: "النترا سوناتا لكزس",
+      pos: "center",
+    },
+    { src: "/gallery/سيارات-كوري.jpg", alt: "مرسيدس اودي", pos: "center" },
+    { src: "/gallery/صناعية-الرياض.jpg", alt: "مرسيدس اودي", pos: "center" },
+    {
+      src: "/gallery/صناعية-النسيم.jpg",
       alt: " ديزل افضل اصلاح سيارات غربي الرياض",
       pos: "center",
     },
     {
-      src: "/gallery/15.jpg",
+      src: "/gallery/صناعية-الرياض.jpg",
       alt: "افضل مصلح مكيفات شرقي الرياض",
       pos: "center",
     },
     {
-      src: "/gallery/17.jpg",
+      src: "/gallery/تصليح-مكيفات.jpg",
       alt: "واضف من عندك ايضاً اي شي متعلق بالتكييف",
       pos: "center",
     },
-    { src: "/gallery/18.jpg", alt: "تصليح مكيفات", pos: "center" },
-    { src: "/gallery/nine.jpg", alt: "تصليح كمبورسور", pos: "center" },
+    { src: "/gallery/كشف-اعطال.jpg", alt: "تصليح مكيفات", pos: "center" },
+    { src: "/gallery/ميكانيكي.jpg", alt: "تصليح كمبورسور", pos: "center" },
   ];
+
   const visibleItems = showAll ? galleryItems : galleryItems.slice(0, 5);
+
   useEffect(() => {
     document.body.classList.toggle("no-scroll", menuOpen);
     const onKey = (e) => {
@@ -187,11 +208,11 @@ export default function App() {
           <div
             data-aos="zoom-in"
             className="card banner-card"
-            style={{ minHeight: 0, display: "block" }} // نلغي grid لأننا نعرض صورة
+            style={{ minHeight: 0, display: "block" }}
           >
             <img
               className="banner-media"
-              src="images/Banner.png" // ضع مسار صورتك
+              src="images/Banner.png"
               alt="الكترونيات حلب العاصمة"
               loading="lazy"
               decoding="async"
@@ -202,12 +223,36 @@ export default function App() {
 
       {/* الخدمات */}
       <section id="services" className="section services-wrap">
-        <div className="car-services" data-aos="fade-up" aria-hidden="true" />
-        <div className="container ">
-          {/* السيارة خلف الكروت ومقصوصة بحدود الحاوية */}
-
-          {/* نفس المحتوى السابق، بس داخل غلاف يعلّيه فوق السيارة */}
+        <div
+          className="car-services"
+          data-aos="fade-right"
+          aria-hidden="true"
+        />
+        <div className="container">
           <div className="services-content">
+            <div className="offer-badge" data-aos="fade-left">
+              <img
+                className="offer-image"
+                src="images/Machine.png"
+                data-aos="zoom-out"
+                alt="عرض خاص"
+              />
+
+              <div className="offer-badge-price">
+                <h3>
+                  99 ريال <span>فقط</span>
+                </h3>
+              </div>
+
+              <div className="offer-badge-text-title">
+                <p>تعبئة فريون بأحدث الأجهزة</p>
+              </div>
+
+              <div className="offer-badge-text">
+                <p>الحق العرض الآن (العرض محدود)</p>
+              </div>
+            </div>
+
             <h2
               className="underline-left"
               data-aos="fade-up"
@@ -217,7 +262,6 @@ export default function App() {
             </h2>
 
             <div className="grid grid-services">
-              {/* نفس الماب تبع الكروت كما هو */}
               {[
                 ["تعبئة فريون", "فريون أصلي مع فحص ضغط."],
                 ["كشف تهريب", "صبغة/نيتروجين وتحديد مكان التهريب."],
@@ -240,9 +284,13 @@ export default function App() {
       <section
         id="whyus"
         className="section services-wrap"
-        style={{ background: "#ff1500ff" }}
+        style={{ background: "#dbdbdbff" }}
       >
-        <div className="car-services-1" data-aos="fade-up" aria-hidden="true" />
+        <div
+          className="car-services-1"
+          data-aos="fade-left"
+          aria-hidden="true"
+        />
 
         <div className="container">
           <h2
@@ -267,9 +315,13 @@ export default function App() {
         </div>
       </section>
 
+      {/* من أعمالنا */}
       <section id="gallery" className="section services-wrap">
-        {/* السيارة الخلفية للديكور – مقصوصة بحدود القسم */}
-        <div className="car-services-2" data-aos="fade-up" aria-hidden="true" />
+        <div
+          className="car-services-2"
+          data-aos="fade-right"
+          aria-hidden="true"
+        />
 
         <div className="container">
           <h2
@@ -280,7 +332,6 @@ export default function App() {
             من أعمالنا
           </h2>
 
-          {/* مهم: الشبكة */}
           <div className="grid grid-3 grid-services">
             {visibleItems.map((g, i) => (
               <div key={i} className="card gallery-card" data-aos="zoom-in">
@@ -295,7 +346,6 @@ export default function App() {
               </div>
             ))}
 
-            {/* مربع عرض المزيد داخل الشبكة */}
             {!showAll && (
               <button
                 type="button"
@@ -310,7 +360,6 @@ export default function App() {
               </button>
             )}
 
-            {/* زر الإخفاء داخل الشبكة */}
             {showAll && (
               <button
                 type="button"
@@ -326,7 +375,7 @@ export default function App() {
       </section>
 
       {/* الأسئلة الشائعة */}
-      <section id="faq" className="section" style={{ background: "#ff8888ff" }}>
+      <section id="faq" className="section" style={{ background: "#dbdbdbff" }}>
         <div className="container">
           <h2
             className="underline-left "
@@ -360,7 +409,7 @@ export default function App() {
           >
             التواصل والموقع
           </h2>
-          <div className="card" data-aos="fade-up">
+          <div className="card contact-section" data-aos="fade-up">
             <p style={{ marginBottom: 8 }}>
               واتساب:{" "}
               <a
