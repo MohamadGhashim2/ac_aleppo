@@ -157,7 +157,7 @@ export default function App() {
             <div className="social-row">
               <a
                 className="social-btn"
-                href="https://snapchat.com/add/yourbrand"
+                href=""
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Snapchat"
@@ -166,7 +166,7 @@ export default function App() {
               </a>
               <a
                 className="social-btn"
-                href="https://instagram.com/yourbrand"
+                href="https://www.instagram.com/abo_aleppo1"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
@@ -175,7 +175,7 @@ export default function App() {
               </a>
               <a
                 className="social-btn"
-                href="https://tiktok.com/@yourbrand"
+                href="https://www.tiktok.com/@abohalp4?_t=ZS-90yjh3XbphM&_r=1"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="TikTok"
@@ -375,7 +375,7 @@ export default function App() {
             <p>
               {" "}
               <a
-                href="https://maps.google.com/?q=your+location"
+                href="https://maps.app.goo.gl/AyVqY388NF9XLJMr7"
                 target="_blank"
                 rel="noreferrer"
                 style={{ color: "#000000ff" }}
@@ -402,7 +402,7 @@ export default function App() {
           <div>© {new Date().getFullYear()} العاصمة حلب – تكييف سيارات</div>
           <div style={{ display: "flex", gap: 10 }}>
             <a
-              href="https://instagram.com/yourbrand"
+              href="https://www.instagram.com/abo_aleppo1"
               target="_blank"
               rel="noreferrer"
               style={{ color: "#fff" }}
@@ -410,7 +410,7 @@ export default function App() {
               Instagram
             </a>
             <a
-              href="https://facebook.com/yourbrand"
+              href="https://www.facebook.com/100067570856327/posts/%D9%88%D8%B1%D8%B4%D8%A9-%D8%A7%D8%A8%D9%88-%D8%AD%D9%84%D8%A8-%D9%84%D9%84%D9%85%D9%83%D9%8A%D9%81%D8%A7%D8%AA-%D8%A7%D9%84%D8%B3%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA/997067369222282/"
               target="_blank"
               rel="noreferrer"
               style={{ color: "#fff" }}
@@ -418,7 +418,7 @@ export default function App() {
               Facebook
             </a>
             <a
-              href="https://maps.google.com/?q=your+location"
+              href="https://maps.app.goo.gl/AyVqY388NF9XLJMr7"
               target="_blank"
               rel="noreferrer"
               style={{ color: "#fff" }}
