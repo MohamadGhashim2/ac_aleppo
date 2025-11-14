@@ -527,7 +527,12 @@ p {
   }
 }
 
-
+.seo-text {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 10px;
+  max-width: 56rem;
+}
 /* ====== فوتر ====== */
 .footer {
   background: #a84a43;
