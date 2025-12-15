@@ -12,52 +12,52 @@ export default function App() {
 
   const galleryItems = [
     {
-      src: "gallery/ابو-حلب.jpg",
+      src: "gallery/ابو-حلب.webp",
       alt: " افضل اصلاح في الرياض",
       pos: "50% 40%",
     },
     {
-      src: "/gallery/افضل-مصلح.jpg",
+      src: "/gallery/افضل-مصلح.webp",
       alt: "افضل اصلاح سيارات في الرياض",
       pos: "center",
     },
-    { src: "/gallery/العاصمة-حلب.jpg", alt: "كشف تهريب", pos: "60% 50%" },
-    { src: "/gallery/النترا.jpg", alt: "تنظيف الثلاجة", pos: "center" },
+    { src: "/gallery/العاصمة-حلب.webp", alt: "كشف تهريب", pos: "60% 50%" },
+    { src: "/gallery/النترا.webp", alt: "تنظيف الثلاجة", pos: "center" },
     {
-      src: "/gallery/فحص-فريون-جهاز.png",
+      src: "/gallery/فحص-فريون-جهاز.webp",
       alt: "كامري",
       pos: "center",
     },
     {
-      src: "/gallery/تصليح-كمبروسر-كورولا.jpg",
+      src: "/gallery/تصليح-كمبروسر-كورولا.webp",
       alt: "فحص إلكتروني",
       pos: "center",
     },
-    { src: "/gallery/تغيير-فريون.jpg", alt: "كورولا يارس", pos: "center" },
+    { src: "/gallery/تغيير-فريون.webp", alt: "كورولا يارس", pos: "center" },
     {
-      src: "/gallery/جيمس-مكيفات.jpg",
+      src: "/gallery/جيمس-مكيفات.webp",
       alt: "النترا سوناتا لكزس",
       pos: "center",
     },
-    { src: "/gallery/سيارات-كوري.jpg", alt: "مرسيدس اودي", pos: "center" },
-    { src: "/gallery/صناعية-الرياض.jpg", alt: "مرسيدس اودي", pos: "center" },
+    { src: "/gallery/سيارات-كوري.webp", alt: "مرسيدس اودي", pos: "center" },
+    { src: "/gallery/صناعية-الرياض.webp", alt: "مرسيدس اودي", pos: "center" },
     {
-      src: "/gallery/صناعية-النسيم.jpg",
+      src: "/gallery/صناعية-النسيم.webp",
       alt: " ديزل افضل اصلاح سيارات غربي الرياض",
       pos: "center",
     },
     {
-      src: "/gallery/صناعية-الرياض.jpg",
+      src: "/gallery/صناعية-الرياض.webp",
       alt: "افضل مصلح مكيفات شرقي الرياض",
       pos: "center",
     },
     {
-      src: "/gallery/تصليح-مكيفات.jpg",
+      src: "/gallery/تصليح-مكيفات.webp",
       alt: "واضف من عندك ايضاً اي شي متعلق بالتكييف",
       pos: "center",
     },
-    { src: "/gallery/كشف-اعطال.jpg", alt: "تصليح مكيفات", pos: "center" },
-    { src: "/gallery/ميكانيكي.jpg", alt: "تصليح كمبورسور", pos: "center" },
+    { src: "/gallery/كشف-اعطال.webp", alt: "تصليح مكيفات", pos: "center" },
+    { src: "/gallery/ميكانيكي.webp", alt: "تصليح كمبورسور", pos: "center" },
   ];
 
   const visibleItems = showAll ? galleryItems : galleryItems.slice(0, 5);
@@ -80,7 +80,7 @@ export default function App() {
       <header className="nav">
         <div className="container wrap">
           <strong style={{ color: "var(--brand)" }}>
-            <img src="/images/logo.png" alt="العاصمة حلب" height="50" />
+            <img src="/images/logo.webp" alt="العاصمة حلب" height="50" />
           </strong>
 
           {/* روابط الدِسك توب */}
@@ -222,7 +222,7 @@ export default function App() {
           >
             <img
               className="banner-media"
-              src="images/Banner.png"
+              src="images/Banner.webp"
               alt="الكترونيات حلب العاصمة"
               loading="lazy"
               decoding="async"
@@ -243,7 +243,7 @@ export default function App() {
             <div className="offer-badge" data-aos="fade-left">
               <img
                 className="offer-image"
-                src="images/Machine.png"
+                src="images/Machine.webp"
                 data-aos="zoom-out"
                 alt="عرض خاص"
               />

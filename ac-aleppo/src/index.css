@@ -389,7 +389,7 @@ p {
   /* الحجم مرن: */
   width: 100%;
   aspect-ratio: 16/9;
-  background: url("/images/Best-repairs-in-East-Riyadh.png") no-repeat right bottom / contain;
+  background: url("/images/Best-repairs-in-East-Riyadh.webp") no-repeat right bottom / contain;
   pointer-events: none;
   z-index: 0;
 
@@ -453,7 +453,7 @@ p {
   left: -10em;
   /* حجم مرن فقط، بدون تأثير على الكروت */
   aspect-ratio: 16 / 9;
-  background: url("/images/Air-conditioning-repair.png") no-repeat left bottom / contain;
+  background: url("/images/Air-conditioning-repair.webp") no-repeat left bottom / contain;
 
   opacity: .20;
   /* شفافية خفيفة */
@@ -479,7 +479,7 @@ p {
   width: 90em;
   /* حجم مرن فقط، بدون تأثير على الكروت */
   aspect-ratio: 16 / 9;
-  background: url("/images/Mercedes-air-conditioning-pecialist.png") no-repeat left bottom / contain;
+  background: url("/images/Mercedes-air-conditioning-pecialist.webp") no-repeat left bottom / contain;
 
   opacity: .20;
   /* شفافية خفيفة */
@@ -501,7 +501,7 @@ p {
   left: -10em;
   /* حجم مرن فقط، بدون تأثير على الكروت */
   aspect-ratio: 16 / 9;
-  background: url("/images/Air-conditioning-repairman.png") no-repeat left bottom / contain;
+  background: url("/images/Air-conditioning-repairman.webp") no-repeat left bottom / contain;
 
   opacity: .20;
   /* شفافية خفيفة */
