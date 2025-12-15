@@ -223,9 +223,11 @@ export default function App() {
             <img
               className="banner-media"
               src="images/Banner.webp"
-              alt="الكترونيات حلب العاصمة"
-              loading="lazy"
-              decoding="async"
+              alt="الكترونيات حلب العاصمة - أفضل إصلاح مكيف سيارات في الرياض"
+              width={500}
+              height={220}
+              loading="eager"
+              fetchPriority="high"
             />
           </div>
         </div>
@@ -354,6 +356,8 @@ export default function App() {
                   className="gallery-media"
                   src={g.src}
                   alt={g.alt}
+                  width={300}
+                  height={300}
                   loading="lazy"
                   decoding="async"
                   style={{ objectPosition: g.pos }}

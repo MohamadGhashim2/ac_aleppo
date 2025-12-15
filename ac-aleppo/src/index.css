@@ -9,7 +9,7 @@
 
 /* ====== 2) متغيرات وثيم عام ====== */
 :root {
-  --brand: #990b0b;
+  --brand: #f57f7f;
   --accent: #f57f7f;
   --bg: #ffffff;
   --text: #1a1a1a;
@@ -182,7 +182,7 @@ p {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #a60000;
+  background: #f57f7f;
   border-bottom: 1px solid #443e3e;
 }
 
@@ -320,7 +320,7 @@ p {
 .offer-badge {
   position: relative;
   overflow: visible;
-  background-color: #fffd99;
+  background-color: #f5d97f;
   padding: 10px;
   border-radius: 10px;
   font-size: 1.3rem;
@@ -534,8 +534,8 @@ p {
   max-width: 56rem;
 }
 /* ====== فوتر ====== */
-.footer {
-  background: #a84a43;
+.footer { 
+  background: var(--brand);
   color: #fff;
   padding: 28px 0;
 }
