@@ -9,8 +9,8 @@
 
 /* ====== 2) متغيرات وثيم عام ====== */
 :root {
-  --brand: #f57f7f;
-  --accent: #f57f7f;
+  --brand: #e53935;
+  --accent: #e53935;
   --bg: #ffffff;
   --text: #1a1a1a;
   --paper: #fffafa;
@@ -182,7 +182,7 @@ p {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #f57f7f;
+  background: var(--brand);
   border-bottom: 1px solid #443e3e;
 }
 
