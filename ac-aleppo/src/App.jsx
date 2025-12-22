@@ -153,7 +153,7 @@ export default function App() {
           {/* خلفية السيارة */}
           <div className="bg-car" aria-hidden="true" />
           <div data-aos="fade-up">
-            <h1>تكييف سيارات بخبرة وضمان</h1>
+            <h1>افضل ورشة مكيفات سيارات بالرياض</h1>
 
             <p>
               صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
