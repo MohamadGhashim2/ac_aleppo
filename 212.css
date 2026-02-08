@@ -1,0 +1,1268 @@
+/* ====== 1) الخط المخصص ====== */
+@font-face {
+  font-family: "AraHamah";
+  src: url("/fonts/Ara-Hamah/Ara-Hamah-Homs.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Light.ttf") format("ttf");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ====== 2) متغيرات الألوان (Pattern: Freon Fresh - انتعاش الفريون) ====== */
+:root {
+  /* --- الهوية الرئيسية --- */
+  --brand: #e53935;
+  /* الأحمر (تنبيه/حركة) */
+  --brand-rgb: 229, 57, 53;
+  --brand-dark: #b71c1c;
+  --brand-deep: #00897b;
+  /* (لون الفريون) تركواز غامق للأزرار الثانوية والفوتر */
+
+  /* --- ألوان النصوص --- */
+  --text-main: #263238;
+  /* رمادي غامق جداً (لون الفحم) */
+  --text-secondary: #546e7a;
+  /* رمادي مزرق للنصوص الفرعية */
+  --text-inverse: #ffffff;
+
+  /* --- الخلفيات (نظافة وانتعاش) --- */
+  --bg-body: #fdfdfd;
+  /* أبيض نقي */
+  --bg-paper: #e0f2f1;
+  /* خلفية فريونية فاتحة جداً (Mint) */
+  --bg-card: #ffffff;
+  --bg-card-rgb: 255, 255, 255;
+  /* كروت بيضاء */
+  --bg-overlay: rgba(0, 77, 64, 0.7);
+  /* تعتيم أخضر غامق */
+
+  --bg-gray: #f1f8e9;
+  /* كسر الروتين بخلفية خضراء باهتة جداً للأقسام */
+  --text-highlight-bg: #ffffff;
+  --text-highlight-bg-rgb: 255, 255, 255;
+  /* --- الحدود والظلال --- */
+  --border-light: #b2dfdb;
+  /* حدود بلون الفريون الفاتح */
+  --border-brand-light: #ffcdd2;
+  --shadow-color: rgba(0, 150, 136, 0.15);
+  /* ظل تركواز خفيف جداً */
+
+  /* --- ألوان وظيفية --- */
+  --whatsapp-green: #25D366;
+  --offer-bg: #e0f7fa;
+  /* خلفية العرض سماوية */
+  --offer-border: #00acc1;
+  /* حدود العرض سماوي غامق */
+  --danger: #d32f2f;
+
+  /* --- الخطوط والأحجام --- */
+  --font-body: "Tajawal", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-head: "Tajawal", "Noto Kufi Arabic", "Segoe UI", system-ui, sans-serif;
+  --h1: clamp(24px, 4vw, 32px);
+  --h2: clamp(18px, 3vw, 24px);
+}
+
+/* ====== 3) أساسيات ====== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-body);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-numeric: tabular-nums;
+}
+
+h1,
+h2,
+h3 {
+  margin: 8px 0 12px;
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: var(--h3);
+}
+
+h1 {
+  font-size: var(--h1);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--h2);
+}
+
+.underline-left {
+  position: relative;
+}
+
+.underline-left::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  width: 30px;
+  height: 3px;
+  background: var(--brand);
+  border-radius: 999px;
+}
+
+p {
+  margin: 0 0 8px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  /* استخدام لون النص الثانوي */
+}
+
+.container {
+  width: min(1200px, 92%);
+  margin-inline: auto;
+}
+
+.section {
+  padding: clamp(32px, 6vw, 64px) 0;
+  /* تم ربط لون الظل بالمتغير */
+  box-shadow: 12px 25px 60px -9px var(--shadow-color);
+}
+
+.btn {
+  font-size: 0.8rem;
+  display: inline-flex;
+  /* استخدام flex لمحاذاة النص والأيقونات */
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  /* تدوير كامل مثل أزرار أبل */
+
+  /* --- سحر الزجاج --- */
+  background: rgba(var(--brand-rgb), 0.75);
+  /* لون البراند مع شفافية */
+  backdrop-filter: blur(16px) saturate(180%);
+  /* التغبيش + إشباع الألوان خلف الزجاج */
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  /* ضروري لمتصفح سفاري و iOS */
+
+  /* --- الحدود والظلال --- */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* حدود بيضاء خفيفة جداً */
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    /* ظل ناعم وكبير */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  /* ظل داخلي خفيف ليعطي عمق */
+
+  /* --- النص --- */
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* حركة ناعمة جداً */
+}
+
+/* تأثير عند المرور بالماوس */
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  /* تكبير وطيران خفيف */
+  background: rgba(var(--brand-rgb), 0.85);
+  /* زيادة اللون قليلاً */
+  box-shadow: 0 10px 30px rgba(var(--brand-rgb), 0.3);
+  /* توهج بلون الزر */
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* زر ضغط (Active) */
+.btn:active {
+  transform: scale(0.96);
+  backdrop-filter: blur(8px);
+}
+
+/* === الزر الثانوي (الشفاف/الأبيض) === */
+.btn.alt {
+  /* زجاجي فاتح جداً (Frosty White) */
+  background: rgba(255, 255, 255, 0.1);
+  /* خلفية بيضاء شفافة جداً */
+  backdrop-filter: blur(12px);
+  /* تغبيش */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 200, 200, 0.4);
+  /* حدود رمادية خفيفة */
+  color: var(--text-main);
+  /* لون النص غامق ليظهر بوضوح */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  /* ظل خفيف جداً */
+}
+
+.btn.alt:hover {
+  background: rgba(255, 255, 255, 0.3);
+  /* خلفية أكثر وضوحاً عند الهوفر */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: rgba(200, 200, 200, 0.6);
+}
+
+.btn.alt:hover {
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* === زر الواتساب الزجاجي === */
+.btn.whatsapp {
+  background: rgba(37, 211, 102, 0.70);
+  /* أخضر واتساب شفاف */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+.btn.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.85);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+  /* توهج أخضر */
+}
+
+/* 1. أزرار خاصة */
+.btn.location {
+  background: var(--brand-deep);
+  color: var(--text-inverse);
+}
+
+/* إصلاح زر "شاهد خدماتنا" */
+.btn.alt.ghost {
+  background: rgba(255, 255, 255, 0.85);
+  /* خلفية بيضاء شبه كاملة لتكون واضحة */
+  border: 1px solid #fff;
+  color: var(--brand);
+  /* لون النص أحمر (لون الهوية) ليبرز */
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn.alt.ghost:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  color: var(--brand-dark);
+}
+/* ====== بطاقات وشبكات ====== */
+.card {
+  background: var(--bg-card);
+  color: var(--text-main);
+  opacity: 0.95;
+  border: 1px solid var(--border-brand-light);
+  /* تم الربط */
+  border-radius: 14px;
+  padding: 9px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .04);
+  font-size: 0.9rem;
+}
+
+.contact-section {
+  font-size: 1.1rem;
+}
+
+.banner-card {
+  overflow: hidden;
+}
+
+.banner-media {
+  display: block;
+  width: 100%;
+  height: clamp(160px, 30vw, 320px);
+  object-fit: cover;
+  object-position: 16% 11%;
+  border-radius: 12px;
+  transform: scale(1.1);
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.grid-services {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ====== هيدر ومنيو جوال ====== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* استخدام متغير RGB للشفافية */
+  background: rgba(var(--brand-rgb), 0.95);
+  border-bottom: 1px solid var(--brand-dark);
+}
+
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.nav .links {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.nav a {
+  color: var(--text-inverse);
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.menu-btn {
+  display: none;
+}
+
+.hamburger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg-body);
+  cursor: pointer;
+  border: 1px solid var(--border-brand-light);
+}
+
+.hamburger:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* لوحة المنيو */
+/* ====== تصميم المنيو الجديد (Glass Drawer) ====== */
+/* ====== تصميم المنيو الزجاجي (تصحيح الشفافية) ====== */
+.mobile-drawer {
+  position: fixed;
+  inset-inline: 0;
+  top: 60px;
+  /* أسفل الهيدر مباشرة */
+  z-index: 1001;
+
+  /* الخلفية: أبيض زجاجي بدلاً من الأخضر/الأحمر */
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(15px);
+  /* تغبيش الخلفية */
+  -webkit-backdrop-filter: blur(15px);
+
+  /* حدود سفلية وظل ناعم */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* توسيط كل العناصر */
+  gap: 15px;
+
+  /* أنيميشن ناعم */
+  transform: translateY(-10px);
+  opacity: 0;
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.mobile-drawer a:not(.btn) {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-main);
+  /* لون داكن واضح */
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+/* تأثير عند اللمس */
+.mobile-drawer a:not(.btn):hover,
+.mobile-drawer a:not(.btn):active {
+  background: rgba(var(--brand-rgb), 0.08);
+  /* خلفية حمراء خفيفة جداً */
+  color: var(--brand);
+  transform: scale(1.02);
+}
+.mobile-drawer a:not(.btn):hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--brand);
+}
+/* 2. تنسيق الأزرار داخل المنيو (تواصل، موقعنا) */
+.mobile-drawer .btn {
+  width: 100%;
+  /* جعل الأزرار بعرض كامل */
+  max-width: 300px;
+  /* لكن لا تتجاوز هذا العرض لتبقى أنيقة */
+  margin-top: 5px;
+  justify-content: center;
+  /* توسيط النص والأيقونة داخل الزر */
+}
+
+/* 3. تنسيق زر الإغلاق (Minimal) */
+/* زر الإغلاق */
+.mobile-drawer .close {
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid var(--text-secondary);
+  color: var(--text-secondary);
+  padding: 10px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.mobile-drawer .close:hover {
+  background: #fff;
+  color: var(--brand);
+  border-color: var(--brand-dark);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* الأنيميشن */
+@keyframes slideDown {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* الخلفية المعتمة خلف القائمة (Backdrop) */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  /* أسود نصف شفاف */
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+  /* تغبيش خفيف للموقع بالخلف */
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+@keyframes slideDown {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: .45
+  }
+}
+
+/* ====== هيرو + سيارة متحركة ريسبونسف ====== */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero .container {
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1.3fr 1fr;
+}
+/* 2. نصوص الهيرو */
+.hero-title {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.hero-desc {
+  font-weight: 460;
+  margin-bottom: 18px;
+  background-color: rgba(var(--text-highlight-bg-rgb), 0.8);
+  padding: 8px;
+  border-radius: 4px;
+  /* تحسين جمالي */
+}
+
+.hero-actions {
+  margin-top: 18px;
+}
+
+
+
+/* 4. هوامش العناوين (بدل style margin-bottom) */
+.mb-md {
+  margin-bottom: 18px;
+}
+
+.mb-sm {
+  margin-bottom: 8px;
+}
+
+/* 5. رابط الخريطة في التواصل */
+.map-link {
+  color: var(--text-main);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* 6. حاوية الخريطة (iFrame) */
+.map-container {
+  width: 100%;
+  height: 450px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.map-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  /* تصحيح الخطأ (كان border: 100) */
+}
+
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  flex-wrap: nowrap;
+}
+
+/* ====== تصميم بادج العرض الجديد ====== */
+.offer-badge {
+  position: relative;
+  /* خلفية بيضاء فاتحة مثل الصورة */
+  background-color: #f0f9ff;
+  /* يمكنك استخدام var(--bg-gray) أو لون أبيض فاتح */
+  padding: 12px 20px;
+  border-radius: 16px;
+  /* زوايا مستديرة أكثر */
+  text-align: right;
+  /* محاذاة النص لليمين */
+
+  /* الحد الأحمر الرفيع من الأسفل فقط */
+  border-bottom: 3px solid var(--brand);
+  /* إزالة الحدود الأخرى */
+  border-top: none;
+  border-left: none;
+  border-right: none;
+
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 3%;
+}
+
+/* تنسيق منطقة السعر ليكون الرقم وكلمة ريال على نفس السطر */
+.offer-badge-price {
+  display: flex;
+  align-items: baseline;
+  /* محاذاة على خط الأساس (ليكون الرقم والكلمة على نفس المستوى) */
+  justify-content: flex-start;
+  /* محاذاة لليمين */
+  margin-bottom: 8px;
+  direction: rtl;
+  /* ضمان الاتجاه العربي */
+}
+
+/* تنسيق الرقم 99 */
+.offer-badge-price h3 {
+  font-size: 3rem;
+  /* رقم كبير وواضح */
+  font-weight: 700;
+  color: var(--brand);
+  /* اللون الأحمر */
+  margin: 0;
+  line-height: 1;
+}
+
+/* تنسيق كلمة "ريال" */
+.offer-badge-price .price-span {
+  font-size: 1rem;
+  /* حجم صغير */
+  font-weight: 500;
+  color: var(--brand);
+  /* نفس اللون الأحمر */
+  margin-right: 6px;
+  /* مسافة صغيرة بين الرقم والكلمة */
+}
+
+/* تنسيق العناوين النصية */
+.offer-badge-text-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-main);
+  /* لون النص الغامق */
+  margin-bottom: 4px;
+}
+
+.offer-badge-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  /* لون نص ثانوي */
+}
+
+/* صورة الماكينة (لا تحتاج تعديل، مكانها جيد) */
+.offer-image {
+  position: absolute;
+  top: -12vw;
+  inset-inline-start: 80%;
+  width: 16vw;
+  height: auto;
+  transform: rotate(-2deg);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.15));
+  pointer-events: none;
+}
+
+@keyframes float {
+  0% {
+    transform: scale(1) translatey(-70%);
+  }
+
+  100% {
+    transform: scale(1.2)translatey(-70%);
+  }
+}
+
+.bg-car {
+  position: absolute;
+  inset-inline-end: 45%;
+  inset-block-end: -80%;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: url("/images/Best-repairs-in-East-Riyadh.webp") no-repeat right bottom / contain;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transform: translateX(120vw);
+  animation:
+    carFromRight .9s cubic-bezier(.18, .9, .2, 1) forwards,
+    carFloat 6s ease-in-out 1s infinite alternate;
+}
+
+@keyframes carFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(120vw);
+  }
+
+  60% {
+    opacity: .9;
+    transform: translateX(-12px);
+  }
+
+  100% {
+    opacity: .65;
+    transform: translateX(0);
+  }
+}
+
+@keyframes carFloat {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  100% {
+    transform: translateX(-5px) translateY(-7px);
+  }
+}
+
+.services-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.services-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* تنسيقات السيارات الديكورية */
+.car-services,
+.car-services-1,
+.car-services-2 {
+  position: absolute;
+  opacity: .20;
+  pointer-events: none;
+  z-index: 0;
+  aspect-ratio: 16 / 9;
+  animation: carFloatL 6s ease-in-out 1s infinite alternate;
+}
+
+.car-services {
+  width: 78em;
+  bottom: -11em;
+  left: -10em;
+  background: url("/images/Air-conditioning-repair.webp") no-repeat left bottom / contain;
+}
+
+.car-services-1 {
+  right: -44em;
+  bottom: -16em;
+  width: 90em;
+  background: url("/images/Mercedes-air-conditioning-pecialist.webp") no-repeat left bottom / contain;
+}
+
+.car-services-2 {
+  width: 78em;
+  bottom: -11em;
+  left: -10em;
+  background: url("/images/Air-conditioning-repairman.webp") no-repeat left bottom / contain;
+}
+
+@keyframes carFloatL {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  100% {
+    transform: translateX(-5px) translateY(-7px);
+  }
+}
+
+.seo-text {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  border-radius: 5px;
+  padding: 8px;
+  background-color: rgba(var(--bg-card-rgb), 0.8);
+  margin-bottom: 10px;
+  max-width: 56rem;
+  font-weight: 460;
+}
+
+/* ====== فوتر ====== */
+.footer {
+  background: var(--brand);
+  color: var(--text-inverse);
+  font-size: 0.8rem;
+  padding: 28px 0;
+}
+
+/* 7. الفوتر المنسق */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  /* لضمان التجاوب في الجوال */
+}
+
+.footer-links {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-link {
+  color: var(--text-inverse);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.footer-link:hover {
+  opacity: 0.8;
+}
+
+/* === إصلاح زر الواتساب العائم === */
+.whatsapp-fab {
+  position: fixed;
+  /* تثبيت في الشاشة */
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+  /* رقم عالي جداً ليكون فوق كل شيء بما في ذلك الفوتر */
+
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+  /* تأثير الزجاج */
+  background: rgba(37, 211, 102, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  /* لضمان توسيط الأيقونة */
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.1) rotate(10deg);
+  background: rgba(37, 211, 102, 1);
+}
+
+.whatsapp-fab img {
+  width: 32px;
+  height: 32px;
+}
+
+.social-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* === تحسين أزرار السوشيال ميديا (تأثير الزجاج) === */
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border-radius: 12px;
+
+  /* تأثير الزجاج */
+  background: rgba(255, 255, 255, 0.6);
+  /* خلفية شبه شفافة */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+  transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--brand);
+  /* تغيير لون الحدود للأحمر عند الهوفر */
+}
+
+.social-btn img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.social-btn:hover img {
+  opacity: 1;
+}
+.gallery-card {
+  overflow: hidden;
+  padding: 0;
+  height: clamp(10px, 36vw, 350px);
+  border-radius: 14px;
+}
+
+.gallery-media {
+  display: block;
+  width: 100%;
+  height: clamp(10px, 36vw, 350px);
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.gallery-card:hover .gallery-media {
+  transform: scale(1.02);
+  transition: transform .25s ease;
+}
+
+.more-card,
+.hide-card {
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  border: 1px dashed var(--border-brand-light);
+  /* تم الربط */
+  z-index: 1;
+  background: var(--bg-card);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.more-card:hover,
+.hide-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, .12);
+  border-color: var(--brand);
+  opacity: 1;
+}
+
+.more-card .plus {
+  font-size: clamp(24px, 3.6vw, 36px);
+  line-height: 1;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.more-label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-main);
+}
+
+.hide-card {
+  border-style: solid;
+  background: var(--bg-body);
+}
+
+/* === Media Queries (بقيت كما هي مع استخدام المتغيرات إذا لزم) === */
+@media (max-width: 1536px) {
+  .bg-car {
+    inset-inline-end: 35%;
+  }
+
+  .car-services-2 {
+    width: 78em;
+    bottom: -11em;
+    left: -10em;
+  }
+
+  .car-services-1 {
+    right: -44em;
+    bottom: -14em;
+    width: 80em;
+  }
+}
+
+@media (max-width: 1280px) {
+  .bg-car {
+    inset-inline-end: 35%;
+  }
+
+  .offer-image {
+    top: -16vw;
+    inset-inline-start: 80%;
+    width: 23%;
+  }
+
+  .car-services-1 {
+    right: -49em;
+    bottom: -13em;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bg-car {
+    inset-block-end: 20%;
+    inset-inline-end: 15%;
+    width: 120%;
+  }
+
+  .car-services {
+    width: 78em;
+    bottom: -11em;
+    left: -10em;
+  }
+
+  .car-services-1 {
+    right: -47em;
+    bottom: -12em;
+    width: 75em;
+  }
+
+  .actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav .links {
+    display: none;
+  }
+
+  .menu-btn {
+    display: inline-flex;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-image {
+    top: -20vw;
+    inset-inline-start: 68vw;
+    width: 29%;
+  }
+}
+
+@media (max-width: 768px) {
+  .bg-car {
+    inset-block-end: 3%;
+    inset-inline-end: -35%;
+    width: 180%;
+  }
+
+  .car-services {
+    width: 72em;
+    bottom: -9em;
+    left: -12em;
+  }
+
+  .car-services-2 {
+    width: 72em;
+    bottom: -9em;
+    left: -12em;
+  }
+
+  .car-services-1 {
+    bottom: -11em;
+    width: 78em;
+  }
+
+  .grid.grid-services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .offer-image {
+    width: 35%;
+  }
+}
+
+@media (max-width: 640px) {
+  .bg-car {
+    inset-block-end: 8%;
+    inset-inline-end: -70%;
+    width: 240%;
+  }
+
+  .car-services {
+    width: 67em;
+    bottom: -6em;
+    left: -11em;
+  }
+
+  .car-services-2 {
+    width: 67em;
+    bottom: -6em;
+    left: -11em;
+  }
+
+  .car-services-1 {
+    right: -47em;
+    bottom: -10em;
+    width: 74em;
+  }
+
+  .offer-badge-text-title {
+    font-size: 1.6rem;
+    margin-top: -10%;
+  }
+
+  .offer-image {
+    top: -22vw;
+    right: 70vw;
+  }
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+}
+
+@media (max-width: 475px) {
+  .car-services {
+    width: 65em;
+    bottom: 0.1em;
+    left: -15em;
+  }
+
+  .car-services-2 {
+    width: 65em;
+    bottom: 0.1em;
+    left: -15em;
+  }
+
+  .car-services-1 {
+    bottom: -9em;
+    width: 72em;
+  }
+
+  .offer-badge-text-title {
+    font-size: 1.4rem;
+    margin-top: -10%;
+  }
+
+  .offer-badge-text {
+    font-size: 0.9rem;
+  }
+
+  .offer-image {
+    width: 9rem;
+  }
+}
+
+@media (max-width: 320px) {
+
+  .car-services,
+  .car-services-2 {
+    bottom: 19em;
+    left: -20em;
+  }
+
+  .car-services-1 {
+    width: 67em;
+  }
+
+  .grid.grid-services {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-image {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .bg-car,
+  .car-services,
+  .car-services-1,
+  .car-services-2 {
+    animation: none;
+    opacity: .18;
+    transform: none;
+  }
+}
+
+
+/* ====== تحسينات الجوال (Mobile Responsiveness) ====== */
+
+@media (max-width: 768px) {
+
+  /* 1. تصغير العناوين الرئيسية والفرعية */
+  :root {
+    --h1: 22px;
+    /* كان 32px تقريباً */
+    --h2: 18px;
+    /* كان 24px تقريباً */
+  }
+
+  /* 2. تقليل الهوامش والمسافات الداخلية */
+  .section {
+    padding: 32px 0;
+    /* تقليل المسافة العلوية والسفلية للنصف */
+  }
+
+  .container {
+    width: 90%;
+    /* توسيع المحتوى قليلاً على الجوانب */
+  }
+
+  /* 3. تصغير المسافات بين العناصر */
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 8px;
+    /* تقريب العناوين من النصوص */
+  }
+
+  p {
+    font-size: 0.9rem;
+    /* تصغير خط الفقرات قليلاً */
+    line-height: 1.6;
+  }
+
+  /* 4. تنسيق كروت الخدمات والعروض */
+  
+
+  .grid {
+    gap: 12px;
+    /* تقليل المسافة بين الكروت */
+  }
+
+  /* 5. ضبط صورة الهيرو (البانر) */
+  .banner-media {
+    height: 180px;
+    /* تحديد ارتفاع ثابت ومناسب للجوال */
+    /* إلغاء التكبير الزائد */
+  }
+
+  /* 6. تحسين عرض "بادج" السعر (الـ 99 ريال) */
+  .offer-badge {
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+
+  .offer-badge-price {
+    font-size: 2rem;
+    /* تصغير الرقم 99 */
+  }
+
+  .offer-badge-text-title {
+    font-size: 1.2rem;
+    margin-top: -5px;
+  }
+
+  /* 7. تصغير صورة "الماكينة" الخارجة من العرض */
+  .offer-image {
+    width: 90px;
+    /* حجم أصغر */
+    top: -40px;
+    /* ضبط الموقع */
+    right: 0px;
+    /* ضبط المحاذاة */
+    left: auto;
+    /* إلغاء القيم القديمة */
+  }
+
+
+
+  /* 9. تحسين أزرار التواصل في الهيدر (القائمة الجانبية) */
+  .mobile-drawer a {
+    font-size: 0.95rem;
+    padding: 10px 5px;
+  }
+
+  /* 10. تصغير زر الواتساب العائم */
+  .whatsapp-fab {
+    width: 48px;
+    height: 48px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .whatsapp-fab img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+
