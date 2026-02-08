@@ -62,6 +62,7 @@
   /* --- Functional Colors --- */
   --whatsapp-green: #25D366;
   --offer-bg: #e0f7fa;
+  --offer-bg-rgb: 224, 247, 250;
   --offer-border: #00acc1;
   --danger: #d32f2f;
 
@@ -432,8 +433,8 @@ p {
 .hero-desc {
   font-weight: 500;
   margin-bottom: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(3px);
   padding: 12px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -480,18 +481,19 @@ p {
 /* ====== Offer Badge (NEW GRID LAYOUT) ====== */
 .offer-badge {
   position: relative;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f7fa 100%);
+  background: rgba(var(--offer-bg-rgb), 0.5);
+  backdrop-filter: blur(20px);
   border-radius: 20px;
-  border-bottom: 1px solid var(--brand);
+  border-bottom: 1px solid var(--brand);  
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  margin-bottom: 40px;
-  overflow: hidden;
-
+  margin-bottom: 20px;
   /* Grid Layout: Text Right, Image Left */
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 300px;
+  /* النص يأخذ المساحة المتبقية، الصورة تأخذ 300px */
   align-items: center;
   width: 100%;
+
   /* Full Width */
 }
 
@@ -504,23 +506,26 @@ p {
 
 /* Image Section */
 .offer-image-container {
-  position: relative;
-  width: 220px;
-  /* Fixed width for image area */
-  height: 100%;
+  width: 150%;  /* Fixed width for image area */
+  height: 95%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.3);
 }
 
 .offer-image {
-  width: 100%;
+  width: auto;
   height: auto;
-  max-height: 200px;
-  /* Constrain height */
+  max-height: 450px;
+  max-width: 120%;
+    /* لضمان عدم الخروج عن الحاوية */
+  /* تكبير الصورة في الديسكتوب (كانت 200px) */  /* Constrain height */
   object-fit: contain;
   filter: drop-shadow(-5px 5px 15px rgba(0, 0, 0, 0.15));
+  margin-bottom: -10px;
+  position: relative;
+ 
+    /* سحب الصورة للأسفل قليلاً لتبدو "خارجة" من الإطار */
 }
 
 .offer-badge-price {
@@ -538,12 +543,22 @@ p {
   color: var(--brand);
   line-height: 1;
   margin: 0;
+    transform-origin: center center;
+      /* التكبير من نقطة المنتصف */
+      animation: pricePulse 1.5s infinite ease-in-out;
+      will-change: transform;
+      /* نبض مستمر وناعم */
 }
 
 .offer-badge-price .price-span {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-secondary);
+    transform-origin: center center;
+      /* التكبير من نقطة المنتصف */
+      animation: pricePulse 1.5s infinite ease-in-out;
+      will-change: transform;
+      /* نبض مستمر وناعم */
 }
 
 .offer-badge-text-title p {
@@ -558,7 +573,20 @@ p {
   color: var(--text-secondary);
   margin: 0;
 }
+@keyframes pricePulse {
+  0% {
+    transform: scale(1);
+  }
 
+  50% {
+    transform: scale(1.1);
+    /* تكبير بنسبة 10% */
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
 /* ====== Car Animations (Untouched as requested) ====== */
 .bg-car {
   position: absolute;
@@ -723,8 +751,8 @@ p {
   color: var(--text-secondary);
   border-radius: 8px;
   padding: 15px;
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid var(--border-light);
   margin-bottom: 20px;
   max-width: 65rem;
@@ -1028,37 +1056,62 @@ p {
   }
 
   /* Offer Badge on Mobile (Stacking) */
-  .offer-badge {
-    grid-template-columns: 1fr;
-    /* Stack vertically */
-    text-align: center;
-    width: 100% !important;
-    /* Full width on mobile */
-  }
-
-  .offer-content {
-    padding: 20px;
-    text-align: center;
-    order: 1;
-    /* Text First */
-  }
-
-  .offer-image-container {
-    width: 100%;
-    height: 180px;
-    background: transparent;
-    order: 2;
-    /* Image Second */
-  }
-
-  .offer-image {
-    max-height: 160px;
-  }
-
-  .offer-badge-price {
-    justify-content: center;
-  }
-
+    .offer-badge {
+      /* تغيير التخطيط في الجوال إلى Flexbox أفقي */
+      display: flex;
+      flex-direction: row-reverse;
+      /* لضمان أن الصورة يسار والنص يمين (حسب الاتجاه العربي) */
+      align-items: stretch;
+      /* لضمان تساوي الارتفاع */
+      min-height: 160px;
+      /* ارتفاع أدنى لضمان ظهور الصورة بشكل جيد */
+    }
+  
+    /* 1. قسم النصوص (75% من العرض) */
+    .offer-content {
+      flex: 3;
+      /* يأخذ 3 أجزاء (75%) */
+      padding: 15px 20px 15px 5px;
+      /* تقليل الحشوة */
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* توسيط النصوص عمودياً */
+    }
+  
+    /* 2. قسم الصورة (25% من العرض) */
+    .offer-image-container {
+      flex: 1;
+      /* يأخذ جزء واحد (25%) */
+      width: 130%;
+      /* إلغاء العرض الثابت */
+      height: 100%;
+      padding: 10px;
+      align-items: center;
+      /* توسيط الصورة عمودياً وأفقياً */
+    }
+  
+    .offer-image {
+      max-height: 100%;
+      /* الصورة تأخذ كامل ارتفاع الحاوية */
+      max-width: 100%;
+      /* الصورة تأخذ كامل عرض الحاوية */
+      margin-bottom: 0;
+    }
+  
+    /* تصغير النصوص لتناسب المساحة الضيقة */
+    .offer-badge-price h3 {
+      font-size: 2.2rem;
+    }
+  
+    .offer-badge-text-title p {
+      font-size: 1.1rem;
+    }
+  
+    .offer-badge-text p {
+      font-size: 0.8rem;
+    }
   .banner-media {
     height: 200px;
   }
