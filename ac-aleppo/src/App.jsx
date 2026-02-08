@@ -146,8 +146,6 @@ export default function App() {
             <a href="" className="btn whatsapp location">
               موقعنا
             </a>
-
-            
           </nav>
         </>
       )}
@@ -155,7 +153,15 @@ export default function App() {
       {/* هيرو */}
       <section className="section hero" style={{ paddingTop: 40 }}>
         <div className="container grid hero-grid">
-          <div className="bg-car" aria-hidden="true" />
+          {/*<div className="bg-car" aria-hidden="true" />*/}
+          {/* حاوية السيارة الذكية */}
+          <div className="smart-car-wrapper" aria-hidden="true">
+            <img
+              src="/images/Best-repairs-in-East-Riyadh.webp"
+              alt="سيارة تكييف"
+              className="smart-car-img"
+            />
+          </div>
           <div data-aos="fade-up" style={{ margin: -5 }}>
             <h1 className="hero-title">افضل ورشة مكيفات سيارات بالرياض</h1>
             <p className="hero-desc">

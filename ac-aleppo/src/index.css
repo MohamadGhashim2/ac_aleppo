@@ -149,10 +149,8 @@ p {
   justify-content: center;
   gap: 8px;
   padding: 12px 24px;
-  border-radius: 25px;
-  background: rgba(var(--brand-rgb), 0.80);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 15px rgba(var(--brand-rgb), 0.2);
   color: #fff;
@@ -174,10 +172,12 @@ p {
 
 /* Ghost Button (Fixed Visibility) */
 .btn.alt.ghost {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.515);
   border: 1px solid #fff;
   color: var(--brand) !important;
   font-weight: 700;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -189,9 +189,11 @@ p {
 
 /* WhatsApp Button */
 .btn.whatsapp {
-  background: rgba(0, 255, 94, 0.616);
+  background: rgba(0, 255, 94, 0.589);
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: #fff;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .btn.whatsapp:hover {
@@ -229,9 +231,9 @@ p {
 .banner-media {
   display: block;
   width: 100%;
-  height: clamp(180px, 30vw, 320px);
+  height: clamp(180px, 20vw, 320px);
   object-fit: cover;
-  object-position: center;
+  object-position: 16% 11%;
   border-radius: 12px;
 }
 
@@ -256,8 +258,9 @@ p {
 .nav {
   position: sticky;
   top: 0;
-  z-index: 50;
-  background: rgba(var(--brand-rgb), 0.98);
+  z-index: 1000;
+  background: rgba(var(--brand-rgb), 0.95);
+  /* خلفية غير شفافة تماماً */
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -312,10 +315,10 @@ p {
   width: 100%;
   height: auto;
   max-height: 80vh;
-    /* أقصى حد 80% من الشاشة لضمان عدم تغطية كل شيء */
+  /* أقصى حد 80% من الشاشة لضمان عدم تغطية كل شيء */
   /* Full Height */
   z-index: 1001;
-border-bottom-left-radius: 25px;
+  border-bottom-left-radius: 25px;
   /* زوايا سفلية دائرية لجمالية أكثر */
   border-bottom-right-radius: 25px;
   /* White Glass Background */
@@ -402,8 +405,13 @@ border-bottom-left-radius: 25px;
 .hero {
   position: relative;
   overflow: hidden;
+  /* نضمن أن الهيرو لديه ارتفاع مرن ومناسب */
+  min-height: 500px;
+  /* للجوال */
+  display: flex;
+  align-items: center;
+  /* يساعد في محاذاة المحتوى */
 }
-
 .hero .container {
   position: relative;
 }
@@ -418,14 +426,14 @@ border-bottom-left-radius: 25px;
 .hero-title {
   font-weight: 800;
   color: var(--text-main);
-  margin-bottom: 5px;  
+  margin-bottom: 5px;
 }
 
 .hero-desc {
   font-weight: 500;
   margin-bottom: 5px;
   background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(5px);
   padding: 12px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -593,6 +601,71 @@ border-bottom-left-radius: 25px;
   }
 }
 
+
+
+/* 1. الحاوية (المسؤولة عن الموقع والدخول) */
+.smart-car-wrapper {
+  position: absolute;
+
+  /* --- التوسيط الذكي (السر هنا) --- */
+  top: 25%;
+  /* ضع رأس السيارة في منتصف الشاشة */
+  right: -35%;
+  /* الخروج قليلاً لليمين */
+  z-index: 0;
+
+  /* الحجم */
+  width: 90vw;
+  max-width: 1000px;
+  /* منع التضخم في الشاشات الكبيرة جداً */
+
+  /* --- الأنيميشن المدمج (دخول + توسيط) --- */
+  /* ملاحظة: الحركة تبدأ من اليمين وتستقر في المنتصف */
+  transform: translate(120%, -50%);
+  animation: carDriveInCentered 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* 2. الصورة نفسها (المسؤولة عن النبض فقط) */
+.smart-car-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+
+  /* أنيميشن النبض (تتحرك للأعلى والأسفل وهي واقفة) */
+  animation: carIdle 3s ease-in-out infinite alternate;
+  animation-delay: 1.2s;
+}
+
+/* =========================================
+   الأنيميشن (Animations)
+   ========================================= */
+
+/* حركة الدخول: تأتي من اليمين وتقف في مكانها المحدد */
+@keyframes carDriveInCentered {
+  from {
+    /* ابدأ من خارج الشاشة يميناً، مع الحفاظ على التوسيط العمودي */
+    transform: translate(120%, -50%);
+    opacity: 0;
+  }
+
+  to {
+    /* استقر في المكان الطبيعي (0 يمين) مع الحفاظ على التوسيط (-50% أعلى) */
+    transform: translate(0, -50%);
+    opacity: 1;
+  }
+}
+
+@keyframes carIdle {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
 .services-wrap {
   position: relative;
   overflow: hidden;
@@ -650,7 +723,7 @@ border-bottom-left-radius: 25px;
   color: var(--text-secondary);
   border-radius: 8px;
   padding: 15px;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid var(--border-light);
   margin-bottom: 20px;
@@ -704,7 +777,8 @@ border-bottom-left-radius: 25px;
   height: 65px;
   border-radius: 50%;
 
-  background: #25D366;
+  background: #25d3656b;
+  backdrop-filter: blur(6px);
   /* Solid color works better for CTA */
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
   border: 2px solid #fff;
@@ -740,8 +814,8 @@ border-bottom-left-radius: 25px;
   height: 55px;
   border-radius: 16px;
 
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
   border: 1px solid #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
@@ -833,7 +907,19 @@ border-bottom-left-radius: 25px;
     bottom: -13em;
   }
 }
+@media (min-width: 1024px) {
+  .hero {
+    /* في الشاشات الكبيرة نزيد الارتفاع قليلاً ليتناسب مع البانر */
+    min-height: 600px;
+  }
 
+  .smart-car-wrapper {
+    /* ضبط الحجم والمكان للشاشات العريضة */
+    width: 70vw;
+    right: -35%;
+    top: 40%;
+  }
+}
 @media (max-width: 1024px) {
   .bg-car {
     inset-block-end: 20%;
@@ -880,6 +966,28 @@ border-bottom-left-radius: 25px;
   :root {
     --h1: 20px;
     --h2: 20px;
+  }
+
+  .smart-car-wrapper {
+    width: 95vw;
+  /* تكبير السيارة في الجوال */    /* عرض أكبر في الجوال */
+    /* تكبير السيارة في الجوال لتملأ العرض */
+    right: -25%;
+  /* دفعها لليمين أكثر */    /* دفعها أكثر لليمين في الجوال لتناسب التصميم الطولي */
+    bottom: -3%;
+    top: auto;
+    /* رفعها قليلاً عن الحافة السفلية */
+    opacity: 0.3;
+    transform: translateX(120%);
+    animation: carDriveInMobile 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    /* تخفيف الشفافية في الجوال كي لا تغطي النص (اختياري) */
+  }
+
+  /* إذا كنت تريد السيارة خلف النص تماماً في الجوال */
+  .hero-grid {
+    position: relative;
+    z-index: 2;
+    /* رفع النص فوق السيارة */
   }
 
   .bg-car {
@@ -971,14 +1079,36 @@ border-bottom-left-radius: 25px;
     bottom: 20px;
   }
 }
+/* أنيميشن خاص للجوال (بدون توسيط عمودي لأننا نستخدم bottom) */
+@keyframes carDriveInMobile {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
 
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 @media (max-width: 640px) {
   .bg-car {
     inset-block-end: 18%;
     inset-inline-end: -160%;
     width: 380%;
   }
-
+  .smart-car-wrapper {
+    width: 115vw;
+    /* تكبير السيارة في الجوال */
+    /* عرض أكبر في الجوال */
+    /* تكبير السيارة في الجوال لتملأ العرض */
+    right: -40%;
+    /* دفعها لليمين أكثر */
+    /* دفعها أكثر لليمين في الجوال لتناسب التصميم الطولي */
+    bottom: 10%;
+    /* رفعها قليلاً عن الحافة السفلية */
+    /* تخفيف الشفافية في الجوال كي لا تغطي النص (اختياري) */
+  }
   .car-services {
     width: 67em;
     bottom: -6em;
@@ -1004,7 +1134,18 @@ border-bottom-left-radius: 25px;
     bottom: 0.1em;
     left: -15em;
   }
-
+  .smart-car-wrapper {
+    width: 180vw;
+    /* تكبير السيارة في الجوال */
+    /* عرض أكبر في الجوال */
+    /* تكبير السيارة في الجوال لتملأ العرض */
+    right: -100%;
+    /* دفعها لليمين أكثر */
+    /* دفعها أكثر لليمين في الجوال لتناسب التصميم الطولي */
+    bottom: 2%;
+    /* رفعها قليلاً عن الحافة السفلية */
+    /* تخفيف الشفافية في الجوال كي لا تغطي النص (اختياري) */
+  }
   .car-services-2 {
     width: 65em;
     bottom: 0.1em;
