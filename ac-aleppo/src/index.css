@@ -6,7 +6,32 @@
   font-style: normal;
   font-display: swap;
 }
+/* الوزن العادي - Regular */
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
+/* الوزن العريض - Bold */
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* الوزن الخفيف - Light (اختياري) */
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Light.ttf") format("ttf");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
 /* ====== 2) متغيرات وثيم عام ====== */
 :root {
   --brand: #e53935;
@@ -15,12 +40,12 @@
   --text: #1a1a1a;
   --paper: #fffafa;
 
-  --font-body: "AraHamah", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif;
-  --font-head: "AraHamah", "Noto Kufi Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Tajawal", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-head: "Tajawal", "Noto Kufi Arabic", "Segoe UI", system-ui, sans-serif;
 
   /* حجوم مرنة */
-  --h1: clamp(28px, 4.2vw, 40px);
-  --h2: clamp(22px, 3.2vw, 28px);
+  --h1: clamp(24px, 4vw, 32px);
+  --h2: clamp(18px, 3vw, 24px);
 }
 
 /* ====== 3) أساسيات ====== */
@@ -109,12 +134,15 @@ p {
 .btn.alt {
   background: var(--accent);
   color: #000000;
-  opacity: 0.95;
+  opacity: 0.9;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .btn.whatsapp {
-  background: rgba(0, 165, 60, 0.95);
-
+  background: rgba(0, 165, 60, 0.9);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 /* ====== بطاقات وشبكات ====== */
@@ -125,13 +153,13 @@ p {
   border-radius: 14px;
   padding: 9px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, .04);
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   ;
 
 }
 
 .contact-section {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 .banner-card {
@@ -203,7 +231,7 @@ p {
   color: #fff;
   text-decoration: none;
   font-weight: 300;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .menu-btn {
@@ -313,8 +341,9 @@ p {
 
 .actions {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5rem;
+  flex-wrap:nowrap;
 }
 
 .offer-badge {
@@ -323,7 +352,7 @@ p {
   background-color: #f5d97f;
   padding: 10px;
   border-radius: 10px;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   margin-bottom: 3%;
   color: #0c0c0c;
   border-bottom: #990b0b 1px solid;
@@ -335,17 +364,17 @@ p {
 
 
 .offer-badge-price {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 600;
   animation: float 1s ease-in-out 1s infinite alternate;
 }
 
 .offer-badge-price h3 span {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .offer-badge-text-title {
-  font-size: 3rem;
+  font-size: 2.22rem;
   font-weight: 500;
   margin-top: -6%;
 }
@@ -528,15 +557,21 @@ p {
 }
 
 .seo-text {
-  font-size: 0.95rem;
+  font-size: 0.7rem;
   color: #444;
+  border-radius: 5px;
+  padding: 8px;
+
+  background-color: rgba(255, 255, 255, 0.8);
   margin-bottom: 10px;
   max-width: 56rem;
+  font-weight: 460;
 }
 /* ====== فوتر ====== */
 .footer { 
   background: var(--brand);
   color: #fff;
+  font-size: 0.8rem;
   padding: 28px 0;
 }
 
@@ -727,7 +762,7 @@ p {
 
   .actions .btn {
     width: 100%;
-    text-align: center;
+    justify-content: center;
   }
 
   .nav .links {

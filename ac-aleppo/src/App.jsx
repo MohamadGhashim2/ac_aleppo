@@ -89,6 +89,13 @@ export default function App() {
             <a href="#whyus">لماذا نحن</a>
             <a href="#gallery">أعمالنا</a>
             <a href="#faq">الأسئلة</a>
+            <a
+              href=""
+              className="btn whatsapp"
+              style={{ background: "#690707" }}
+            >
+              موقعنا
+            </a>
             <a href="#contact" className="btn whatsapp">
               تواصل
             </a>
@@ -139,6 +146,14 @@ export default function App() {
               >
                 تواصل
               </a>
+              <a
+                href=""
+                className="btn whatsapp"
+                style={{ background: "#690707" }}
+              >
+                موقعنا
+              </a>
+
               <button className="close" onClick={() => setMenuOpen(false)}>
                 إغلاق القائمة
               </button>
@@ -152,10 +167,17 @@ export default function App() {
         <div className="container grid hero-grid">
           {/* خلفية السيارة */}
           <div className="bg-car" aria-hidden="true" />
-          <div data-aos="fade-up">
-            <h1>افضل ورشة مكيفات سيارات بالرياض</h1>
+          <div data-aos="fade-up" style={{ margin: -5 }}>
+            <h1 style={{ fontWeight: 600 }}>افضل ورشة مكيفات سيارات بالرياض</h1>
 
-            <p>
+            <p
+              style={{
+                fontWeight: 460,
+                marginBottom: 18,
+                backgroundColor: "rgba(255, 255, 255, 0.8)",
+                padding: 8,
+              }}
+            >
               صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
               إلكتروني… سرعة وجودة بأسعار مناسبة.
             </p>
@@ -173,14 +195,18 @@ export default function App() {
                 className="btn whatsapp"
                 href={`https://wa.me/${phone.replace(
                   /\D/g,
-                  ""
+                  "",
                 )}?text=${encodeURIComponent(waText)}`}
                 target="_blank"
                 rel="noreferrer"
               >
                 راسلنا واتساب
               </a>
-              <a className="btn alt" href="#services">
+              <a
+                className="btn alt"
+                style={{ color: "#ffffff" }}
+                href="#services"
+              >
                 شاهد خدماتنا
               </a>
             </div>
@@ -439,14 +465,23 @@ export default function App() {
                 7818 608 54 966+
               </a>
             </p>
-            <p>السعودية – الرياض</p>
+            <p>السعودية – الرياض - صناعية النسيم</p>
             <p>
               {" "}
               <a
                 href="https://maps.app.goo.gl/AyVqY388NF9XLJMr7"
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: "#000000ff" }}
+                style={{ color: "#000000ff", fontWeight: "bold" }}
+                onClick={() => {
+                  // 👇👇 هنا نضع كود الـ Event Snippet 👇👇
+                  if (window.gtag) {
+                    window.gtag("event", "conversion", {
+                      send_to: "AW-17079539386/tu49CITX7fMbELqtlNA_",
+                    });
+                  }
+                  // 👆👆 انتهى الكود 👆👆
+                }}
               >
                 الخريطة (إضغط لعرض الموقع)
               </a>
@@ -455,7 +490,21 @@ export default function App() {
           </div>
         </div>
       </section>
-
+      {/* 📍 سكشن الخريطة (Embed Map) */}
+      <section
+        id="map-section"
+        style={{ width: "100%", height: "450px", padding: 0 }}
+      >
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.477549116924!2d46.85528802405107!3d24.710480351241465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa95da9d6ba3d%3A0x67336cca9c6a55b3!2z2YjYsdi02Kkg2KfZhNi52KfYtdmF2Ycg2K3ZhNioINin2YTYqtmD2YrZitmBINmE2LXZitin2YbYqSDYp9mE2LPZitin2LHYp9iq!5e0!3m2!1sar!2str!4v1770549351252!5m2!1sar!2str"
+          width="100%"
+          height="450"
+          style={{ border: 100 }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </section>
       {/* فوتر */}
       <footer className="footer">
         <div
@@ -490,6 +539,15 @@ export default function App() {
               target="_blank"
               rel="noreferrer"
               style={{ color: "#fff" }}
+              onClick={() => {
+                // 👇👇 هنا نضع كود الـ Event Snippet 👇👇
+                if (window.gtag) {
+                  window.gtag("event", "conversion", {
+                    send_to: "AW-17079539386/tu49CITX7fMbELqtlNA_",
+                  });
+                }
+                // 👆👆 انتهى الكود 👆👆
+              }}
             >
               الخريطة
             </a>
@@ -502,7 +560,7 @@ export default function App() {
         className="whatsapp-fab"
         href={`https://wa.me/${phone.replace(
           /\D/g,
-          ""
+          "",
         )}?text=${encodeURIComponent(waText)}`}
         target="_blank"
         rel="noreferrer"
