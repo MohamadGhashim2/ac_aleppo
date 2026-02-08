@@ -31,13 +31,20 @@
   font-display: swap;
 }
 
-/* ====== 2) Color Variables (Pattern: Freon Fresh) ====== */
+/* ====== 2) Color Variables (Root) ====== */
 :root {
+  /* --- Base Colors (RGB for Transparency) --- */
+  --white: #ffffff;
+  --white-rgb: 255, 255, 255;
+  --black: #000000;
+  --black-rgb: 0, 0, 0;
+
   /* --- Brand Identity --- */
   --brand: #e53935;
   --brand-rgb: 229, 57, 53;
   --brand-dark: #b71c1c;
   --brand-deep: #00897b;
+  /* Teal */
 
   /* --- Text Colors --- */
   --text-main: #263238;
@@ -49,18 +56,27 @@
   --bg-paper: #e0f2f1;
   --bg-card: #ffffff;
   --bg-card-rgb: 255, 255, 255;
-  --bg-overlay: rgba(0, 77, 64, 0.7);
   --bg-gray: #f1f8e9;
+  --bg-light-blue: #f0f9ff;
+  /* For offer badge gradient start */
+
   --text-highlight-bg: #ffffff;
   --text-highlight-bg-rgb: 255, 255, 255;
 
   /* --- Borders & Shadows --- */
   --border-light: #b2dfdb;
   --border-brand-light: #ffcdd2;
-  --shadow-color: rgba(0, 150, 136, 0.15);
+  --border-grey: #cccccc;
+  /* Used in close button */
 
-  /* --- Functional Colors --- */
+  --shadow-base-rgb: 0, 150, 136;
+  /* Teal shadow base */
+
+  /* --- Functional Colors (WhatsApp & Offers) --- */
   --whatsapp-green: #25D366;
+  --whatsapp-green-rgb: 37, 211, 102;
+  --whatsapp-dark: #128C7E;
+
   --offer-bg: #e0f7fa;
   --offer-bg-rgb: 224, 247, 250;
   --offer-border: #00acc1;
@@ -90,7 +106,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-variant-numeric: tabular-nums;
   overflow-x: hidden;
-  /* لمنع التمرير الأفقي */
 }
 
 h1,
@@ -139,7 +154,7 @@ p {
 
 .section {
   padding: clamp(32px, 6vw, 64px) 0;
-  box-shadow: 12px 25px 60px -9px var(--shadow-color);
+  box-shadow: 12px 25px 60px -9px rgba(var(--shadow-base-rgb), 0.15);
 }
 
 /* ====== Buttons (Glass Effect) ====== */
@@ -151,10 +166,9 @@ p {
   gap: 8px;
   padding: 12px 24px;
   border-radius: 20px;
-
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(var(--white-rgb), 0.3);
   box-shadow: 0 4px 15px rgba(var(--brand-rgb), 0.2);
-  color: #fff;
+  color: var(--white);
   text-decoration: none;
   font-weight: 500;
   line-height: 1;
@@ -173,38 +187,59 @@ p {
 
 /* Ghost Button (Fixed Visibility) */
 .btn.alt.ghost {
-  background: rgba(255, 255, 255, 0.515);
-  border: 1px solid #fff;
+  background: rgba(var(--white-rgb), 0.515);
+  border: 1px solid var(--white);
   color: var(--brand) !important;
   font-weight: 700;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(var(--black-rgb), 0.1);
 }
 
 .btn.alt.ghost:hover {
   background: var(--brand);
-  color: #fff !important;
+  color: var(--white) !important;
   transform: translateY(-2px);
 }
 
 /* WhatsApp Button */
 .btn.whatsapp {
-  background: rgba(0, 255, 94, 0.589);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
+  background: rgba(var(--whatsapp-green-rgb), 0.6);
+  border: 1px solid rgba(var(--white-rgb), 0.3);
+  color: var(--white);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
 
 .btn.whatsapp:hover {
-  background: #25D366;
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+  background: var(--whatsapp-green);
+  box-shadow: 0 8px 25px rgba(var(--whatsapp-green-rgb), 0.4);
 }
 
 .btn.location {
   background: var(--brand-deep);
   color: var(--text-inverse);
+}
+
+/* ====== زر العرض الجديد (CTA) ====== */
+.btn.offer-cta {
+  background: var(--whatsapp-green);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 8px 20px;
+  margin-top: 8px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(var(--whatsapp-green-rgb), 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn.offer-cta:hover {
+  background: var(--whatsapp-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--whatsapp-green-rgb), 0.5);
 }
 
 /* ====== Cards & Grid ====== */
@@ -215,7 +250,7 @@ p {
   border: 1px solid var(--border-brand-light);
   border-radius: 16px;
   padding: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.04);
   font-size: 0.95rem;
   transition: transform 0.2s ease;
 }
@@ -261,9 +296,8 @@ p {
   top: 0;
   z-index: 1000;
   background: rgba(var(--brand-rgb), 0.95);
-  /* خلفية غير شفافة تماماً */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(var(--black-rgb), 0.1);
+  box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
 }
 
 .nav .wrap {
@@ -302,10 +336,10 @@ p {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: #fff;
+  background: var(--white);
   cursor: pointer;
   border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.1);
 }
 
 /* ====== Mobile Drawer (NEW DESIGN - Vertical & Centered) ====== */
@@ -316,31 +350,25 @@ p {
   width: 100%;
   height: auto;
   max-height: 80vh;
-  /* أقصى حد 80% من الشاشة لضمان عدم تغطية كل شيء */
-  /* Full Height */
   z-index: 1001;
   border-bottom-left-radius: 25px;
-  /* زوايا سفلية دائرية لجمالية أكثر */
   border-bottom-right-radius: 25px;
-  /* White Glass Background */
-  background: rgba(255, 255, 255, 0.98);
+
+  background: rgba(var(--white-rgb), 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
-  /* Vertical Centering Layout */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 25px;
-  /* Spacing between items */
 
   animation: drawerFadeIn 0.3s ease-out;
 }
 
 .mobile-drawer a:not(.btn) {
   font-size: 1.5rem;
-  /* Larger Text */
   font-weight: 700;
   color: var(--text-main);
   text-decoration: none;
@@ -361,8 +389,8 @@ p {
 .mobile-drawer .close {
   margin-top: 30px;
   background: transparent;
-  border: 1px solid #ccc;
-  color: #777;
+  border: 1px solid var(--border-grey);
+  color: var(--text-secondary);
   padding: 10px 40px;
   border-radius: 50px;
   cursor: pointer;
@@ -384,20 +412,14 @@ p {
 .backdrop {
   position: fixed;
   inset: 0;
-  /* تغطي كامل الشاشة */
-  background: rgba(0, 0, 0, 0.6) !important;
-  /* لون أسود نصف شفاف */
+  background: rgba(var(--black-rgb), 0.6) !important;
   backdrop-filter: blur(5px);
-  /* تغبيش المحتوى الخلفي */
   -webkit-backdrop-filter: blur(5px);
   z-index: 1000;
-  /* خلف القائمة مباشرة */
   display: block;
-  /* ضمان ظهورها */
   animation: fadeIn 0.3s ease-out;
 }
 
-/* No need for backdrop with full screen menu */
 .no-scroll {
   overflow: hidden;
 }
@@ -406,13 +428,11 @@ p {
 .hero {
   position: relative;
   overflow: hidden;
-  /* نضمن أن الهيرو لديه ارتفاع مرن ومناسب */
   min-height: 500px;
-  /* للجوال */
   display: flex;
   align-items: center;
-  /* يساعد في محاذاة المحتوى */
 }
+
 .hero .container {
   position: relative;
 }
@@ -433,11 +453,11 @@ p {
 .hero-desc {
   font-weight: 500;
   margin-bottom: 5px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(var(--white-rgb), 0.5);
   backdrop-filter: blur(3px);
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(var(--white-rgb), 0.5);
   line-height: 1.3;
   font-size: 0.9rem;
 }
@@ -446,7 +466,6 @@ p {
   margin-top: 24px;
   display: flex;
   gap: 15px;
-
 }
 
 .mb-md {
@@ -468,7 +487,7 @@ p {
   height: 400px;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(var(--black-rgb), 0.1);
   margin-top: 40px;
 }
 
@@ -482,19 +501,17 @@ p {
 .offer-badge {
   position: relative;
   background: rgba(var(--offer-bg-rgb), 0.5);
+  background: linear-gradient(135deg, var(--bg-light-blue) 0%, var(--offer-bg) 100%);
   backdrop-filter: blur(20px);
   border-radius: 20px;
-  border-bottom: 1px solid var(--brand);  
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--brand);
+  box-shadow: 0 10px 30px rgba(var(--black-rgb), 0.08);
   margin-bottom: 20px;
-  /* Grid Layout: Text Right, Image Left */
+
   display: grid;
   grid-template-columns: 1fr 300px;
-  /* النص يأخذ المساحة المتبقية، الصورة تأخذ 300px */
   align-items: center;
   width: 100%;
-
-  /* Full Width */
 }
 
 /* Text Section */
@@ -506,7 +523,7 @@ p {
 
 /* Image Section */
 .offer-image-container {
-  width: 150%;  /* Fixed width for image area */
+  width: 150%;
   height: 95%;
   display: flex;
   align-items: flex-end;
@@ -518,14 +535,10 @@ p {
   height: auto;
   max-height: 450px;
   max-width: 120%;
-    /* لضمان عدم الخروج عن الحاوية */
-  /* تكبير الصورة في الديسكتوب (كانت 200px) */  /* Constrain height */
   object-fit: contain;
-  filter: drop-shadow(-5px 5px 15px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(-5px 5px 15px rgba(var(--black-rgb), 0.15));
   margin-bottom: -10px;
   position: relative;
- 
-    /* سحب الصورة للأسفل قليلاً لتبدو "خارجة" من الإطار */
 }
 
 .offer-badge-price {
@@ -543,22 +556,18 @@ p {
   color: var(--brand);
   line-height: 1;
   margin: 0;
-    transform-origin: center center;
-      /* التكبير من نقطة المنتصف */
-      animation: pricePulse 1.5s infinite ease-in-out;
-      will-change: transform;
-      /* نبض مستمر وناعم */
+  transform-origin: center center;
+  animation: pricePulse 1.5s infinite ease-in-out;
+  will-change: transform;
 }
 
 .offer-badge-price .price-span {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-secondary);
-    transform-origin: center center;
-      /* التكبير من نقطة المنتصف */
-      animation: pricePulse 1.5s infinite ease-in-out;
-      will-change: transform;
-      /* نبض مستمر وناعم */
+  transform-origin: center center;
+  animation: pricePulse 1.5s infinite ease-in-out;
+  will-change: transform;
 }
 
 .offer-badge-text-title p {
@@ -573,6 +582,7 @@ p {
   color: var(--text-secondary);
   margin: 0;
 }
+
 @keyframes pricePulse {
   0% {
     transform: scale(1);
@@ -580,14 +590,14 @@ p {
 
   50% {
     transform: scale(1.1);
-    /* تكبير بنسبة 10% */
   }
 
   100% {
     transform: scale(1);
   }
 }
-/* ====== Car Animations (Untouched as requested) ====== */
+
+/* ====== Car Animations ====== */
 .bg-car {
   position: absolute;
   inset-inline-end: 45%;
@@ -629,26 +639,14 @@ p {
   }
 }
 
-
-
 /* 1. الحاوية (المسؤولة عن الموقع والدخول) */
 .smart-car-wrapper {
   position: absolute;
-
-  /* --- التوسيط الذكي (السر هنا) --- */
   top: 25%;
-  /* ضع رأس السيارة في منتصف الشاشة */
   right: -35%;
-  /* الخروج قليلاً لليمين */
   z-index: 0;
-
-  /* الحجم */
   width: 90vw;
   max-width: 1000px;
-  /* منع التضخم في الشاشات الكبيرة جداً */
-
-  /* --- الأنيميشن المدمج (دخول + توسيط) --- */
-  /* ملاحظة: الحركة تبدأ من اليمين وتستقر في المنتصف */
   transform: translate(120%, -50%);
   animation: carDriveInCentered 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
@@ -659,8 +657,6 @@ p {
   width: 100%;
   height: auto;
   object-fit: contain;
-
-  /* أنيميشن النبض (تتحرك للأعلى والأسفل وهي واقفة) */
   animation: carIdle 3s ease-in-out infinite alternate;
   animation-delay: 1.2s;
 }
@@ -668,17 +664,13 @@ p {
 /* =========================================
    الأنيميشن (Animations)
    ========================================= */
-
-/* حركة الدخول: تأتي من اليمين وتقف في مكانها المحدد */
 @keyframes carDriveInCentered {
   from {
-    /* ابدأ من خارج الشاشة يميناً، مع الحفاظ على التوسيط العمودي */
     transform: translate(120%, -50%);
     opacity: 0;
   }
 
   to {
-    /* استقر في المكان الطبيعي (0 يمين) مع الحفاظ على التوسيط (-50% أعلى) */
     transform: translate(0, -50%);
     opacity: 1;
   }
@@ -752,7 +744,7 @@ p {
   border-radius: 8px;
   padding: 15px;
   backdrop-filter: blur(4px);
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(var(--white-rgb), 0.5);
   border: 1px solid var(--border-light);
   margin-bottom: 20px;
   max-width: 65rem;
@@ -781,7 +773,7 @@ p {
 }
 
 .footer-link {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(var(--white-rgb), 0.9);
   text-decoration: none;
   font-weight: 500;
   transition: opacity 0.2s;
@@ -790,7 +782,7 @@ p {
 
 .footer-link:hover {
   opacity: 1;
-  border-color: #fff;
+  border-color: var(--white);
 }
 
 /* ====== WhatsApp Floating Button (FIXED Z-Index & Position) ====== */
@@ -799,18 +791,13 @@ p {
   right: 25px;
   bottom: 25px;
   z-index: 9999;
-  /* Highest priority */
-
   width: 65px;
   height: 65px;
   border-radius: 50%;
-
-  background: #25d3656b;
+  background: rgba(var(--whatsapp-green-rgb), 0.45);
   backdrop-filter: blur(6px);
-  /* Solid color works better for CTA */
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-  border: 2px solid #fff;
-
+  box-shadow: 0 4px 20px rgba(var(--whatsapp-green-rgb), 0.4);
+  border: 2px solid var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -841,18 +828,17 @@ p {
   width: 55px;
   height: 55px;
   border-radius: 16px;
-
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(var(--white-rgb), 0.5);
   backdrop-filter: blur(4px);
-  border: 1px solid #fff;
+  border: 1px solid var(--white);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
 .social-btn:hover {
   transform: translateY(-5px);
-  background: #fff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background: var(--white);
+  box-shadow: 0 10px 25px rgba(var(--black-rgb), 0.1);
   border-color: var(--brand);
 }
 
@@ -897,7 +883,7 @@ p {
 .more-card:hover,
 .hide-card:hover {
   border-color: var(--brand);
-  background: #fff;
+  background: var(--white);
 }
 
 .more-card .plus {
@@ -935,19 +921,19 @@ p {
     bottom: -13em;
   }
 }
+
 @media (min-width: 1024px) {
   .hero {
-    /* في الشاشات الكبيرة نزيد الارتفاع قليلاً ليتناسب مع البانر */
     min-height: 600px;
   }
 
   .smart-car-wrapper {
-    /* ضبط الحجم والمكان للشاشات العريضة */
     width: 70vw;
     right: -35%;
     top: 40%;
   }
 }
+
 @media (max-width: 1024px) {
   .bg-car {
     inset-block-end: 20%;
@@ -996,26 +982,26 @@ p {
     --h2: 20px;
   }
 
+  .btn.offer-cta {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    width: auto;
+    align-self: center;
+  }
+
   .smart-car-wrapper {
     width: 95vw;
-  /* تكبير السيارة في الجوال */    /* عرض أكبر في الجوال */
-    /* تكبير السيارة في الجوال لتملأ العرض */
     right: -25%;
-  /* دفعها لليمين أكثر */    /* دفعها أكثر لليمين في الجوال لتناسب التصميم الطولي */
     bottom: -3%;
     top: auto;
-    /* رفعها قليلاً عن الحافة السفلية */
     opacity: 0.3;
     transform: translateX(120%);
     animation: carDriveInMobile 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    /* تخفيف الشفافية في الجوال كي لا تغطي النص (اختياري) */
   }
 
-  /* إذا كنت تريد السيارة خلف النص تماماً في الجوال */
   .hero-grid {
     position: relative;
     z-index: 2;
-    /* رفع النص فوق السيارة */
   }
 
   .bg-car {
@@ -1055,63 +1041,48 @@ p {
     gap: 10px;
   }
 
-  /* Offer Badge on Mobile (Stacking) */
-    .offer-badge {
-      /* تغيير التخطيط في الجوال إلى Flexbox أفقي */
-      display: flex;
-      flex-direction: row-reverse;
-      /* لضمان أن الصورة يسار والنص يمين (حسب الاتجاه العربي) */
-      align-items: stretch;
-      /* لضمان تساوي الارتفاع */
-      min-height: 160px;
-      /* ارتفاع أدنى لضمان ظهور الصورة بشكل جيد */
-    }
-  
-    /* 1. قسم النصوص (75% من العرض) */
-    .offer-content {
-      flex: 3;
-      /* يأخذ 3 أجزاء (75%) */
-      padding: 15px 20px 15px 5px;
-      /* تقليل الحشوة */
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      /* توسيط النصوص عمودياً */
-    }
-  
-    /* 2. قسم الصورة (25% من العرض) */
-    .offer-image-container {
-      flex: 1;
-      /* يأخذ جزء واحد (25%) */
-      width: 130%;
-      /* إلغاء العرض الثابت */
-      height: 100%;
-      padding: 10px;
-      align-items: center;
-      /* توسيط الصورة عمودياً وأفقياً */
-    }
-  
-    .offer-image {
-      max-height: 100%;
-      /* الصورة تأخذ كامل ارتفاع الحاوية */
-      max-width: 100%;
-      /* الصورة تأخذ كامل عرض الحاوية */
-      margin-bottom: 0;
-    }
-  
-    /* تصغير النصوص لتناسب المساحة الضيقة */
-    .offer-badge-price h3 {
-      font-size: 2.2rem;
-    }
-  
-    .offer-badge-text-title p {
-      font-size: 1.1rem;
-    }
-  
-    .offer-badge-text p {
-      font-size: 0.8rem;
-    }
+  .offer-badge {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: stretch;
+    min-height: 160px;
+  }
+
+  .offer-content {
+    flex: 3;
+    padding: 15px 20px 15px 5px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .offer-image-container {
+    flex: 1;
+    width: 130%;
+    height: 100%;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .offer-image {
+    max-height: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
+  .offer-badge-price h3 {
+    font-size: 2.2rem;
+  }
+
+  .offer-badge-text-title p {
+    font-size: 1.1rem;
+  }
+
+  .offer-badge-text p {
+    font-size: 0.8rem;
+  }
+
   .banner-media {
     height: 200px;
   }
@@ -1132,7 +1103,7 @@ p {
     bottom: 20px;
   }
 }
-/* أنيميشن خاص للجوال (بدون توسيط عمودي لأننا نستخدم bottom) */
+
 @keyframes carDriveInMobile {
   from {
     transform: translateX(120%);
@@ -1144,24 +1115,20 @@ p {
     opacity: 1;
   }
 }
+
 @media (max-width: 640px) {
   .bg-car {
     inset-block-end: 18%;
     inset-inline-end: -160%;
     width: 380%;
   }
+
   .smart-car-wrapper {
     width: 115vw;
-    /* تكبير السيارة في الجوال */
-    /* عرض أكبر في الجوال */
-    /* تكبير السيارة في الجوال لتملأ العرض */
     right: -40%;
-    /* دفعها لليمين أكثر */
-    /* دفعها أكثر لليمين في الجوال لتناسب التصميم الطولي */
     bottom: 10%;
-    /* رفعها قليلاً عن الحافة السفلية */
-    /* تخفيف الشفافية في الجوال كي لا تغطي النص (اختياري) */
   }
+
   .car-services {
     width: 67em;
     bottom: -6em;
@@ -1187,18 +1154,13 @@ p {
     bottom: 0.1em;
     left: -15em;
   }
+
   .smart-car-wrapper {
     width: 180vw;
-    /* تكبير السيارة في الجوال */
-    /* عرض أكبر في الجوال */
-    /* تكبير السيارة في الجوال لتملأ العرض */
     right: -100%;
-    /* دفعها لليمين أكثر */
-    /* دفعها أكثر لليمين في الجوال لتناسب التصميم الطولي */
     bottom: 2%;
-    /* رفعها قليلاً عن الحافة السفلية */
-    /* تخفيف الشفافية في الجوال كي لا تغطي النص (اختياري) */
   }
+
   .car-services-2 {
     width: 65em;
     bottom: 0.1em;
@@ -1223,7 +1185,6 @@ p {
     width: 67em;
   }
 
-  /* Fallback to 1 column on extremely small screens if needed, otherwise keep 2 */
   .grid.grid-services {
     grid-template-columns: 1fr;
   }

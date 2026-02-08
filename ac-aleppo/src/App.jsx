@@ -4,6 +4,8 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const phone = "+966546087818";
   const waText = "مرحباً، أريد الاستفسار عن خدمة تكييف السيارات";
+  const offerWaText =
+    "مرحباً، أريد الاستفسار وحجز عرض تعبئة الفريون بـ 99 ريال";
   const [showAll, setShowAll] = useState(false);
 
   // صور المعرض
@@ -255,7 +257,21 @@ export default function App() {
                 </div>
 
                 <div className="offer-badge-text">
-                  <p>الحق العرض الآن (العرض محدود)</p>
+                  <a
+                    href={`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(offerWaText)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn offer-cta"
+                  >
+                    احجز العرض عبر واتساب (العرض محدود){" "}
+                    <img
+                      src="/icons/whatsapp.svg"
+                      alt=""
+                      width="20"
+                      height="20"
+                      style={{ filter: "brightness(0) invert(1)" }}
+                    />
+                  </a>
                 </div>
               </div>
 
