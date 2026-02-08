@@ -79,8 +79,12 @@ export default function App() {
       {/* الهيدر */}
       <header className="nav">
         <div className="container wrap">
-          <strong style={{ color: "var(--brand)" }}>
-            <img src="/images/logo.webp" alt="العاصمة حلب" height="50" />
+          <strong>
+            <img
+              src="/images/logo.webp"
+              alt="ابو حلب كهربائي سيارات"
+              height="50"
+            />
           </strong>
 
           {/* روابط الدِسك توب */}
@@ -89,11 +93,7 @@ export default function App() {
             <a href="#whyus">لماذا نحن</a>
             <a href="#gallery">أعمالنا</a>
             <a href="#faq">الأسئلة</a>
-            <a
-              href=""
-              className="btn whatsapp"
-              style={{ background: "#690707" }}
-            >
+            <a href="" className="btn whatsapp location">
               موقعنا
             </a>
             <a href="#contact" className="btn whatsapp">
@@ -146,11 +146,7 @@ export default function App() {
               >
                 تواصل
               </a>
-              <a
-                href=""
-                className="btn whatsapp"
-                style={{ background: "#690707" }}
-              >
+              <a href="" className="btn whatsapp location">
                 موقعنا
               </a>
 
@@ -168,16 +164,8 @@ export default function App() {
           {/* خلفية السيارة */}
           <div className="bg-car" aria-hidden="true" />
           <div data-aos="fade-up" style={{ margin: -5 }}>
-            <h1 style={{ fontWeight: 600 }}>افضل ورشة مكيفات سيارات بالرياض</h1>
-
-            <p
-              style={{
-                fontWeight: 460,
-                marginBottom: 18,
-                backgroundColor: "rgba(255, 255, 255, 0.8)",
-                padding: 8,
-              }}
-            >
+            <h1 className="hero-title">افضل ورشة مكيفات سيارات بالرياض</h1>
+            <p className="hero-desc">
               صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
               إلكتروني… سرعة وجودة بأسعار مناسبة.
             </p>
@@ -190,7 +178,7 @@ export default function App() {
               الرياض وشرق الرياض مع أفضل إصلاح مكيف سيارات بأسعار مناسبة.
             </p>
 
-            <div className="actions" style={{ marginTop: 18 }}>
+            <div className="actions hero-actions">
               <a
                 className="btn whatsapp"
                 href={`https://wa.me/${phone.replace(
@@ -202,11 +190,7 @@ export default function App() {
               >
                 راسلنا واتساب
               </a>
-              <a
-                className="btn alt"
-                style={{ color: "#ffffff" }}
-                href="#services"
-              >
+              <a className="btn alt ghost" href="#services">
                 شاهد خدماتنا
               </a>
             </div>
@@ -241,11 +225,7 @@ export default function App() {
               </a>
             </div>
           </div>
-          <div
-            data-aos="zoom-in"
-            className="card banner-card"
-            style={{ minHeight: 0, display: "block" }}
-          >
+          <div data-aos="zoom-in" className="card banner-card">
             <img
               className="banner-media"
               src="images/Banner.webp"
@@ -278,7 +258,8 @@ export default function App() {
 
               <div className="offer-badge-price">
                 <h3>
-                  99 ريال <span>فقط</span>
+                  99
+                  <span className="price-span">ريال </span>{" "}
                 </h3>
               </div>
 
@@ -291,11 +272,7 @@ export default function App() {
               </div>
             </div>
 
-            <h2
-              className="underline-left"
-              data-aos="fade-up"
-              style={{ marginBottom: 18 }}
-            >
+            <h2 className="underline-left mb-md" data-aos="fade-up">
               خدماتنا
             </h2>
             <p className="seo-text" data-aos="fade-up">
@@ -314,8 +291,7 @@ export default function App() {
                 ["صيانة المواسير", "استبدال/لحام مواسير التكييف."],
               ].map(([title, desc], i) => (
                 <div key={i} className="card" data-aos="fade-up">
-                  <h3 style={{ marginBottom: 8 }}>{title}</h3>
-                  <p>{desc}</p>
+                  <h3 className="mb-sm">{title}</h3> <p>{desc}</p>
                 </div>
               ))}
             </div>
@@ -324,11 +300,7 @@ export default function App() {
       </section>
 
       {/* لماذا نحن */}
-      <section
-        id="whyus"
-        className="section services-wrap"
-        style={{ background: "#dbdbdbff" }}
-      >
+      <section id="whyus" className="section services-wrap section-gray">
         <div
           className="car-services-1"
           data-aos="fade-left"
@@ -336,11 +308,7 @@ export default function App() {
         />
 
         <div className="container">
-          <h2
-            className="underline-left "
-            data-aos="fade-up"
-            style={{ marginBottom: 18 }}
-          >
+          <h2 className="underline-left mb-md" data-aos="fade-up">
             لماذا تختارنا؟
           </h2>
           <div className="grid grid-3 grid-services">
@@ -468,19 +436,18 @@ export default function App() {
             <p>السعودية – الرياض - صناعية النسيم</p>
             <p>
               {" "}
+              {/* تم استبدال الستايل بـ map-link */}
               <a
                 href="https://maps.app.goo.gl/AyVqY388NF9XLJMr7"
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: "#000000ff", fontWeight: "bold" }}
+                className="map-link"
                 onClick={() => {
-                  // 👇👇 هنا نضع كود الـ Event Snippet 👇👇
                   if (window.gtag) {
                     window.gtag("event", "conversion", {
                       send_to: "AW-17079539386/tu49CITX7fMbELqtlNA_",
                     });
                   }
-                  // 👆👆 انتهى الكود 👆👆
                 }}
               >
                 الخريطة (إضغط لعرض الموقع)
@@ -491,10 +458,7 @@ export default function App() {
         </div>
       </section>
       {/* 📍 سكشن الخريطة (Embed Map) */}
-      <section
-        id="map-section"
-        style={{ width: "100%", height: "450px", padding: 0 }}
-      >
+      <section id="map-section" className="map-container">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.477549116924!2d46.85528802405107!3d24.710480351241465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa95da9d6ba3d%3A0x67336cca9c6a55b3!2z2YjYsdi02Kkg2KfZhNi52KfYtdmF2Ycg2K3ZhNioINin2YTYqtmD2YrZitmBINmE2LXZitin2YbYqSDYp9mE2LPZitin2LHYp9iq!5e0!3m2!1sar!2str!4v1770549351252!5m2!1sar!2str"
           width="100%"
@@ -505,24 +469,17 @@ export default function App() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </section>
+
       {/* فوتر */}
       <footer className="footer">
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 12,
-          }}
-        >
+        <div className="container footer-content">
           <div>© {new Date().getFullYear()} العاصمة حلب – تكييف سيارات</div>
-          <div style={{ display: "flex", gap: 10 }}>
+          <div className="footer-links">
             <a
               href="https://www.instagram.com/abo_aleppo1"
               target="_blank"
               rel="noreferrer"
-              style={{ color: "#fff" }}
+              className="footer-link"
             >
               Instagram
             </a>
@@ -530,7 +487,7 @@ export default function App() {
               href="https://www.facebook.com/100067570856327/posts/%D9%88%D8%B1%D8%B4%D8%A9-%D8%A7%D8%A8%D9%88-%D8%AD%D9%84%D8%A8-%D9%84%D9%84%D9%85%D9%83%D9%8A%D9%81%D8%A7%D8%AA-%D8%A7%D9%84%D8%B3%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA/997067369222282/"
               target="_blank"
               rel="noreferrer"
-              style={{ color: "#fff" }}
+              className="footer-link"
             >
               Facebook
             </a>
@@ -538,7 +495,7 @@ export default function App() {
               href="https://maps.app.goo.gl/AyVqY388NF9XLJMr7"
               target="_blank"
               rel="noreferrer"
-              style={{ color: "#fff" }}
+              className="footer-link"
               onClick={() => {
                 // 👇👇 هنا نضع كود الـ Event Snippet 👇👇
                 if (window.gtag) {
