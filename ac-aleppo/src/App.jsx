@@ -110,40 +110,46 @@ export default function App() {
       </header>
 
       {/* المنيو الجانبي الجديد (Drawer) */}
+      {/* الخلفية والمنيو */}
       {menuOpen && (
-        <nav
-          id="mobile-drawer"
-          className="mobile-drawer"
-          role="dialog"
-          aria-modal="true"
-        >
-          {/* تمت إزالة الـ container ليعمل التوسيط بشكل صحيح */}
-          <a href="#services" onClick={() => setMenuOpen(false)}>
-            الخدمات
-          </a>
-          <a href="#whyus" onClick={() => setMenuOpen(false)}>
-            لماذا نحن
-          </a>
-          <a href="#gallery" onClick={() => setMenuOpen(false)}>
-            أعمالنا
-          </a>
-          <a href="#faq" onClick={() => setMenuOpen(false)}>
-            الأسئلة
-          </a>
-          <a
-            href="#contact"
-            className="btn whatsapp"
-            onClick={() => setMenuOpen(false)}
+        <>
+          {/* 1. طبقة الخلفية (عند الضغط عليها تغلق القائمة) */}
+          <div className="backdrop" onClick={() => setMenuOpen(false)} />
+
+          {/* 2. القائمة نفسها */}
+          <nav
+            id="mobile-drawer"
+            className="mobile-drawer"
+            role="dialog"
+            aria-modal="true"
           >
-            تواصل
-          </a>
-          <a href="" className="btn whatsapp location">
-            موقعنا
-          </a>
-          <button className="close" onClick={() => setMenuOpen(false)}>
-            إغلاق القائمة
-          </button>
-        </nav>
+            <a href="#services" onClick={() => setMenuOpen(false)}>
+              الخدمات
+            </a>
+            <a href="#whyus" onClick={() => setMenuOpen(false)}>
+              لماذا نحن
+            </a>
+            <a href="#gallery" onClick={() => setMenuOpen(false)}>
+              أعمالنا
+            </a>
+            <a href="#faq" onClick={() => setMenuOpen(false)}>
+              الأسئلة
+            </a>
+
+            <a
+              href="#contact"
+              className="btn whatsapp"
+              onClick={() => setMenuOpen(false)}
+            >
+              تواصل
+            </a>
+            <a href="" className="btn whatsapp location">
+              موقعنا
+            </a>
+
+            
+          </nav>
+        </>
       )}
 
       {/* هيرو */}
