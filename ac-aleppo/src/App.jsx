@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
+import "./App.css";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const phone = "+966546087818";
-  const waText = "مرحباً، أريد الاستفسار عن خدمة تكييف السيارات";
-  const offerWaText =
-    "مرحباً، أريد الاستفسار وحجز عرض تعبئة الفريون بـ 99 ريال";
+  // ... (نفس المتغيرات والبيانات السابقة) ...
   const [showAll, setShowAll] = useState(false);
 
-  // صور المعرض
   const galleryItems = [
     {
-      src: "gallery/ابو-حلب.webp",
+      src: "/gallery/ابو-حلب.webp",
       alt: " افضل اصلاح في الرياض",
       pos: "50% 40%",
     },
@@ -46,85 +44,92 @@ export default function App() {
       alt: "افضل مصلح مكيفات شرقي الرياض",
       pos: "center",
     },
-    {
-      src: "/gallery/تصليح-مكيفات.webp",
-      alt: "واضف من عندك ايضاً اي شي متعلق بالتكييف",
-      pos: "center",
-    },
-    { src: "/gallery/كشف-اعطال.webp", alt: "تصليح مكيفات", pos: "center" },
-    { src: "/gallery/ميكانيكي.webp", alt: "تصليح كمبورسور", pos: "center" },
   ];
 
   const visibleItems = showAll ? galleryItems : galleryItems.slice(0, 5);
 
   useEffect(() => {
     document.body.classList.toggle("no-scroll", menuOpen);
-    const onKey = (e) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.classList.remove("no-scroll");
-    };
   }, [menuOpen]);
 
   return (
     <>
+      {/* ✅✅ هنا مكان الـ Free Object الحقيقي ✅✅ */}
+      {/* وضعناها خارج كل السكاشن لتكون مربوطة بالبادي مباشرة */}
+      <img
+        src="/images/Air-conditioning-repair.webp"
+        alt="سيارة جانبية"
+        className="free-car-object"
+        data-aos="fade-left"
+        data-aos-delay="1500"
+      />
+      <img
+        src="/images/Air-conditioning-repairman.webp"
+        alt="سيارة جانبية"
+        className="free-car-object-2"
+        data-aos="fade-right"
+        data-aos-delay="1200"
+      />
       {/* الهيدر */}
       <header className="nav">
         <div className="container wrap">
-          <strong>
+          {/* اللوجو يمين */}
+          <a href="/" className="logo-container">
             <img
               src="/images/logo.webp"
               alt="ابو حلب كهربائي سيارات"
-              height="50"
+              height="60"
             />
-          </strong>
+          </a>
 
-          {/* روابط الديسكتوب */}
+          {/* روابط الديسكتوب (وسط) */}
           <nav className="links">
             <a href="#services">الخدمات</a>
             <a href="#whyus">لماذا نحن</a>
             <a href="#gallery">أعمالنا</a>
             <a href="#faq">الأسئلة</a>
-            <a href="" className="btn whatsapp location">
-              موقعنا
-            </a>
-            <a href="#contact" className="btn whatsapp">
-              تواصل
-            </a>
           </nav>
 
+          {/* زر واتساب وموقع (يسار) */}
+          <div className="desktop-actions">
+            <span className="phone-number text-white ml-2">{phone}</span>
+            <a
+              href={`https://wa.me/${phone.replace(/\D/g, "")}`}
+              className="icon-btn whatsapp"
+            >
+              <img src="/icons/whatsapp.svg" alt="wa" />
+            </a>
+            <a href="#location" className="icon-btn location">
+              <img src="/icons/pin.svg" alt="loc" />
+            </a>
+          </div>
+
           {/* زر منيو الجوال */}
-          <div className="menu-btn" aria-hidden={false}>
+          <div className="menu-btn">
+            <a href={`tel:${phone}`} className="icon-btn call-mobile">
+              <img src="/icons/whatsapp.svg" alt="call" />
+            </a>
             <button
               className="hamburger"
-              aria-label={menuOpen ? "إغلاق القائمة" : "فتح القائمة"}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-drawer"
               onClick={() => setMenuOpen((v) => !v)}
             >
-              <img src="/icons/menu.svg" alt="ابو حلب" width="24" height="24" />
+              <img
+                src="/icons/menu.svg"
+                alt="Menu"
+                width="24"
+                height="24"
+                style={{ filter: "invert(1)" }}
+              />
             </button>
           </div>
         </div>
       </header>
 
-      {/* المنيو الجانبي الجديد (Drawer) */}
-      {/* الخلفية والمنيو */}
+      {/* المنيو الجانبي (Drawer) */}
       {menuOpen && (
         <>
-          {/* 1. طبقة الخلفية (عند الضغط عليها تغلق القائمة) */}
           <div className="backdrop" onClick={() => setMenuOpen(false)} />
-
-          {/* 2. القائمة نفسها */}
-          <nav
-            id="mobile-drawer"
-            className="mobile-drawer"
-            role="dialog"
-            aria-modal="true"
-          >
+          <nav id="mobile-drawer" className="mobile-drawer">
             <a href="#services" onClick={() => setMenuOpen(false)}>
               الخدمات
             </a>
@@ -137,375 +142,336 @@ export default function App() {
             <a href="#faq" onClick={() => setMenuOpen(false)}>
               الأسئلة
             </a>
-
             <a
               href="#contact"
-              className="btn whatsapp"
+              className="btn btn-red"
               onClick={() => setMenuOpen(false)}
             >
               تواصل
-            </a>
-            <a href="" className="btn whatsapp location">
-              موقعنا
             </a>
           </nav>
         </>
       )}
 
-      {/* هيرو */}
-      <section className="section hero" style={{ paddingTop: 40 }}>
+      {/* --- HERO SECTION --- */}
+      <section className="section hero">
+        {/* الخلفية المموهة (كما في الديسكتوب) */}
+        <div className="hero-blur-bg" aria-hidden="true"></div>
+        <div className="hero-overlay" aria-hidden="true"></div>
+        <div className="blue-effect" aria-hidden="true"></div>
+        <div className="smooth-overlay" aria-hidden="true"></div>
+
         <div className="container grid hero-grid">
-          {/*<div className="bg-car" aria-hidden="true" />*/}
-          {/* حاوية السيارة الذكية */}
-          <div className="smart-car-wrapper" aria-hidden="true">
-            <img
-              src="/images/Best-repairs-in-East-Riyadh.webp"
-              alt="سيارة تكييف"
-              className="smart-car-img"
-            />
-          </div>
-          <div data-aos="fade-up" style={{ margin: -5 }}>
-            <h1 className="hero-title">افضل ورشة مكيفات سيارات بالرياض</h1>
+          {/* النص (يمين في الديسكتوب) */}
+          <div
+            className="hero-text-content"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <h1 className="hero-title">ابو حلب للتكييف</h1>
+            <p className="hero-subtitle">افضل ورشة مكيفات سيارات بالرياض</p>
+
             <p className="hero-desc">
               صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
               إلكتروني… سرعة وجودة بأسعار مناسبة.
             </p>
-            <p className="seo-text">
-              ورشة أبو حلب لتكييف السيارات في الرياض متخصصة في إصلاح مكيفات جميع
-              السيارات: كامري، كورولا، يارس، النترا، سوناتا، لكزس، مرسيدس، بي إم
-              دبليو، جينيسس. نخدم صناعية النسيم، غرب الرياض وشرق الرياض.
-            </p>
 
-            <div className="actions hero-actions">
-              <a
-                className="btn whatsapp"
-                href={`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(waText)}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                راسلنا واتساب
+            {/* الأزرار */}
+            <div className="hero-actions">
+              <a href="#contact" className="btn btn-red btn-block">
+                احجز موعد صيانة
               </a>
-              <a className="btn alt ghost" href="#services">
+              <a href="#services" className="btn btn-white btn-block">
                 شاهد خدماتنا
               </a>
             </div>
-
-            <div className="social-row">
-              <a
-                className="social-btn"
-                href=""
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Snapchat"
-              >
-                <img src="/icons/snapchat.svg" alt="ابو حلب" />
-              </a>
-              <a
-                className="social-btn"
-                href="https://www.instagram.com/abo_aleppo1"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram"
-              >
-                <img src="/icons/instagram.svg" alt="تصليح مكيفات" />
-              </a>
-              <a
-                className="social-btn"
-                href="https://www.tiktok.com/@abohalp4"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="TikTok"
-              >
-                <img src="/icons/tiktok.svg" alt="صناعية النسيم" />
-              </a>
-            </div>
           </div>
-          <div data-aos="zoom-in" className="card banner-card">
+
+          {/* السيارة (يسار في الديسكتوب) */}
+          <div className="hero-car-container">
             <img
-              className="banner-media"
-              src="images/Banner.webp"
-              alt="أفضل إصلاح مكيف سيارات في الرياض"
-              width={500}
-              height={220}
-              loading="eager"
-              fetchPriority="high"
+              src="/images/Best-repairs-in-East-Riyadh.webp"
+              alt="سيارة بي ام دبليو"
+              className="hero-car-img"
             />
           </div>
         </div>
       </section>
 
-      {/* الخدمات */}
-      <section id="services" className="section services-wrap">
-        <div
-          className="car-services"
-          data-aos="fade-right"
-          aria-hidden="true"
-        />
+      {/* --- عرض 99 ريال (بانر) --- */}
+      <section className="section banner-section">
         <div className="container">
-          <div className="services-content">
-            {/* تصميم البادج الجديد (Grid Layout) */}
-            <div className="offer-badge" data-aos="fade-left">
-              {/* القسم الأول: النصوص */}
-              <div className="offer-content">
-                <div className="offer-badge-price">
-                  <h3>99</h3>
-                  <span className="price-span">ريال</span>
-                </div>
-
-                <div className="offer-badge-text-title">
-                  <p>تعبئة فريون بأحدث الأجهزة</p>
-                </div>
-
-                <div className="offer-badge-text">
-                  <a
-                    href={`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(offerWaText)}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn offer-cta"
-                  >
-                    احجز العرض عبر واتساب (العرض محدود){" "}
-                    <img
-                      src="/icons/whatsapp.svg"
-                      alt=""
-                      width="20"
-                      height="20"
-                      style={{ filter: "brightness(0) invert(1)" }}
-                    />
-                  </a>
-                </div>
-              </div>
-
-              {/* القسم الثاني: الصورة */}
-              <div className="offer-image-container">
-                <img
-                  className="offer-image"
-                  src="images/Machine.webp"
-                  data-aos="zoom-out"
-                  alt="عرض خاص"
-                />
-              </div>
+          <div className="offer-badge" data-aos="zoom-in" data-aos-delay="1800">
+            <div className="offer-info">
+              <h3>
+                99 <span className="currency">ريال</span>
+              </h3>
+              <p>عرض خاص: تعبئة فريون بأحدث الأجهزة</p>
+              <a
+                href={`https://wa.me/${phone.replace(/\D/g, "")}`}
+                className="btn btn-green"
+              >
+                احجز العرض الآن
+                <img src="/icons/whatsapp.svg" width="20" height="20" alt="" />
+              </a>
             </div>
-
-            <h2 className="underline-left mb-md" data-aos="fade-up">
-              خدماتنا
-            </h2>
-            <p className="seo-text" data-aos="fade-up">
-              نقدم أفضل إصلاح مكيفات سيارات في الرياض، تعبئة فريون بأحدث
-              الأجهزة، كشف تهريب فريون، صيانة مواسير، تغيير كمبروسر، وتنظيف
-              ثلاجة المكيف.
-            </p>
-            <div className="grid grid-services">
-              {[
-                ["تعبئة فريون", "فريون أصلي مع فحص ضغط."],
-                ["كشف تهريب", "صبغة/نيتروجين وتحديد مكان التهريب."],
-                ["تغيير كمبروسر", "وكالة/بديل مع ضمان."],
-                ["تنظيف الثلاجة", "تحسين التبريد وإزالة الروائح."],
-                ["فحص إلكتروني", "قراءة أعطال وحساسات."],
-                ["صيانة المواسير", "استبدال/لحام مواسير التكييف."],
-              ].map(([title, desc], i) => (
-                <div key={i} className="card" data-aos="fade-up">
-                  <h3 className="mb-sm">{title}</h3> <p>{desc}</p>
-                </div>
-              ))}
+            <div className="offer-img-wrap">
+              <img src="images/Machine.webp" alt="جهاز الفريون" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* لماذا نحن */}
-      <section id="whyus" className="section services-wrap section-gray">
-        <div
-          className="car-services-1"
-          data-aos="fade-left"
-          aria-hidden="true"
-        />
+      {/* --- الخدمات --- */}
+      <section id="services" className="section services-section">
         <div className="container">
-          <h2 className="underline-left mb-md" data-aos="fade-up">
-            لماذا تختارنا؟
+          <h2
+            className="section-header"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            خدماتنا
           </h2>
-          <div className="grid grid-3 grid-services">
+          <p className="section-sub" data-aos="fade-up" data-aos-delay="100">
+            نقدم أفضل إصلاح مكيفات سيارات في الرياض، تعبئة فريون بأحدث الأجهزة،
+            كشف تهريب فريون، صيانة مواسير، تغيير كمبروسر، وتنظيف ثلاجة المكيف.
+          </p>
+
+          <div className="grid services-grid">
             {[
-              ["ضمان مكتوب", "ضمان 3 أشهر على أعمال التكييف."],
-              ["تشخيص دقيق", "أجهزة فحص حديثة."],
-              ["سرعة بالإنجاز", "خدمة فورية حسب المواعيد."],
-            ].map(([title, desc], i) => (
-              <div key={i} className="card" data-aos="fade-up">
-                <h3 style={{ marginBottom: 8 }}>{title}</h3>
-                <p>{desc}</p>
+              {
+                title: "تعبئة فريون",
+                desc: "فريون أصلي مع فحص ضغط",
+                icon: "/icons/snow.svg",
+              },
+              {
+                title: "كشف تهريب",
+                desc: "صبغة/نيتروجين وتحديد مكان التهريب",
+                icon: "/icons/search.svg",
+              },
+              {
+                title: "تغيير كمبروسر",
+                desc: "وكالة/بديل مع ضمان",
+                icon: "/icons/engine.svg",
+              },
+              {
+                title: "تنظيف الثلاجة",
+                desc: "تحسين التبريد وإزالة الروائح",
+                icon: "/icons/spray.svg",
+              },
+              {
+                title: "فحص إلكتروني",
+                desc: "قراءة أعطال وحساسات",
+                icon: "/icons/chip.svg",
+              },
+              {
+                title: "صيانة المواسير",
+                desc: "استبدال/لحام مواسير التكييف",
+                icon: "/icons/wrench.svg",
+              },
+            ].map((srv, i) => (
+              <div
+                key={i}
+                className="service-card"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <img
+                  src={srv.icon}
+                  alt={srv.title}
+                  className="service-icon-floating"
+                />
+                <h3>{srv.title}</h3>
+                <p>{srv.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* من أعمالنا */}
-      <section id="gallery" className="section services-wrap">
-        <div
-          className="car-services-2"
-          data-aos="fade-right"
-          aria-hidden="true"
-        />
+      {/* --- لماذا تختارنا --- */}
+      <section id="whyus" className="section">
         <div className="container">
           <h2
-            className="underline-left"
+            className="section-header"
             data-aos="fade-up"
-            style={{ marginBottom: 18 }}
+            data-aos-delay="100"
+          >
+            لماذا تختارنا
+          </h2>
+          <div className="grid whyus-grid">
+            {[
+              {
+                t: "سرعة بالإنجاز",
+                d: "خدمة فورية حسب المواعيد",
+                img: "/icons/speed.svg",
+              },
+              {
+                t: "تشخيص دقيق",
+                d: "أجهزة فحص حديثة",
+                img: "/icons/laptop.svg",
+              },
+              {
+                t: "ضمان مكتوب",
+                d: "ضمان 3 أشهر على أعمال التكييف",
+                img: "/icons/shield.svg",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="why-card"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <div className="why-icon-circle">
+                  <img src={item.img} alt={item.t} />
+                </div>
+                <h3>{item.t}</h3>
+                <p>{item.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- من أعمالنا --- */}
+      <section id="gallery" className="section">
+        <div className="container">
+          <h2
+            className="section-header"
+            data-aos="fade-up"
+            data-aos-delay="100"
           >
             من أعمالنا
           </h2>
-          <div className="grid grid-3 grid-services">
+          <div className="grid gallery-grid">
             {visibleItems.map((g, i) => (
-              <div key={i} className="card gallery-card" data-aos="zoom-in">
+              <div
+                key={i}
+                className="gallery-item"
+                data-aos="zoom-in"
+                data-aos-delay="100"
+              >
                 <img
-                  className="gallery-media"
                   src={g.src}
                   alt={g.alt}
-                  loading="lazy"
-                  decoding="async"
                   style={{ objectPosition: g.pos }}
+                  loading="lazy"
                 />
               </div>
             ))}
 
-            {!showAll && (
-              <button
-                type="button"
-                className="card gallery-card more-card"
+            {!showAll ? (
+              <div
+                className="gallery-item more-card"
                 onClick={() => setShowAll(true)}
+                data-aos="zoom-in"
+                data-aos-delay="100"
               >
-                <div className="plus">+</div>
-                <span className="more-label">عرض المزيد</span>
-              </button>
-            )}
-
-            {showAll && (
+                <div className="more-content">
+                  <span className="arrow-left">◀</span>
+                  <span>عرض كل الأعمال</span>
+                </div>
+              </div>
+            ) : (
               <button
-                type="button"
-                className="card gallery-card hide-card"
+                className="btn btn-white full-width"
+                style={{ gridColumn: "1 / -1", marginTop: 20 }}
                 onClick={() => setShowAll(false)}
               >
-                <span className="more-label">إخفاء</span>
+                إخفاء
               </button>
             )}
           </div>
         </div>
       </section>
 
-      {/* الأسئلة الشائعة */}
-      <section id="faq" className="section" style={{ background: "#dbdbdbff" }}>
+      {/* --- الأسئلة الشائعة --- */}
+      <section id="faq" className="section">
         <div className="container">
           <h2
-            className="underline-left "
+            className="section-header"
             data-aos="fade-up"
-            style={{ marginBottom: 18 }}
+            data-aos-delay="100"
           >
             الأسئلة الشائعة
           </h2>
-          <div className="grid">
-            <div className="card" data-aos="fade-up">
-              <strong>هل الفحص مدفوع؟</strong>
+          <div className="faq-grid">
+            <div className="faq-card" data-aos="fade-up" data-aos-delay="100">
+              <h4>
+                هل الفحص مدفوع؟ <span className="plus">+</span>
+              </h4>
               <p>
                 الفحص مبدئي مجاني—أحيانًا تُحسب رسوم رمزية تُخصم عند الإصلاح.
               </p>
             </div>
-            <div className="card" data-aos="fade-up">
-              <strong>ما مدة الضمان؟</strong>
+            <div className="faq-card" data-aos="fade-up" data-aos-delay="100">
+              <h4>
+                ما مدة الضمان؟ <span className="plus">+</span>
+              </h4>
               <p>ضمان مكتوب 3 أشهر على العمل (تفاصيل الضمان بالفاتورة).</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* تواصل */}
-      <section id="contact" className="section">
-        <div className="container">
-          <h2
-            className="underline-left "
-            data-aos="fade-up"
-            style={{ marginBottom: 18 }}
-          >
-            التواصل والموقع
-          </h2>
-          <div className="card contact-section" data-aos="fade-up">
-            <p style={{ marginBottom: 8 }}>
-              واتساب:{" "}
-              <a
-                href={`https://wa.me/${phone.replace(/\D/g, "")}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                7818 608 54 966+
-              </a>
+      {/* --- تواصل + خريطة + فوتر --- */}
+      <footer id="contact" className="footer">
+        <div className="container footer-grid">
+          <div className="footer-col info">
+            <img src="/images/logo.webp" alt="لوجو" className="footer-logo" />
+            <p className="footer-desc">
+              أفضل ورشة مكيفات سيارات بالرياض، نخدم صناعية النسيم وغرب وشرق
+              الرياض.
             </p>
-            <p>السعودية – الرياض - صناعية النسيم</p>
-            <p>
-              <a
-                href="https://maps.app.goo.gl/AyVqY388NF9XLJMr7"
-                target="_blank"
-                rel="noreferrer"
-                className="map-link"
-              >
-                الخريطة (إضغط لعرض الموقع)
+            <div className="footer-contact-row">
+              <img src="/icons/pin.svg" className="icon-sm" alt="" />
+              <span>صناعية النسيم - الرياض</span>
+            </div>
+            <div className="footer-contact-row">
+              <img src="/icons/phone.svg" className="icon-sm" alt="" />
+              <span>{phone}</span>
+            </div>
+          </div>
+
+          <div className="footer-col links-col">
+            <h4>روابط سريعة</h4>
+            <a href="#services">الخدمات</a>
+            <a href="#whyus">لماذا نحن</a>
+            <a href="#contact">حجز موعد</a>
+          </div>
+
+          <div className="footer-col map-col">
+            <h4>موقعنا</h4>
+            <div className="map-preview">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.482259090595!2d46.85601582405104!3d24.710318551248026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa94700fc87c3%3A0x5547eabe372c1df4!2z2KPZhdis2KfYryDYrdmE2Kgg2KfZhNit2LHYqSDZhNmD2YfYsdio2KfYoSDYp9mE2LPZitin2LHYp9iq!5e0!3m2!1sar!2str!4v1770727156633!5m2!1sar!2str"
+                title="map"
+              />
+            </div>
+            <div className="social-icons">
+              <a href="#">
+                <img src="/icons/snapchat.svg" alt="snap" />
               </a>
-            </p>
-            <p>ساعات العمل: يوميًا 10ص–10م</p>
+              <a href="#">
+                <img src="/icons/instagram.svg" alt="insta" />
+              </a>
+              <a href="#">
+                <img src="/icons/tiktok.svg" alt="tiktok" />
+              </a>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* الخريطة */}
-      <section id="map-section" className="map-container">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.477549116924!2d46.85528802405107!3d24.710480351241465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa95da9d6ba3d%3A0x67336cca9c6a55b3!2z2YjYsdi02Kkg2KfZhNi52KfYtdmF2Ycg2K3ZhNioINin2YTYqtmD2YrZitmBINmE2LXZitin2YbYqSDYp9mE2LPZitin2LHYp9iq!5e0!3m2!1sar!2str!4v1770549351252!5m2!1sar!2str"
-          width="100%"
-          height="450"
-          className="map-frame"
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </section>
-
-      {/* فوتر */}
-      <footer className="footer">
-        <div className="container footer-content">
-          <div>© {new Date().getFullYear()} العاصمة حلب – تكييف سيارات</div>
-          <div className="footer-links">
-            <a
-              href="https://www.instagram.com/abo_aleppo1"
-              target="_blank"
-              rel="noreferrer"
-              className="footer-link"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://www.facebook.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="footer-link"
-            >
-              Facebook
-            </a>
-            <a
-              href="https://maps.app.goo.gl/AyVqY388NF9XLJMr7"
-              target="_blank"
-              rel="noreferrer"
-              className="footer-link"
-            >
-              الخريطة
-            </a>
-          </div>
+        <div className="copyright">
+          © {new Date().getFullYear()} ورشة أبو حلب – صنع بكل حب في الرياض.
         </div>
       </footer>
 
-      {/* زر واتساب عائم */}
       <a
         className="whatsapp-fab"
-        href={`https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(waText)}`}
+        href={`https://wa.me/${phone.replace(/\D/g, "")}`}
         target="_blank"
         rel="noreferrer"
-        aria-label="تواصل واتساب"
       >
         <img src="/icons/whatsapp.svg" alt="واتساب" />
       </a>

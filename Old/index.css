@@ -1,0 +1,1207 @@
+/* ====== 1) Custom Fonts ====== */
+@font-face {
+  font-family: "AraHamah";
+  src: url("/fonts/Ara-Hamah/Ara-Hamah-Homs.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("/fonts/Tajawal/Tajawal-Light.ttf") format("ttf");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ====== 2) Color Variables (Root) ====== */
+:root {
+  /* --- Base Colors (RGB for Transparency) --- */
+  --white: #ffffff;
+  --white-rgb: 255, 255, 255;
+  --black: #000000;
+  --black-rgb: 0, 0, 0;
+
+  /* --- Brand Identity --- */
+  --brand: #e53935;
+  --brand-rgb: 229, 57, 53;
+  --brand-dark: #b71c1c;
+  --brand-deep: #00897b;
+  /* Teal */
+
+  /* --- Text Colors --- */
+  --text-main: #263238;
+  --text-secondary: #546e7a;
+  --text-inverse: #ffffff;
+
+  /* --- Backgrounds --- */
+  --bg-body: #fdfdfd;
+  --bg-paper: #e0f2f1;
+  --bg-card: #ffffff;
+  --bg-card-rgb: 255, 255, 255;
+  --bg-gray: #f1f8e9;
+  --bg-light-blue: #f0f9ff;
+  /* For offer badge gradient start */
+
+  --text-highlight-bg: #ffffff;
+  --text-highlight-bg-rgb: 255, 255, 255;
+
+  /* --- Borders & Shadows --- */
+  --border-light: #b2dfdb;
+  --border-brand-light: #ffcdd2;
+  --border-grey: #cccccc;
+  /* Used in close button */
+
+  --shadow-base-rgb: 0, 150, 136;
+  /* Teal shadow base */
+
+  /* --- Functional Colors (WhatsApp & Offers) --- */
+  --whatsapp-green: #25D366;
+  --whatsapp-green-rgb: 37, 211, 102;
+  --whatsapp-dark: #128C7E;
+
+  --offer-bg: #e0f7fa;
+  --offer-bg-rgb: 224, 247, 250;
+  --offer-border: #00acc1;
+  --danger: #d32f2f;
+
+  /* --- Typography --- */
+  --font-body: "Tajawal", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-head: "Tajawal", "Noto Kufi Arabic", "Segoe UI", system-ui, sans-serif;
+  --h1: clamp(24px, 4vw, 32px);
+  --h2: clamp(18px, 3vw, 24px);
+  --h3: 1.1rem;
+}
+
+/* ====== 3) Base Styles ====== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-body);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-numeric: tabular-nums;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  margin: 8px 0 8px;
+  font-family: var(--font-head);
+  font-weight: 500;
+}
+
+h1 {
+  font-size: var(--h1);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: var(--h2);
+  line-height: 1.5;
+}
+
+.underline-left {
+  position: relative;
+}
+
+.underline-left::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  width: 30px;
+  height: 3px;
+  background: var(--brand);
+  border-radius: 999px;
+}
+
+p {
+  margin: 0 0 8px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.container {
+  width: min(1200px, 92%);
+  margin-inline: auto;
+}
+
+.section {
+  padding: clamp(32px, 6vw, 64px) 0;
+  box-shadow: 12px 25px 60px -9px rgba(var(--shadow-base-rgb), 0.15);
+}
+
+/* ====== Buttons (Glass Effect) ====== */
+.btn {
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--white-rgb), 0.3);
+  box-shadow: 0 4px 15px rgba(var(--brand-rgb), 0.2);
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background: var(--brand);
+  box-shadow: 0 8px 25px rgba(var(--brand-rgb), 0.4);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+/* Ghost Button (Fixed Visibility) */
+.btn.alt.ghost {
+  background: rgba(var(--white-rgb), 0.515);
+  border: 1px solid var(--white);
+  color: var(--brand) !important;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 4px 15px rgba(var(--black-rgb), 0.1);
+}
+
+.btn.alt.ghost:hover {
+  background: var(--brand);
+  color: var(--white) !important;
+  transform: translateY(-2px);
+}
+
+/* WhatsApp Button */
+.btn.whatsapp {
+  background: rgba(var(--whatsapp-green-rgb), 0.6);
+  border: 1px solid rgba(var(--white-rgb), 0.3);
+  color: var(--white);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.btn.whatsapp:hover {
+  background: var(--whatsapp-green);
+  box-shadow: 0 8px 25px rgba(var(--whatsapp-green-rgb), 0.4);
+}
+
+.btn.location {
+  background: var(--brand-deep);
+  color: var(--text-inverse);
+}
+
+/* ====== زر العرض الجديد (CTA) ====== */
+.btn.offer-cta {
+  background: var(--whatsapp-green);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 8px 20px;
+  margin-top: 8px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(var(--whatsapp-green-rgb), 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn.offer-cta:hover {
+  background: var(--whatsapp-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--whatsapp-green-rgb), 0.5);
+}
+
+/* ====== Cards & Grid ====== */
+.card {
+  background: var(--bg-card);
+  color: var(--text-main);
+  opacity: 0.98;
+  border: 1px solid var(--border-brand-light);
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.04);
+  font-size: 0.95rem;
+  transition: transform 0.2s ease;
+}
+
+.contact-section {
+  font-size: 1.1rem;
+}
+
+.banner-card {
+  overflow: hidden;
+  padding: 0;
+}
+
+.banner-media {
+  display: block;
+  width: 100%;
+  height: clamp(180px, 20vw, 320px);
+  object-fit: cover;
+  object-position: 16% 11%;
+  border-radius: 12px;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.grid-services {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ====== Header & Navigation ====== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(var(--brand-rgb), 0.95);
+  border-bottom: 1px solid rgba(var(--black-rgb), 0.1);
+  box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
+}
+
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.nav .links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.nav a {
+  color: var(--text-inverse);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+}
+
+.nav a:hover {
+  opacity: 0.8;
+}
+
+.menu-btn {
+  display: none;
+}
+
+.hamburger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--white);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.1);
+}
+
+/* ====== Mobile Drawer (NEW DESIGN - Vertical & Centered) ====== */
+.mobile-drawer {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  z-index: 1001;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+
+  background: rgba(var(--white-rgb), 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+
+  animation: drawerFadeIn 0.3s ease-out;
+}
+
+.mobile-drawer a:not(.btn) {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mobile-drawer a:not(.btn):hover {
+  color: var(--brand);
+}
+
+.mobile-drawer .btn {
+  width: 80%;
+  max-width: 320px;
+  padding: 14px;
+  font-size: 1.1rem;
+}
+
+.mobile-drawer .close {
+  margin-top: 30px;
+  background: transparent;
+  border: 1px solid var(--border-grey);
+  color: var(--text-secondary);
+  padding: 10px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+@keyframes drawerFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(var(--black-rgb), 0.6) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+/* ====== Hero Section ====== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.hero .container {
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+}
+
+.hero-title {
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 5px;
+}
+
+.hero-desc {
+  font-weight: 500;
+  margin-bottom: 5px;
+  background-color: rgba(var(--white-rgb), 0.5);
+  backdrop-filter: blur(3px);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(var(--white-rgb), 0.5);
+  line-height: 1.3;
+  font-size: 0.9rem;
+}
+
+.hero-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 15px;
+}
+
+.mb-md {
+  margin-bottom: 20px;
+}
+
+.mb-sm {
+  margin-bottom: 10px;
+}
+
+.map-link {
+  color: var(--brand);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.map-container {
+  width: 100%;
+  height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(var(--black-rgb), 0.1);
+  margin-top: 40px;
+}
+
+.map-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ====== Offer Badge (NEW GRID LAYOUT) ====== */
+.offer-badge {
+  position: relative;
+  background: rgba(var(--offer-bg-rgb), 0.5);
+  background: linear-gradient(135deg, var(--bg-light-blue) 0%, var(--offer-bg) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border-bottom: 1px solid var(--brand);
+  box-shadow: 0 10px 30px rgba(var(--black-rgb), 0.08);
+  margin-bottom: 20px;
+
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  align-items: center;
+  width: 100%;
+}
+
+/* Text Section */
+.offer-content {
+  padding: 30px 40px;
+  text-align: right;
+  z-index: 1;
+}
+
+/* Image Section */
+.offer-image-container {
+  width: 150%;
+  height: 95%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.offer-image {
+  width: auto;
+  height: auto;
+  max-height: 450px;
+  max-width: 120%;
+  object-fit: contain;
+  filter: drop-shadow(-5px 5px 15px rgba(var(--black-rgb), 0.15));
+  margin-bottom: -10px;
+  position: relative;
+}
+
+.offer-badge-price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  direction: rtl;
+  margin-bottom: 10px;
+}
+
+.offer-badge-price h3 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--brand);
+  line-height: 1;
+  margin: 0;
+  transform-origin: center center;
+  animation: pricePulse 1.5s infinite ease-in-out;
+  will-change: transform;
+}
+
+.offer-badge-price .price-span {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transform-origin: center center;
+  animation: pricePulse 1.5s infinite ease-in-out;
+  will-change: transform;
+}
+
+.offer-badge-text-title p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 5px 0;
+}
+
+.offer-badge-text p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@keyframes pricePulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ====== Car Animations ====== */
+.bg-car {
+  position: absolute;
+  inset-inline-end: 45%;
+  inset-block-end: -80%;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: url("/images/Best-repairs-in-East-Riyadh.webp") no-repeat right bottom / contain;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transform: translateX(120vw);
+  animation: carFromRight .9s cubic-bezier(.18, .9, .2, 1) forwards, carFloat 6s ease-in-out 1s infinite alternate;
+}
+
+@keyframes carFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(120vw);
+  }
+
+  60% {
+    opacity: .9;
+    transform: translateX(-12px);
+  }
+
+  100% {
+    opacity: .65;
+    transform: translateX(0);
+  }
+}
+
+@keyframes carFloat {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  100% {
+    transform: translateX(-5px) translateY(-7px);
+  }
+}
+
+/* 1. الحاوية (المسؤولة عن الموقع والدخول) */
+.smart-car-wrapper {
+  position: absolute;
+  top: 25%;
+  right: -35%;
+  z-index: 0;
+  width: 90vw;
+  max-width: 1000px;
+  transform: translate(120%, -50%);
+  animation: carDriveInCentered 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* 2. الصورة نفسها (المسؤولة عن النبض فقط) */
+.smart-car-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  animation: carIdle 3s ease-in-out infinite alternate;
+  animation-delay: 1.2s;
+}
+
+/* =========================================
+   الأنيميشن (Animations)
+   ========================================= */
+@keyframes carDriveInCentered {
+  from {
+    transform: translate(120%, -50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0, -50%);
+    opacity: 1;
+  }
+}
+
+@keyframes carIdle {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.services-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.services-content {
+  position: relative;
+  z-index: 1;
+}
+
+.car-services,
+.car-services-1,
+.car-services-2 {
+  position: absolute;
+  opacity: .20;
+  pointer-events: none;
+  z-index: 0;
+  aspect-ratio: 16 / 9;
+  animation: carFloatL 6s ease-in-out 1s infinite alternate;
+}
+
+.car-services {
+  width: 78em;
+  bottom: -11em;
+  left: -10em;
+  background: url("/images/Air-conditioning-repair.webp") no-repeat left bottom / contain;
+}
+
+.car-services-1 {
+  right: -44em;
+  bottom: -16em;
+  width: 90em;
+  background: url("/images/Mercedes-air-conditioning-pecialist.webp") no-repeat left bottom / contain;
+}
+
+.car-services-2 {
+  width: 78em;
+  bottom: -11em;
+  left: -10em;
+  background: url("/images/Air-conditioning-repairman.webp") no-repeat left bottom / contain;
+}
+
+@keyframes carFloatL {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  100% {
+    transform: translateX(-5px) translateY(-7px);
+  }
+}
+
+.seo-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  padding: 15px;
+  backdrop-filter: blur(4px);
+  background-color: rgba(var(--white-rgb), 0.5);
+  border: 1px solid var(--border-light);
+  margin-bottom: 20px;
+  max-width: 65rem;
+  line-height: 1.8;
+}
+
+/* ====== Footer ====== */
+.footer {
+  background: var(--brand);
+  color: var(--text-inverse);
+  font-size: 0.9rem;
+  padding: 40px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-links {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-link {
+  color: rgba(var(--white-rgb), 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+  border-bottom: 1px solid transparent;
+}
+
+.footer-link:hover {
+  opacity: 1;
+  border-color: var(--white);
+}
+
+/* ====== WhatsApp Floating Button (FIXED Z-Index & Position) ====== */
+.whatsapp-fab {
+  position: fixed !important;
+  right: 25px;
+  bottom: 25px;
+  z-index: 9999;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: rgba(var(--whatsapp-green-rgb), 0.45);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(var(--whatsapp-green-rgb), 0.4);
+  border: 2px solid var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.whatsapp-fab img {
+  width: 35px;
+  height: 35px;
+}
+
+/* ====== Social Buttons (Glass) ====== */
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 16px;
+  background: rgba(var(--white-rgb), 0.5);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--white);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-5px);
+  background: var(--white);
+  box-shadow: 0 10px 25px rgba(var(--black-rgb), 0.1);
+  border-color: var(--brand);
+}
+
+.social-btn img {
+  width: 28px;
+  height: 28px;
+}
+
+/* ====== Gallery ====== */
+.gallery-card {
+  overflow: hidden;
+  padding: 0;
+  height: 280px;
+  border-radius: 16px;
+  position: relative;
+}
+
+.gallery-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-card:hover .gallery-media {
+  transform: scale(1.1);
+}
+
+.more-card,
+.hide-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  border: 2px dashed var(--border-brand-light);
+  background: var(--bg-card);
+}
+
+.more-card:hover,
+.hide-card:hover {
+  border-color: var(--brand);
+  background: var(--white);
+}
+
+.more-card .plus {
+  font-size: 40px;
+  line-height: 1;
+  color: var(--brand);
+}
+
+/* ====== Mobile Responsiveness ====== */
+@media (max-width: 1536px) {
+  .bg-car {
+    inset-inline-end: 35%;
+  }
+
+  .car-services-2 {
+    width: 78em;
+    bottom: -11em;
+    left: -10em;
+  }
+
+  .car-services-1 {
+    right: -44em;
+    bottom: -14em;
+    width: 80em;
+  }
+}
+
+@media (max-width: 1280px) {
+  .bg-car {
+    inset-inline-end: 35%;
+  }
+
+  .car-services-1 {
+    right: -49em;
+    bottom: -13em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    min-height: 600px;
+  }
+
+  .smart-car-wrapper {
+    width: 70vw;
+    right: -35%;
+    top: 40%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bg-car {
+    inset-block-end: 20%;
+    inset-inline-end: 15%;
+    width: 120%;
+  }
+
+  .car-services {
+    width: 78em;
+    bottom: -11em;
+    left: -10em;
+  }
+
+  .car-services-1 {
+    right: -47em;
+    bottom: -12em;
+    width: 75em;
+  }
+
+  .actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav .links {
+    display: none;
+  }
+
+  .menu-btn {
+    display: inline-flex;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --h1: 20px;
+    --h2: 20px;
+  }
+
+  .btn.offer-cta {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    width: auto;
+    align-self: center;
+  }
+
+  .smart-car-wrapper {
+    width: 95vw;
+    right: -25%;
+    bottom: -3%;
+    top: auto;
+    opacity: 0.3;
+    transform: translateX(120%);
+    animation: carDriveInMobile 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  .hero-grid {
+    position: relative;
+    z-index: 2;
+  }
+
+  .bg-car {
+    inset-block-end: 3%;
+    inset-inline-end: -35%;
+    width: 180%;
+  }
+
+  .car-services {
+    width: 72em;
+    bottom: -9em;
+    left: -12em;
+  }
+
+  .car-services-2 {
+    width: 72em;
+    bottom: -9em;
+    left: -12em;
+  }
+
+  .car-services-1 {
+    bottom: -11em;
+    width: 78em;
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+
+  .container {
+    width: 92%;
+  }
+
+  .grid.grid-services,
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .offer-badge {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: stretch;
+    min-height: 160px;
+  }
+
+  .offer-content {
+    flex: 3;
+    padding: 15px 20px 15px 5px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .offer-image-container {
+    flex: 1;
+    width: 130%;
+    height: 100%;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .offer-image {
+    max-height: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
+  .offer-badge-price h3 {
+    font-size: 2.2rem;
+  }
+
+  .offer-badge-text-title p {
+    font-size: 1.1rem;
+  }
+
+  .offer-badge-text p {
+    font-size: 0.8rem;
+  }
+
+  .banner-media {
+    height: 200px;
+  }
+
+  .gallery-card {
+    height: 180px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .whatsapp-fab {
+    width: 55px;
+    height: 55px;
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@keyframes carDriveInMobile {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .bg-car {
+    inset-block-end: 18%;
+    inset-inline-end: -160%;
+    width: 380%;
+  }
+
+  .smart-car-wrapper {
+    width: 115vw;
+    right: -40%;
+    bottom: 10%;
+  }
+
+  .car-services {
+    width: 67em;
+    bottom: -6em;
+    left: -11em;
+  }
+
+  .car-services-2 {
+    width: 67em;
+    bottom: -6em;
+    left: -11em;
+  }
+
+  .car-services-1 {
+    right: -47em;
+    bottom: -10em;
+    width: 74em;
+  }
+}
+
+@media (max-width: 475px) {
+  .car-services {
+    width: 65em;
+    bottom: 0.1em;
+    left: -15em;
+  }
+
+  .smart-car-wrapper {
+    width: 180vw;
+    right: -100%;
+    bottom: 2%;
+  }
+
+  .car-services-2 {
+    width: 65em;
+    bottom: 0.1em;
+    left: -15em;
+  }
+
+  .car-services-1 {
+    bottom: -9em;
+    width: 72em;
+  }
+}
+
+@media (max-width: 320px) {
+
+  .car-services,
+  .car-services-2 {
+    bottom: 19em;
+    left: -20em;
+  }
+
+  .car-services-1 {
+    width: 67em;
+  }
+
+  .grid.grid-services {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-image {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .bg-car,
+  .car-services,
+  .car-services-1,
+  .car-services-2 {
+    animation: none;
+    opacity: .18;
+    transform: none;
+  }
+}
