@@ -445,7 +445,7 @@ export default function App() {
             <h4>موقعنا</h4>
             <div className="map-preview">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.482259090595!2d46.85601582405104!3d24.710318551248026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa94700fc87c3%3A0x5547eabe372c1df4!2z2KPZhdis2KfYryDYrdmE2Kgg2KfZhNit2LHYqSDZhNmD2YfYsdio2KfYoSDYp9mE2LPZitin2LHYp9iq!5e0!3m2!1sar!2str!4v1770727156633!5m2!1sar!2str"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.4776903362417!2d46.852713099999995!3d24.7104755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa95da9d6ba3d%3A0x67336cca9c6a55b3!2z2YjYsdi02Kkg2KfZhNi52KfYtdmF2Ycg2K3ZhNioINin2YTYqtmD2YrZitmBINmE2LXZitin2YbYqSDYp9mE2LPZitin2LHYp9iq!5e0!3m2!1sar!2str!4v1770758271180!5m2!1sar!2str"
                 title="map"
               />
             </div>
