@@ -883,7 +883,7 @@ box-shadow: 0 4px 6px var(--shadow-color);
   justify-content: space-between;
   margin-bottom: 10px;
   font-size: 1.2rem;
-  color: white;
+  color: var(--text-primary);
 }
 
 .faq-card .plus {
@@ -1048,6 +1048,34 @@ color: var(--text-secondary);  font-size: 1.1rem;
   gap: 20px;
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
 }
+@keyframes car-pulse-animation {
+  0% {
+    scale: 1;
+    /* الحجم الطبيعي */
+  }
+
+  50% {
+    scale: 1.05;
+    /* تكبير بنسبة 5% فقط */
+  }
+
+  100% {
+    scale: 1;
+    /* عودة للحجم الطبيعي */
+  }
+}
+.free-car-object,
+.free-car-object-2,
+.hero-car-container {
+  /* 3s = مدة النبضة الواحدة (كلما زاد الرقم صارت أبطأ وأنعم)
+     infinite = تكرار لا نهائي
+     ease-in-out = حركة ناعمة في البداية والنهاية 
+  */
+  animation: car-pulse-animation 9s infinite ease-in-out;
+
+  /* تحسين الأداء للحركة */
+  will-change: scale;
+}
 /* --- تنسيق نص الـ SEO في الفوتر --- */
 .footer-seo-text {
   text-align: center;
@@ -1197,13 +1225,7 @@ color: var(--text-secondary);  font-size: 1.1rem;
  
  
 
-  .hero-car-third {
-    max-width: 900px;
-    /* تكبير في الديسكتوب */
-    opacity: 0.2;
-    /* سحب للأعلى أكثر + إزاحة لليسار */
-  }
-
+  
   .services-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
