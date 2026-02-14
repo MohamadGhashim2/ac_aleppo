@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import "./App.css";
 
 export default function App() {
@@ -11,7 +11,23 @@ export default function App() {
     const cleanPhone = phone.replace(/\D/g, "");
     return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
   };
-  const [theme, setTheme] = useState("dark"); // القيمة الافتراضية
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark" || savedTheme === "light") {
+      return savedTheme;
+    }
+
+    const systemPrefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+    return systemPrefersDark ? "dark" : "light";
+  });
+
+  useLayoutEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.style.colorScheme = theme;
+  }, [theme]);
   const galleryItems = [
     {
       src: "/gallery/ابو-حلب.webp",
@@ -41,27 +57,16 @@ export default function App() {
 
   const visibleItems = showAll ? galleryItems : galleryItems.slice(0, 5);
   useEffect(() => {
-    // 1. التحقق مما إذا كان هناك إعداد محفوظ مسبقاً في localStorage
-    const savedTheme = localStorage.getItem("theme");
+    localStorage.setItem("theme", theme);
 
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.setAttribute("data-theme", savedTheme);
-    } else {
-      // 2. إذا لم يكن محفوظاً، تحقق من إعدادات النظام (System Preference)
-      const systemPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      const initialTheme = systemPrefersDark ? "dark" : "light";
-      setTheme(initialTheme);
-      document.documentElement.setAttribute("data-theme", initialTheme);
-    }
-  }, []);
+    // تحسين إعادة الرسم في متصفحات الجوال التي قد تؤخر تحديث الخلفية
+    document.body.style.transform = "translateZ(0)";
+    requestAnimationFrame(() => {
+      document.body.style.transform = "";
+    });
+  }, [theme]);
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme); // حفظ الاختيار
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
   };
   useEffect(() => {
     document.body.classList.toggle("no-scroll", menuOpen);
