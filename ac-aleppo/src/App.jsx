@@ -7,59 +7,84 @@ export default function App() {
   const [showAll, setShowAll] = useState(false);
   const locationLink = "https://maps.app.goo.gl/HEv9z2j2GvYXzhUR7";
 
-  // =========================
-  // WhatsApp URL helper
-  // =========================
+  // ✅ Google Ads Conversion IDs (حسب الـ event snippet عندك)
+  const ADS_CONV_WHATSAPP = "AW-17079539386/TB95CNNH4fgbELqt1NA_";
+  const ADS_CONV_CALL = "AW-17079539386/Bt6YCNKH4fgbELqt1NA_";
+
+  // دالة لتجهيز رابط واتساب
   const getWhatsAppUrl = (message) => {
     const cleanPhone = phone.replace(/\D/g, "");
     return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
   };
 
-  // =========================
-  // Google Ads Conversion (send_to)
-  // =========================
-  const SEND_TO_WHATSAPP = "AW-17079539386/TB95CNNH4fgbELqt1NA_";
-  const SEND_TO_CALL = "AW-17079539386/Bt6YCNKH4fgbELqt1NA_";
-
-  const reportConversion = (sendTo, cb) => {
-    // لمنع تنفيذ callback مرتين (بسبب event_callback + timeout)
-    let done = false;
-    const safeCb = () => {
-      if (done) return;
-      done = true;
-      cb();
-    };
-
-    if (window.gtag && sendTo?.includes("AW-")) {
-      window.gtag("event", "conversion", {
-        send_to: sendTo,
-        event_callback: safeCb,
-      });
-      setTimeout(safeCb, 700);
-    } else {
-      safeCb();
+  // ✅ GA4 event helper (يسجّل على GA4 + يطلع بRealtime)
+  const fireGAEvent = (eventName, params = {}) => {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", eventName, params);
     }
   };
 
-  const onWhatsAppClick = (message) => (e) => {
-    e.preventDefault();
+  // ✅ Google Ads conversion helper (نفس فكرة gtag_report_conversion)
+  const fireAdsConversion = (sendTo, url) => {
+    // إذا gtag مو جاهز، افتح الرابط مباشرة
+    if (typeof window === "undefined" || typeof window.gtag !== "function") {
+      if (url) window.location.href = url;
+      return;
+    }
+
+    let navigated = false;
+    const callback = () => {
+      if (navigated) return;
+      navigated = true;
+      if (url) window.location.href = url;
+    };
+
+    window.gtag("event", "conversion", {
+      send_to: sendTo,
+      event_callback: callback,
+      transport_type: "beacon",
+    });
+
+    // fallback إذا المتصفح ما نفّذ callback
+    setTimeout(callback, 800);
+  };
+
+  // ✅ WhatsApp click handler (GA4 + Ads)
+  const handleWhatsAppClick = (e, message, source = "unknown") => {
+    if (e) e.preventDefault();
+
+    const cleanPhone = phone.replace(/\D/g, "");
     const url = getWhatsAppUrl(message);
-    reportConversion(SEND_TO_WHATSAPP, () => {
-      window.open(url, "_blank", "noopener,noreferrer");
+
+    // GA4 (كل الترافيك)
+    fireGAEvent("whatsapp_click", {
+      method: "whatsapp",
+      phone: cleanPhone,
+      source,
     });
+
+    // Google Ads (Paid attribution عند توفر click id)
+    fireAdsConversion(ADS_CONV_WHATSAPP, url);
   };
 
-  const onCallClick = (e) => {
-    e.preventDefault();
-    const telUrl = `tel:${phone}`;
-    reportConversion(SEND_TO_CALL, () => {
-      window.location.href = telUrl;
+  // ✅ Call click handler (GA4 + Ads)
+  const handleCallClick = (e, source = "unknown") => {
+    if (e) e.preventDefault();
+
+    const cleanPhone = phone.replace(/\D/g, "");
+    const url = `tel:${phone}`;
+
+    // GA4
+    fireGAEvent("call_click", {
+      method: "tel",
+      phone: cleanPhone,
+      source,
     });
+
+    // Ads
+    fireAdsConversion(ADS_CONV_CALL, url);
   };
 
-  // =========================
-  // Theme
-  // =========================
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
 
@@ -127,7 +152,7 @@ export default function App() {
 
   return (
     <>
-      {/* السيارات الجانبية */}
+      {/* السيارات الجانبية (Free Objects) */}
       <img
         src="/images/Air-conditioning-repair.webp"
         alt="سيارة جانبية"
@@ -179,12 +204,19 @@ export default function App() {
 
             <span className="phone-number text-white ml-2">{phone}</span>
 
-            {/* WhatsApp (Desktop) */}
+            {/* ✅ WhatsApp tracked */}
             <a
               href={getWhatsAppUrl("السلام عليكم، استفسار عام")}
-              onClick={onWhatsAppClick("السلام عليكم، استفسار عام")}
+              onClick={(e) =>
+                handleWhatsAppClick(
+                  e,
+                  "السلام عليكم، استفسار عام",
+                  "header_icon",
+                )
+              }
               className="icon-btn whatsapp"
               aria-label="واتساب"
+              rel="noreferrer"
             >
               <img src="/icons/whatsapp.svg" width="22" height="22" alt="" />
             </a>
@@ -193,6 +225,7 @@ export default function App() {
               href={locationLink}
               className="icon-btn location"
               aria-label="موقعنا"
+              rel="noreferrer"
             >
               <img src="/icons/pin.svg" width="22" height="22" alt="" />
             </a>
@@ -212,14 +245,13 @@ export default function App() {
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
 
-            {/* Call (Mobile) */}
+            {/* ✅ Call tracked */}
             <a
               href={`tel:${phone}`}
-              onClick={onCallClick}
+              onClick={(e) => handleCallClick(e, "mobile_call_icon")}
               className="icon-btn call-mobile"
               aria-label="اتصال"
             >
-              {/* غيرت الأيقونة لهاتف */}
               <img src="/icons/phone.svg" width="22" height="22" alt="" />
             </a>
 
@@ -269,7 +301,7 @@ export default function App() {
       )}
 
       <main>
-        {/* HERO */}
+        {/* --- HERO SECTION --- */}
         <section className="section hero">
           <div className="hero-blur-bg" aria-hidden="true"></div>
           <div className="hero-overlay" aria-hidden="true"></div>
@@ -297,15 +329,20 @@ export default function App() {
                     <span>صناعية النسيم - الرياض</span>
                   </a>
 
-                  {/* WhatsApp (Hero CTA) */}
+                  {/* ✅ WhatsApp tracked */}
                   <a
                     href={getWhatsAppUrl(
                       "السلام عليكم، أرغب بحجز موعد صيانة تكييف",
                     )}
-                    onClick={onWhatsAppClick(
-                      "السلام عليكم، أرغب بحجز موعد صيانة تكييف",
-                    )}
+                    onClick={(e) =>
+                      handleWhatsAppClick(
+                        e,
+                        "السلام عليكم، أرغب بحجز موعد صيانة تكييف",
+                        "hero_book_btn",
+                      )
+                    }
                     className="btn btn-red btn-block"
+                    rel="noreferrer"
                   >
                     احجز موعد صيانة
                   </a>
@@ -331,7 +368,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* عرض 99 ريال */}
+        {/* --- عرض 99 ريال --- */}
         <section className="section banner-section">
           <div className="container">
             <div
@@ -345,15 +382,20 @@ export default function App() {
                 </h3>
                 <p>عرض خاص: تعبئة فريون بأحدث الأجهزة</p>
 
-                {/* WhatsApp (Offer CTA) */}
+                {/* ✅ WhatsApp tracked */}
                 <a
                   href={getWhatsAppUrl(
                     "السلام عليكم، أرغب بحجز عرض تعبئة الفريون بـ 99 ريال",
                   )}
-                  onClick={onWhatsAppClick(
-                    "السلام عليكم، أرغب بحجز عرض تعبئة الفريون بـ 99 ريال",
-                  )}
+                  onClick={(e) =>
+                    handleWhatsAppClick(
+                      e,
+                      "السلام عليكم، أرغب بحجز عرض تعبئة الفريون بـ 99 ريال",
+                      "offer_99_btn",
+                    )
+                  }
                   className="btn btn-green"
+                  rel="noreferrer"
                 >
                   احجز العرض الآن
                   <img
@@ -378,7 +420,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* الخدمات */}
+        {/* --- الخدمات --- */}
         <section id="services" className="section services-section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
@@ -439,7 +481,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* لماذا تختارنا */}
+        {/* --- لماذا تختارنا --- */}
         <section id="whyus" className="section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
@@ -481,7 +523,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* من أعمالنا */}
+        {/* --- من أعمالنا --- */}
         <section id="gallery" className="section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
@@ -525,7 +567,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* الأسئلة الشائعة */}
+        {/* --- الأسئلة الشائعة --- */}
         <section id="faq" className="section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
@@ -551,7 +593,7 @@ export default function App() {
         </section>
       </main>
 
-      {/* الفوتر */}
+      {/* --- الفوتر --- */}
       <footer id="contact" className="footer">
         <div className="container footer-grid">
           <div className="footer-col info">
@@ -567,6 +609,7 @@ export default function App() {
               أفضل ورشة مكيفات سيارات بالرياض، نخدم صناعية النسيم وغرب وشرق
               الرياض.
             </p>
+
             <a
               href={locationLink}
               target="_blank"
@@ -576,6 +619,7 @@ export default function App() {
               <img src="/icons/pin.svg" width="20" height="20" alt="" />
               <span>صناعية النسيم - الرياض</span>
             </a>
+
             <div className="footer-contact-row">
               <img src="/icons/phone.svg" width="20" height="20" alt="" />
               <span>{phone}</span>
@@ -600,6 +644,7 @@ export default function App() {
                 loading="lazy"
               />
             </div>
+
             <div className="social-icons">
               <a href="#" aria-label="سناب شات">
                 <img
@@ -612,6 +657,8 @@ export default function App() {
               <a
                 href="https://www.instagram.com/abo_aleppo1?igsh=MW9iNzB3OG5xeTVkeg=="
                 aria-label="انستقرام"
+                target="_blank"
+                rel="noreferrer"
               >
                 <img
                   src="/icons/instagram.svg"
@@ -623,6 +670,8 @@ export default function App() {
               <a
                 href="https://www.tiktok.com/@asimat_halab_ac?_r=1&_t=ZS-93oaiHV0EbK"
                 aria-label="تيك توك"
+                target="_blank"
+                rel="noreferrer"
               >
                 <img
                   src="/icons/tiktok.svg"
@@ -649,14 +698,19 @@ export default function App() {
         </div>
       </footer>
 
-      {/* WhatsApp FAB */}
+      {/* ✅ WhatsApp FAB tracked */}
       <a
         className="whatsapp-fab"
         href={getWhatsAppUrl("السلام عليكم، عندي استفسار بخصوص مكيف السيارة")}
-        onClick={onWhatsAppClick(
-          "السلام عليكم، عندي استفسار بخصوص مكيف السيارة",
-        )}
+        onClick={(e) =>
+          handleWhatsAppClick(
+            e,
+            "السلام عليكم، عندي استفسار بخصوص مكيف السيارة",
+            "whatsapp_fab",
+          )
+        }
         aria-label="تواصل واتساب"
+        rel="noreferrer"
       >
         <img src="/icons/whatsapp.svg" width="38" height="38" alt="" />
       </a>
