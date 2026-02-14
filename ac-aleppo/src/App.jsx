@@ -6,11 +6,60 @@ export default function App() {
   const phone = "+966546087818";
   const [showAll, setShowAll] = useState(false);
   const locationLink = "https://maps.app.goo.gl/HEv9z2j2GvYXzhUR7";
-  // دالة لتجهيز رابط واتساب
+
+  // =========================
+  // WhatsApp URL helper
+  // =========================
   const getWhatsAppUrl = (message) => {
     const cleanPhone = phone.replace(/\D/g, "");
     return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
   };
+
+  // =========================
+  // Google Ads Conversion (send_to)
+  // =========================
+  const SEND_TO_WHATSAPP = "AW-17079539386/TB95CNNH4fgbELqt1NA_";
+  const SEND_TO_CALL = "AW-17079539386/Bt6YCNKH4fgbELqt1NA_";
+
+  const reportConversion = (sendTo, cb) => {
+    // لمنع تنفيذ callback مرتين (بسبب event_callback + timeout)
+    let done = false;
+    const safeCb = () => {
+      if (done) return;
+      done = true;
+      cb();
+    };
+
+    if (window.gtag && sendTo?.includes("AW-")) {
+      window.gtag("event", "conversion", {
+        send_to: sendTo,
+        event_callback: safeCb,
+      });
+      setTimeout(safeCb, 700);
+    } else {
+      safeCb();
+    }
+  };
+
+  const onWhatsAppClick = (message) => (e) => {
+    e.preventDefault();
+    const url = getWhatsAppUrl(message);
+    reportConversion(SEND_TO_WHATSAPP, () => {
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+  };
+
+  const onCallClick = (e) => {
+    e.preventDefault();
+    const telUrl = `tel:${phone}`;
+    reportConversion(SEND_TO_CALL, () => {
+      window.location.href = telUrl;
+    });
+  };
+
+  // =========================
+  // Theme
+  // =========================
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
 
@@ -28,6 +77,7 @@ export default function App() {
     document.documentElement.setAttribute("data-theme", theme);
     document.documentElement.style.colorScheme = theme;
   }, [theme]);
+
   const galleryItems = [
     {
       src: "/gallery/ابو-حلب.webp",
@@ -56,6 +106,7 @@ export default function App() {
   ];
 
   const visibleItems = showAll ? galleryItems : galleryItems.slice(0, 5);
+
   useEffect(() => {
     localStorage.setItem("theme", theme);
 
@@ -65,17 +116,18 @@ export default function App() {
       document.body.style.transform = "";
     });
   }, [theme]);
+
   const toggleTheme = () => {
     setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
   };
+
   useEffect(() => {
     document.body.classList.toggle("no-scroll", menuOpen);
   }, [menuOpen]);
 
   return (
     <>
-      {/* السيارات الجانبية (Free Objects) */}
-      {/* تمت إضافة الأبعاد لمنع اهتزاز الصفحة */}
+      {/* السيارات الجانبية */}
       <img
         src="/images/Air-conditioning-repair.webp"
         alt="سيارة جانبية"
@@ -105,7 +157,7 @@ export default function App() {
               src="/images/logo.webp"
               alt="ابو حلب كهربائي سيارات"
               width="120"
-              height="60" // ✅ تحديد أبعاد اللوجو
+              height="60"
             />
           </a>
 
@@ -124,14 +176,19 @@ export default function App() {
             >
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
+
             <span className="phone-number text-white ml-2">{phone}</span>
+
+            {/* WhatsApp (Desktop) */}
             <a
               href={getWhatsAppUrl("السلام عليكم، استفسار عام")}
+              onClick={onWhatsAppClick("السلام عليكم، استفسار عام")}
               className="icon-btn whatsapp"
               aria-label="واتساب"
             >
               <img src="/icons/whatsapp.svg" width="22" height="22" alt="" />
             </a>
+
             <a
               href={locationLink}
               className="icon-btn location"
@@ -154,13 +211,18 @@ export default function App() {
             >
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
+
+            {/* Call (Mobile) */}
             <a
               href={`tel:${phone}`}
+              onClick={onCallClick}
               className="icon-btn call-mobile"
               aria-label="اتصال"
             >
-              <img src="/icons/whatsapp.svg" width="22" height="22" alt="" />
+              {/* غيرت الأيقونة لهاتف */}
+              <img src="/icons/phone.svg" width="22" height="22" alt="" />
             </a>
+
             <button
               className="hamburger"
               onClick={() => setMenuOpen((v) => !v)}
@@ -207,7 +269,7 @@ export default function App() {
       )}
 
       <main>
-        {/* --- HERO SECTION --- */}
+        {/* HERO */}
         <section className="section hero">
           <div className="hero-blur-bg" aria-hidden="true"></div>
           <div className="hero-overlay" aria-hidden="true"></div>
@@ -224,7 +286,6 @@ export default function App() {
               </p>
 
               <div className="hero-actions">
-                {/* ✅ الإضافة المطلوبة: الموقع فوق الزر */}
                 <div className="actions-primary-group">
                   <a
                     href={locationLink}
@@ -236,8 +297,12 @@ export default function App() {
                     <span>صناعية النسيم - الرياض</span>
                   </a>
 
+                  {/* WhatsApp (Hero CTA) */}
                   <a
                     href={getWhatsAppUrl(
+                      "السلام عليكم، أرغب بحجز موعد صيانة تكييف",
+                    )}
+                    onClick={onWhatsAppClick(
                       "السلام عليكم، أرغب بحجز موعد صيانة تكييف",
                     )}
                     className="btn btn-red btn-block"
@@ -245,6 +310,7 @@ export default function App() {
                     احجز موعد صيانة
                   </a>
                 </div>
+
                 <a href="#services" className="btn btn-white btn-block">
                   شاهد خدماتنا
                 </a>
@@ -256,8 +322,8 @@ export default function App() {
                 src="/images/Best-repairs-in-East-Riyadh.webp"
                 alt="سيارة بي ام دبليو"
                 width="857"
-                height="381" // ✅ ضروري جداً للأداء
-                fetchpriority="high" // ✅ تحميل فوري لأهم صورة
+                height="381"
+                fetchpriority="high"
                 className="hero-car-img"
                 style={{ width: "85%", height: "auto", maxWidth: "800px" }}
               />
@@ -265,7 +331,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- عرض 99 ريال --- */}
+        {/* عرض 99 ريال */}
         <section className="section banner-section">
           <div className="container">
             <div
@@ -278,8 +344,13 @@ export default function App() {
                   99 <span className="currency">ريال</span>
                 </h3>
                 <p>عرض خاص: تعبئة فريون بأحدث الأجهزة</p>
+
+                {/* WhatsApp (Offer CTA) */}
                 <a
                   href={getWhatsAppUrl(
+                    "السلام عليكم، أرغب بحجز عرض تعبئة الفريون بـ 99 ريال",
+                  )}
+                  onClick={onWhatsAppClick(
                     "السلام عليكم، أرغب بحجز عرض تعبئة الفريون بـ 99 ريال",
                   )}
                   className="btn btn-green"
@@ -293,6 +364,7 @@ export default function App() {
                   />
                 </a>
               </div>
+
               <div className="offer-img-wrap">
                 <img
                   src="images/Machine.webp"
@@ -306,7 +378,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- الخدمات --- */}
+        {/* الخدمات */}
         <section id="services" className="section services-section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
@@ -355,7 +427,7 @@ export default function App() {
                     src={srv.icon}
                     alt={srv.title}
                     width="60"
-                    height="60" // ✅ أبعاد الأيقونات
+                    height="60"
                     className="service-icon-floating"
                     loading="lazy"
                   />
@@ -367,7 +439,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- لماذا تختارنا --- */}
+        {/* لماذا تختارنا */}
         <section id="whyus" className="section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
@@ -409,7 +481,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- من أعمالنا --- */}
+        {/* من أعمالنا */}
         <section id="gallery" className="section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
@@ -422,12 +494,13 @@ export default function App() {
                     src={g.src}
                     alt={g.alt}
                     width="400"
-                    height="400" // ✅ أبعاد تقريبية للصور المربعة
+                    height="400"
                     style={{ objectPosition: g.pos }}
                     loading="lazy"
                   />
                 </div>
               ))}
+
               {!showAll ? (
                 <div
                   className="gallery-item more-card"
@@ -452,7 +525,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- الأسئلة الشائعة --- */}
+        {/* الأسئلة الشائعة */}
         <section id="faq" className="section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
@@ -478,7 +551,7 @@ export default function App() {
         </section>
       </main>
 
-      {/* --- الفوتر --- */}
+      {/* الفوتر */}
       <footer id="contact" className="footer">
         <div className="container footer-grid">
           <div className="footer-col info">
@@ -561,6 +634,7 @@ export default function App() {
             </div>
           </div>
         </div>
+
         <div className="container">
           <p className="footer-seo-text">
             ورشة أبو حلب لتكييف السيارات في الرياض متخصصة في إصلاح مكيفات جميع
@@ -575,11 +649,13 @@ export default function App() {
         </div>
       </footer>
 
+      {/* WhatsApp FAB */}
       <a
         className="whatsapp-fab"
         href={getWhatsAppUrl("السلام عليكم، عندي استفسار بخصوص مكيف السيارة")}
-        target="_blank"
-        rel="noreferrer"
+        onClick={onWhatsAppClick(
+          "السلام عليكم، عندي استفسار بخصوص مكيف السيارة",
+        )}
         aria-label="تواصل واتساب"
       >
         <img src="/icons/whatsapp.svg" width="38" height="38" alt="" />
