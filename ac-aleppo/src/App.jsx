@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { useJsonLd, useSeoMeta } from "./seo";
 import { LOCATION_LINK, PHONE, SITE_URL, getWhatsAppUrl } from "./siteConfig";
 
@@ -159,6 +158,10 @@ export default function App() {
 
   useEffect(() => {
     document.body.classList.toggle("no-scroll", menuOpen);
+
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
   }, [menuOpen]);
 
   return (
@@ -249,6 +252,8 @@ export default function App() {
               className="hamburger"
               onClick={() => setMenuOpen((v) => !v)}
               aria-label="القائمة"
+              aria-controls="mobile-drawer"
+              aria-expanded={menuOpen}
             >
               <img src="/icons/menu.svg" alt="" width="24" height="24" />
             </button>
@@ -395,7 +400,7 @@ export default function App() {
 
               <div className="offer-img-wrap">
                 <img
-                  src="images/Machine.webp"
+                  src="/images/Machine.webp"
                   alt="جهاز الفريون"
                   width="150"
                   height="235"
@@ -530,16 +535,18 @@ export default function App() {
               ))}
 
               {!showAll ? (
-                <div
+                <button
+                  type="button"
                   className="gallery-item more-card"
                   onClick={() => setShowAll(true)}
                   data-aos="zoom-in"
+                  aria-label="عرض كل الأعمال"
                 >
                   <div className="more-content">
                     <span className="arrow-left">◀</span>
                     <span>عرض كل الأعمال</span>
                   </div>
-                </div>
+                </button>
               ) : (
                 <button
                   className="btn btn-white full-width"
