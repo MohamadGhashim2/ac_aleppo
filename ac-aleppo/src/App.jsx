@@ -1,22 +1,66 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import "./App.css";
+import { useJsonLd, useSeoMeta } from "./seo";
+import { LOCATION_LINK, PHONE, SITE_URL, getWhatsAppUrl } from "./siteConfig";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const phone = "+966546087818";
+  const phone = PHONE;
   const [showAll, setShowAll] = useState(false);
-  const locationLink = "https://maps.app.goo.gl/HEv9z2j2GvYXzhUR7";
+  const locationLink = LOCATION_LINK;
+
+  const landingPath = "/best-car-ac-repair-riyadh";
+  const isLandingPage =
+    typeof window !== "undefined" && window.location.pathname === landingPath;
+
+  const seoTitle = isLandingPage
+    ? "أفضل اصلاح مكيفات سيارات في الرياض | ورشة أبو حلب"
+    : "أفضل فني إصلاح مكيفات في الرياض | الفني ابو حلب";
+
+  const seoDescription = isLandingPage
+    ? "أفضل اصلاح مكيفات سيارات في الرياض بخدمة سريعة وفحص دقيق وصيانة احترافية تشمل تعبئة فريون سيارات وفحص التسريب وإصلاح الكمبروسر."
+    : "صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة مكيف السيارة بخبرة وضمان, افضل اصلاح مكيفات شرق الرياض وغربها.";
+
+  const canonicalUrl = isLandingPage
+    ? `${SITE_URL}${landingPath}`
+    : `${SITE_URL}/`;
+
+  useSeoMeta({
+    title: seoTitle,
+    description: seoDescription,
+    canonical: canonicalUrl,
+    ogTitle: seoTitle,
+    ogDescription: seoDescription,
+    ogUrl: canonicalUrl,
+    twitterTitle: seoTitle,
+    twitterDescription: seoDescription,
+  });
+
+  useJsonLd(
+    isLandingPage
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "أفضل اصلاح مكيفات سيارات في الرياض",
+          provider: {
+            "@type": "AutoRepair",
+            name: "العاصمة حلب لتكييف السيارات",
+            telephone: PHONE,
+            areaServed: "الرياض",
+          },
+          areaServed: "الرياض",
+          serviceType: "أفضل اصلاح مكيفات سيارات",
+          url: canonicalUrl,
+        }
+      : null,
+    "route-jsonld",
+  );
 
   // ✅ Google Ads Conversion IDs (حسب الـ event snippet عندك)
   const ADS_CONV_WHATSAPP = "AW-17079539386/TB95CNNH4fgbELqt1NA_";
   const ADS_CONV_CALL = "AW-17079539386/Bt6YCNKH4fgbELqt1NA_";
 
-  // دالة لتجهيز رابط واتساب
-  const getWhatsAppUrl = (message) => {
-    const cleanPhone = phone.replace(/\D/g, "");
-    return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
-  };
-
+ 
   // ✅ GA4 event helper (يسجّل على GA4 + يطلع بRealtime)
   const fireGAEvent = (eventName, params = {}) => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
@@ -149,7 +193,13 @@ export default function App() {
   useEffect(() => {
     document.body.classList.toggle("no-scroll", menuOpen);
   }, [menuOpen]);
-
+  const landingPath = "/best-car-ac-repair-riyadh";
+  if (
+    typeof window !== "undefined" &&
+    window.location.pathname === landingPath
+  ) {
+    return <BestCarAcRepairRiyadhPage />;
+  }
   return (
     <>
       {/* السيارات الجانبية (Free Objects) */}
