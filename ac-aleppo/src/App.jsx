@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import "./App.css";
 import { useJsonLd, useSeoMeta } from "./seo";
 import { LOCATION_LINK, PHONE, SITE_URL, getWhatsAppUrl } from "./siteConfig";
+import BestCarAcRepairRiyadhPage from "./BestCarAcRepairRiyadhPage";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,7 +61,6 @@ export default function App() {
   const ADS_CONV_WHATSAPP = "AW-17079539386/TB95CNNH4fgbELqt1NA_";
   const ADS_CONV_CALL = "AW-17079539386/Bt6YCNKH4fgbELqt1NA_";
 
- 
   // ✅ GA4 event helper (يسجّل على GA4 + يطلع بRealtime)
   const fireGAEvent = (eventName, params = {}) => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
@@ -193,11 +193,7 @@ export default function App() {
   useEffect(() => {
     document.body.classList.toggle("no-scroll", menuOpen);
   }, [menuOpen]);
-  const landingPath = "/best-car-ac-repair-riyadh";
-  if (
-    typeof window !== "undefined" &&
-    window.location.pathname === landingPath
-  ) {
+  if (isLandingPage) {
     return <BestCarAcRepairRiyadhPage />;
   }
   return (
