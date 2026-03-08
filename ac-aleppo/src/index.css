@@ -102,7 +102,7 @@ button {
   left: 0;
   width: 100%;
   z-index: 100;
-  padding: 20px 0;
+  padding: 12px 0;
   background: transparent;
   display: flex;
   justify-content: center;
@@ -159,7 +159,7 @@ button {
 .nav .wrap {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 28px;
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
@@ -177,7 +177,7 @@ button {
   color: var(--text-secondary);
   /* تعديل */
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
   position: relative;
 }
 
@@ -258,7 +258,7 @@ button {
   align-items: center;
   justify-content: center;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 /* --- تنسيق أيقونة الموقع فوق الزر --- */
@@ -381,7 +381,7 @@ button {
 .hero-wave-wrap {
   position: absolute;
   left: 0;
-  bottom: 3px;
+  bottom: 0px;
   width: 100%;
   height: 88px;
   z-index: 1;
@@ -634,7 +634,7 @@ button {
 .offer-info p {
   color: var(--text-gray);
   margin-bottom: 25px;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .offer-img-wrap {
@@ -736,11 +736,11 @@ button {
   gap: 30px;
 }
 
-.service-card {
+.home-service-card {
   background: var(--bg-card);
   /* تعديل */
   border-radius: 20px;
-  padding: 40px 30px;
+  padding: 58px 30px 40px;
   position: relative;
   border: 1px solid var(--border-color);
   /* تعديل */
@@ -751,28 +751,28 @@ button {
   backdrop-filter: blur(10px);
 }
 
-.service-card:hover {
+.home-service-card:hover {
   background: var(--bg-hover);
   border-color: var(--primary-red);
   transform: translateY(-10px);
 }
 
-.service-icon-floating {
+.home-service-icon {
   position: absolute;
-  top: -30px;
-  left: 30px;
+  top: 10px;
+  left: 18px;
   width: 60px;
   height: 60px;
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
   transition: 0.3s;
 }
 
-.service-card:hover .service-icon-floating {
-  transform: scale(1.1) rotate(-10deg);
-  top: -40px;
+.home-service-card:hover .home-service-icon {
+  transform: scale(1.08) rotate(-8deg);
+  top: 10px;
 }
 
-.service-card h3 {
+.home-service-card h3 {
   font-size: 1.5rem;
   margin-bottom: 10px;
   margin-top: 15px;
@@ -780,10 +780,21 @@ button {
   /* تعديل */
 }
 
-.service-card p {
+.home-service-card p {
   font-size: 1rem;
   color: var(--text-gray);
   line-height: 1.6;
+}
+
+.services-more-actions {
+  margin-top: 42px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.services-more-actions .btn {
+  min-width: 220px;
 }
 
 /* --- WHY US --- */
@@ -925,7 +936,7 @@ button {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--text-primary);
 }
 
@@ -951,7 +962,7 @@ button {
 
 .footer-grid {
   display: grid;
-  gap: 50px;
+  gap: 28px;
   text-align: center;
 }
 
@@ -1180,7 +1191,7 @@ button {
   .nav .wrap {
     justify-content: flex-start;
     /* العناصر تبدأ من اليمين */
-    gap: 50px;
+    gap: 28px;
     /* تباعد بين اللوجو والروابط */
   }
 
@@ -1398,5 +1409,274 @@ button {
   /* تكبير السيارة للشاشات العملاقة */
   .hero-car-img {
     transform: scale(3) scaleX(-1) translateX(100px);
+  }
+}
+
+
+
+/* SEO pages */
+.inner-page-bg {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.inner-content {
+  position: relative;
+  z-index: 2;
+}
+
+.inner-bg-layer {
+  position: fixed !important;
+  inset: 0;
+  display: block !important;
+}
+
+.inner-page-bg .hero-blur-bg {
+  background-image: url('/images/backgroundlayer.webp');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.28;
+  z-index: 0;
+}
+
+.inner-page-bg .hero-overlay {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1;
+}
+
+.inner-page-bg .blue-effect {
+  background: linear-gradient(to top, #02aefd 0%, #ffffff 100%);
+  opacity: 0.22;
+  filter: blur(70px);
+  z-index: 1;
+}
+
+.inner-page-bg .hero-wave-wrap {
+  top: auto;
+  bottom: -1px;
+  height: 70px;
+  z-index: 1;
+}
+
+.inner-nav {
+  position: sticky;
+  top: 0;
+  z-index: 130;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.inner-wrap {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.inner-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.inner-links a {
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.inner-links a:hover {
+  color: var(--primary-red);
+}
+
+.inner-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.inner-btn {
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+.article-layout {
+  padding: 50px 0 40px;
+  max-width: 900px;
+}
+
+.article-layout h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin-bottom: 16px;
+}
+
+.article-layout h2 {
+  margin: 18px 0 10px;
+  font-size: 1.8rem;
+}
+
+.article-layout p,
+.article-layout li {
+  font-size: 1.12rem;
+  line-height: 1.9;
+}
+
+.lead {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.seo-card {
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 22px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+}
+
+
+
+.service-card {
+  overflow: hidden;
+}
+
+.service-card-image {
+  width: calc(100% + 44px);
+  margin: -22px -22px 14px;
+  height: 190px;
+  object-fit: cover;
+}
+
+.article-link {
+  color: var(--primary-red);
+  font-weight: 700;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 28px 0;
+}
+
+.cta-row .btn {
+  min-width: 190px;
+}
+
+.breadcrumbs {
+  margin-bottom: 16px;
+  color: var(--text-gray);
+}
+
+.article-hero {
+  width: 100%;
+  border-radius: 20px;
+  margin: 14px 0 20px;
+  max-height: 420px;
+  object-fit: cover;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
+}
+
+.inner-footer {
+  margin-top: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.inner-footer-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.whatsapp-fab {
+  overflow: visible;
+}
+
+.whatsapp-fab-note {
+  position: absolute;
+  right: 78px;
+  white-space: nowrap;
+  background: #fff;
+  color: #111;
+  border-radius: 22px;
+  padding: 8px 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.whatsapp-fab-note::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (max-width: 900px) {
+  .inner-wrap {
+    min-height: 62px;
+    gap: 8px;
+  }
+
+  .inner-links {
+    gap: 12px;
+  }
+
+  .inner-links a {
+    font-size: 0.86rem;
+  }
+
+  .inner-actions .inner-btn {
+    min-height: 35px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    border-radius: 20px;
+  }
+
+  .article-layout {
+    padding-top: 30px;
+  }
+
+  .article-layout p,
+  .article-layout li {
+    font-size: 1rem;
+  }
+
+  .cta-row .btn,
+  .inner-footer-actions .btn {
+    width: 100%;
+  }
+
+  .whatsapp-fab {
+    right: 16px;
+    bottom: 18px;
+    width: 58px;
+    height: 58px;
+  }
+
+  .whatsapp-fab-note {
+    right: 68px;
+    font-size: 0.8rem;
+    padding: 7px 10px;
   }
 }

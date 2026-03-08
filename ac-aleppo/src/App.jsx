@@ -4,25 +4,34 @@ import { LOCATION_LINK, PHONE, SITE_URL, getWhatsAppUrl } from "./siteConfig";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const phone = PHONE;
   const [showAll, setShowAll] = useState(false);
+
+  const phone = PHONE;
   const locationLink = LOCATION_LINK;
 
+  const shortName = "أبو حلب";
+  const businessName = "أبو حلب لتكييف السيارات";
+  const baseUrl = SITE_URL.replace(/\/+$/, "");
   const landingPath = "/best-car-ac-repair-riyadh";
-  const isLandingPage =
-    typeof window !== "undefined" && window.location.pathname === landingPath;
+
+  const currentPath =
+    typeof window !== "undefined"
+      ? window.location.pathname.replace(/\/+$/, "") || "/"
+      : "/";
+
+  const isLandingPage = currentPath === landingPath;
 
   const seoTitle = isLandingPage
-    ? "أفضل اصلاح مكيفات سيارات في الرياض | ورشة أبو حلب"
-    : "أفضل فني إصلاح مكيفات في الرياض | الفني ابو حلب";
+    ? "أفضل إصلاح مكيفات سيارات في الرياض | أبو حلب"
+    : "أبو حلب لتكييف السيارات في الرياض";
 
   const seoDescription = isLandingPage
-    ? "أفضل اصلاح مكيفات سيارات في الرياض بخدمة سريعة وفحص دقيق وصيانة احترافية تشمل تعبئة فريون سيارات وفحص التسريب وإصلاح الكمبروسر."
-    : "صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة مكيف السيارة بخبرة وضمان, افضل اصلاح مكيفات شرق الرياض وغربها.";
+    ? "أفضل إصلاح مكيفات سيارات في الرياض بخدمة سريعة وفحص دقيق وصيانة احترافية تشمل تعبئة فريون السيارات وفحص التسريب وإصلاح الكمبروسر."
+    : "أبو حلب لتكييف السيارات في الرياض. صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة مكيف السيارة بخبرة وضمان.";
 
   const canonicalUrl = isLandingPage
-    ? `${SITE_URL}${landingPath}`
-    : `${SITE_URL}/`;
+    ? `${baseUrl}${landingPath}`
+    : `${baseUrl}/`;
 
   useSeoMeta({
     title: seoTitle,
@@ -40,35 +49,31 @@ export default function App() {
       ? {
           "@context": "https://schema.org",
           "@type": "Service",
-          name: "أفضل اصلاح مكيفات سيارات في الرياض",
+          name: "أفضل إصلاح مكيفات سيارات في الرياض",
           provider: {
             "@type": "AutoRepair",
-            name: "العاصمة حلب لتكييف السيارات",
+            name: businessName,
             telephone: PHONE,
             areaServed: "الرياض",
           },
           areaServed: "الرياض",
-          serviceType: "أفضل اصلاح مكيفات سيارات",
+          serviceType: "إصلاح مكيفات السيارات",
           url: canonicalUrl,
         }
       : null,
     "route-jsonld",
   );
 
-  // ✅ Google Ads Conversion IDs (حسب الـ event snippet عندك)
   const ADS_CONV_WHATSAPP = "AW-17079539386/TB95CNNH4fgbELqt1NA_";
   const ADS_CONV_CALL = "AW-17079539386/Bt6YCNKH4fgbELqt1NA_";
 
-  // ✅ GA4 event helper (يسجّل على GA4 + يطلع بRealtime)
   const fireGAEvent = (eventName, params = {}) => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("event", eventName, params);
     }
   };
 
-  // ✅ Google Ads conversion helper (نفس فكرة gtag_report_conversion)
   const fireAdsConversion = (sendTo, url) => {
-    // إذا gtag مو جاهز، افتح الرابط مباشرة
     if (typeof window === "undefined" || typeof window.gtag !== "function") {
       if (url) window.location.href = url;
       return;
@@ -87,53 +92,46 @@ export default function App() {
       transport_type: "beacon",
     });
 
-    // fallback إذا المتصفح ما نفّذ callback
     setTimeout(callback, 800);
   };
 
-  // ✅ WhatsApp click handler (GA4 + Ads)
   const handleWhatsAppClick = (e, message, source = "unknown") => {
     if (e) e.preventDefault();
 
     const cleanPhone = phone.replace(/\D/g, "");
     const url = getWhatsAppUrl(message);
 
-    // GA4 (كل الترافيك)
     fireGAEvent("whatsapp_click", {
       method: "whatsapp",
       phone: cleanPhone,
       source,
     });
 
-    // Google Ads (Paid attribution عند توفر click id)
     fireAdsConversion(ADS_CONV_WHATSAPP, url);
   };
 
-  // ✅ Call click handler (GA4 + Ads)
   const handleCallClick = (e, source = "unknown") => {
     if (e) e.preventDefault();
 
     const cleanPhone = phone.replace(/\D/g, "");
     const url = `tel:${phone}`;
 
-    // GA4
     fireGAEvent("call_click", {
       method: "tel",
       phone: cleanPhone,
       source,
     });
 
-    // Ads
     fireAdsConversion(ADS_CONV_CALL, url);
   };
 
   const galleryItems = [
     {
       src: "/gallery/ابو-حلب.webp",
-      alt: "افضل اصلاح في الرياض",
+      alt: "أفضل إصلاح في الرياض",
       pos: "50% 40%",
     },
-    { src: "/gallery/افضل-مصلح.webp", alt: "افضل اصلاح سيارات", pos: "center" },
+    { src: "/gallery/افضل-مصلح.webp", alt: "أفضل إصلاح سيارات", pos: "center" },
     { src: "/gallery/العاصمة-حلب.webp", alt: "كشف تهريب", pos: "60% 50%" },
     { src: "/gallery/النترا.webp", alt: "تنظيف الثلاجة", pos: "center" },
     { src: "/gallery/فحص-فريون-جهاز.webp", alt: "كامري", pos: "center" },
@@ -144,11 +142,11 @@ export default function App() {
     },
     { src: "/gallery/تغيير-فريون.webp", alt: "كورولا يارس", pos: "center" },
     { src: "/gallery/جيمس-مكيفات.webp", alt: "النترا سوناتا", pos: "center" },
-    { src: "/gallery/سيارات-كوري.webp", alt: "مرسيدس اودي", pos: "center" },
+    { src: "/gallery/سيارات-كوري.webp", alt: "مرسيدس أودي", pos: "center" },
     { src: "/gallery/صناعية-الرياض.webp", alt: "صناعية الرياض", pos: "center" },
     {
       src: "/gallery/صناعية-النسيم.webp",
-      alt: "اصلاح سيارات غربي الرياض",
+      alt: "إصلاح سيارات غرب الرياض",
       pos: "center",
     },
     { src: "/gallery/صناعية-الرياض.webp", alt: "مصلح مكيفات", pos: "center" },
@@ -166,7 +164,6 @@ export default function App() {
 
   return (
     <>
-      {/* السيارات الجانبية (Free Objects) */}
       <img
         src="/images/Air-conditioning-repair.webp"
         alt="سيارة جانبية"
@@ -177,9 +174,10 @@ export default function App() {
         data-aos="fade-left"
         data-aos-delay="800"
       />
+
       <img
         src="/images/Air-conditioning-repairman.webp"
-        alt="سيارة جانبية"
+        alt="فني تكييف سيارات"
         className="free-car-object-2"
         width="1146"
         height="405"
@@ -188,13 +186,12 @@ export default function App() {
         data-aos-delay="900"
       />
 
-      {/* الهيدر */}
       <header className="nav">
         <div className="container wrap">
           <a href="/" className="logo-container">
             <img
               src="/images/logo.webp"
-              alt="ابو حلب كهربائي سيارات"
+              alt={businessName}
               width="120"
               height="60"
             />
@@ -205,12 +202,13 @@ export default function App() {
             <a href="#whyus">لماذا نحن</a>
             <a href="#gallery">أعمالنا</a>
             <a href="#faq">الأسئلة</a>
+            <a href="/services">الخدمات المفصلة</a>
+            <a href="/articles">المقالات</a>
           </nav>
 
           <div className="desktop-actions">
             <span className="phone-number text-white ml-2">{phone}</span>
 
-            {/* ✅ WhatsApp tracked */}
             <a
               href={getWhatsAppUrl("السلام عليكم، استفسار عام")}
               onClick={(e) =>
@@ -238,7 +236,6 @@ export default function App() {
           </div>
 
           <div className="menu-btn">
-            {/* ✅ Call tracked */}
             <a
               href={`tel:${phone}`}
               onClick={(e) => handleCallClick(e, "mobile_call_icon")}
@@ -261,7 +258,6 @@ export default function App() {
         </div>
       </header>
 
-      {/* المنيو الجانبي */}
       {menuOpen && (
         <>
           <div className="backdrop" onClick={() => setMenuOpen(false)} />
@@ -290,7 +286,6 @@ export default function App() {
       )}
 
       <main>
-        {/* --- HERO SECTION --- */}
         <section className="section hero">
           <div className="hero-blur-bg" aria-hidden="true"></div>
           <div className="hero-overlay" aria-hidden="true"></div>
@@ -299,13 +294,14 @@ export default function App() {
             <div className="hero-wave hero-wave-back"></div>
             <div className="hero-wave hero-wave-front"></div>
           </div>
+
           <div className="container grid hero-grid">
             <div className="hero-text-content animate-pop-in">
-              <h1 className="hero-title">ابو حلب للتكييف</h1>
-              <p className="hero-subtitle">افضل ورشة مكيفات سيارات بالرياض</p>
+              <h1 className="hero-title">{businessName}</h1>
+              <p className="hero-subtitle">أفضل ورشة مكيفات سيارات بالرياض</p>
               <p className="hero-desc">
                 صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
-                إلكتروني… سرعة وجودة بأسعار مناسبة.
+                إلكتروني، سرعة وجودة بأسعار مناسبة.
               </p>
 
               <div className="hero-actions">
@@ -320,7 +316,6 @@ export default function App() {
                     <span>صناعية النسيم - الرياض</span>
                   </a>
 
-                  {/* ✅ WhatsApp tracked */}
                   <a
                     href={getWhatsAppUrl(
                       "السلام عليكم، أرغب بحجز موعد صيانة تكييف",
@@ -348,7 +343,7 @@ export default function App() {
             <div className="hero-car-container">
               <img
                 src="/images/Best-repairs-in-East-Riyadh.webp"
-                alt="سيارة بي ام دبليو"
+                alt="سيارة بي إم دبليو"
                 width="857"
                 height="381"
                 fetchpriority="high"
@@ -359,7 +354,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- عرض 99 ريال --- */}
         <section className="section banner-section">
           <div className="container">
             <div
@@ -373,7 +367,6 @@ export default function App() {
                 </h3>
                 <p>عرض خاص: تعبئة فريون بأحدث الأجهزة</p>
 
-                {/* ✅ WhatsApp tracked */}
                 <a
                   href={getWhatsAppUrl(
                     "السلام عليكم، أرغب بحجز عرض تعبئة الفريون بـ 99 ريال",
@@ -411,15 +404,14 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- الخدمات --- */}
         <section id="services" className="section services-section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
               خدماتنا
             </h2>
             <p className="section-sub" data-aos="fade-up">
-              نقدم أفضل إصلاح مكيفات سيارات في الرياض، تعبئة فريون بأحدث
-              الأجهزة...
+              نقدم أفضل إصلاح مكيفات سيارات في الرياض، تعبئة فريون بأحدث الأجهزة
+              وخدمة سريعة لجميع أنواع السيارات.
             </p>
 
             <div className="grid services-grid">
@@ -431,12 +423,12 @@ export default function App() {
                 },
                 {
                   title: "كشف تهريب",
-                  desc: "صبغة/نيتروجين وتحديد مكان التهريب",
+                  desc: "صبغة ونيتروجين وتحديد مكان التهريب",
                   icon: "/icons/search.svg",
                 },
                 {
                   title: "تغيير كمبروسر",
-                  desc: "وكالة/بديل مع ضمان",
+                  desc: "وكالة أو بديل مع ضمان",
                   icon: "/icons/engine.svg",
                 },
                 {
@@ -451,17 +443,17 @@ export default function App() {
                 },
                 {
                   title: "صيانة المواسير",
-                  desc: "استبدال/لحام مواسير التكييف",
+                  desc: "استبدال أو لحام مواسير التكييف",
                   icon: "/icons/wrench.svg",
                 },
               ].map((srv, i) => (
-                <div key={i} className="service-card" data-aos="fade-up">
+                <div key={i} className="home-service-card" data-aos="fade-up">
                   <img
                     src={srv.icon}
                     alt={srv.title}
                     width="60"
                     height="60"
-                    className="service-icon-floating"
+                    className="home-service-icon"
                     loading="lazy"
                   />
                   <h3>{srv.title}</h3>
@@ -469,15 +461,21 @@ export default function App() {
                 </div>
               ))}
             </div>
+
+            <div className="services-more-actions" data-aos="fade-up">
+              <a href="/services" className="btn btn-red">
+                المزيد من الخدمات
+              </a>
+            </div>
           </div>
         </section>
 
-        {/* --- لماذا تختارنا --- */}
         <section id="whyus" className="section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
               لماذا تختارنا
             </h2>
+
             <div className="grid whyus-grid">
               {[
                 {
@@ -514,12 +512,12 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- من أعمالنا --- */}
         <section id="gallery" className="section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
               من أعمالنا
             </h2>
+
             <div className="grid gallery-grid">
               {visibleItems.map((g, i) => (
                 <div key={i} className="gallery-item" data-aos="zoom-in">
@@ -560,44 +558,48 @@ export default function App() {
           </div>
         </section>
 
-        {/* --- الأسئلة الشائعة --- */}
         <section id="faq" className="section">
           <div className="container">
             <h2 className="section-header" data-aos="fade-up">
               الأسئلة الشائعة
             </h2>
+
             <div className="faq-grid">
               <div className="faq-card" data-aos="fade-up">
                 <h4>
                   هل الفحص مدفوع؟ <span className="plus">+</span>
                 </h4>
                 <p>
-                  الفحص مبدئي مجاني—أحيانًا تُحسب رسوم رمزية تُخصم عند الإصلاح.
+                  الفحص مبدئي مجاني، وأحيانًا تُحسب رسوم رمزية تُخصم عند
+                  الإصلاح.
                 </p>
               </div>
+
               <div className="faq-card" data-aos="fade-up">
                 <h4>
                   ما مدة الضمان؟ <span className="plus">+</span>
                 </h4>
-                <p>ضمان مكتوب 3 أشهر على العمل (تفاصيل الضمان بالفاتورة).</p>
+                <p>
+                  ضمان مكتوب 3 أشهر على العمل، وتفاصيل الضمان تكون بالفاتورة.
+                </p>
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      {/* --- الفوتر --- */}
       <footer id="contact" className="footer">
         <div className="container footer-grid">
           <div className="footer-col info">
             <img
               src="/images/logo.webp"
-              alt="لوجو"
+              alt={businessName}
               width="120"
               height="65"
               loading="lazy"
               className="footer-logo"
             />
+
             <p className="footer-desc">
               أفضل ورشة مكيفات سيارات بالرياض، نخدم صناعية النسيم وغرب وشرق
               الرياض.
@@ -624,10 +626,13 @@ export default function App() {
             <a href="#services">الخدمات</a>
             <a href="#whyus">لماذا نحن</a>
             <a href="#contact">حجز موعد</a>
+            <a href="/services">صفحة الخدمات</a>
+            <a href="/articles">مقالات الأعطال</a>
           </div>
 
           <div className="footer-col map-col">
             <h4>موقعنا</h4>
+
             <div className="map-preview">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.4776903362417!2d46.852713099999995!3d24.7104755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa95da9d6ba3d%3A0x67336cca9c6a55b3!2z2YjYsdi02Kkg2KfZhNi52KfYtdmF2Ycg2K3ZhNioINin2YTYqtmD2YrZitmBINmE2LXZitin2YbYqSDYp9mE2LPZitin2LHYp9iq!5e0!3m2!1sar!2str!4v1770758271180!5m2!1sar!2str"
@@ -647,9 +652,10 @@ export default function App() {
                   alt="snap"
                 />
               </a>
+
               <a
                 href="https://www.instagram.com/abo_aleppo1?igsh=MW9iNzB3OG5xeTVkeg=="
-                aria-label="انستقرام"
+                aria-label="إنستقرام"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -660,6 +666,7 @@ export default function App() {
                   alt="insta"
                 />
               </a>
+
               <a
                 href="https://www.tiktok.com/@asimat_halab_ac?_r=1&_t=ZS-93oaiHV0EbK"
                 aria-label="تيك توك"
@@ -679,19 +686,18 @@ export default function App() {
 
         <div className="container">
           <p className="footer-seo-text">
-            ورشة أبو حلب لتكييف السيارات في الرياض متخصصة في إصلاح مكيفات جميع
-            السيارات: كامري، كورولا، يارس، النترا، سوناتا، لكزس، مرسيدس، بي إم
-            دبليو، جينيسس. نخدم صناعية النسيم، غرب الرياض وشرق الرياض.
+            {businessName} في الرياض متخصصة في إصلاح مكيفات جميع السيارات:
+            كامري، كورولا، يارس، النترا، سوناتا، لكزس، مرسيدس، بي إم دبليو،
+            جينيسس. نخدم صناعية النسيم، غرب الرياض وشرق الرياض.
           </p>
         </div>
 
         <div className="copyright">
-          © {new Date().getFullYear()} ورشة أبو حلب – ورشة التكييف الافضل في
+          © {new Date().getFullYear()} {shortName} – ورشة تكييف سيارات في
           الرياض.
         </div>
       </footer>
 
-      {/* ✅ WhatsApp FAB tracked */}
       <a
         className="whatsapp-fab"
         href={getWhatsAppUrl("السلام عليكم، عندي استفسار بخصوص مكيف السيارة")}
@@ -705,6 +711,7 @@ export default function App() {
         aria-label="تواصل واتساب"
         rel="noreferrer"
       >
+        <span className="whatsapp-fab-note">اتصل الآن</span>
         <img src="/icons/whatsapp.svg" width="38" height="38" alt="" />
       </a>
     </>
