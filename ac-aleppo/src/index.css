@@ -6,25 +6,7 @@
   --primary-red: #E53935;
   --primary-green: #25D366;
   --primary-yellow: #FFD600;
-
-  /* متغيرات الوضع الداكن (الافتراضي في الكود الحالي) */
-  --bg-main: radial-gradient(50% 50% at 50% 50%, #2C2C2C 0%, #000000 100%);
-  --bg-solid: #050505;
-  --bg-card: rgba(255, 255, 255, 0.05);
-  --bg-hover: rgba(255, 255, 255, 0.1);
-  --text-primary: #FFFFFF;
-  --text-secondary: #B0B0B0;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --nav-bg: rgba(0, 0, 0, 0.5);
-  /* خلفية الهيدر */
-  --shadow-color: rgba(0, 0, 0, 0.5);
---hero-overlay-color: rgba(0, 0, 0, 0.9);
-  --container-width: 90%;
-  --max-width: 1440px;
-}
-[data-theme="light"] {
   --bg-main: #f4f4f9;
-  /* خلفية رمادية فاتحة جداً */
   --bg-solid: #ffffff;
   --bg-card: #ffffff;
   --bg-hover: #f0f0f0;
@@ -34,6 +16,8 @@
   --nav-bg: rgba(255, 255, 255, 0.8);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --hero-overlay-color: rgba(255, 255, 255, 0.801);
+    --container-width: 90%;
+      --max-width: 1440px;
 }
 * {
   box-sizing: border-box;
@@ -224,7 +208,7 @@ color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-border: 1px solid var(--border-color);
+   border: 1px solid var(--border-color);
  }
 
 .icon-btn img {
@@ -234,10 +218,7 @@ border: 1px solid var(--border-color);
 /* إضافة فلتر للأيقونات في اللايت مود */
 
 
-[data-theme="light"] .offer-img-wrap img {
-  /* استثناء الصور الملونة */
-  filter: none;
-}
+
 /* أزرار الجوال */
 .menu-btn {
   display: flex;
@@ -249,11 +230,9 @@ border: 1px solid var(--border-color);
   background: none;
   border: none;
 }
-[data-theme="light"] .hamburger img {
-  filter: invert(1);
-}
+
 .call-mobile {
-  background-color: var(--primary-green) !important;
+  background-color: var(--bg-black) !important;
   color: white;
   width: 40px;
   height: 40px;
@@ -328,7 +307,6 @@ color: var(--text-primary);
 .hero-blur-bg {
   display: none;
     position: absolute;
-  
     /* ✅✅ الحل الجذري: سحب الصورة للخارج 50 بكسل من كل الاتجاهات ✅✅ */
     /* هذا سيخفي الحواف البيضاء الشفافة تماماً خارج الشاشة */
 
@@ -355,7 +333,7 @@ color: var(--text-primary);
     /* لدعم متصفح سفاري */
   z-index: 1;
   backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
     /* لدعم متصفح سفاري */
 }
 
@@ -364,31 +342,55 @@ color: var(--text-primary);
   z-index: 0;
   pointer-events: none;
   /* لكي لا تمنع الضغط على الأزرار */
-  background: #00E5FF;
-  filter: blur(90px);
   /* زيادة التمويه للنعومة */
-  border-radius: 50%;
-  /* شكل دائري */
-  opacity: 0.5;
-  /* شفافية متوسطة للجوال لكي لا تغطي النص */
-
-  /* مكانها في الجوال: خلف السيارة في الوسط تقريباً */
-  width: 250px;
-  height: 350px;
-  top: 25%;
+  background: linear-gradient(to top, #7fd6ff 0%, #bfeaff 45%, #ffffff 100%);
   left: 50%;
+      filter: blur(50px);
+  /* شكل دائري */
+  opacity: 0.68;  /* شفافية متوسطة للجوال لكي لا تغطي النص */
+  width: 100%;
+  height: 100%;
+  /* مكانها في الجوال: خلف السيارة في الوسط تقريباً */
   transform: translateX(-50%);
   /* توسيط أفقي */
 
   /* لا يوجد أنيميشن حركة هنا لتجنب القص */
 }
 
-.smooth-overlay {
-  top: auto;
-  bottom: 0;
-  height: 30%;
-  background: linear-gradient(to top, var(--bg-black) 10%, transparent);
+
+
+.hero-wave-wrap {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 88px;
   z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-repeat: repeat-x;
+  background-size: 1200px 100%;
+  transform-origin: bottom;
+}
+
+.hero-wave-back {
+  bottom: 0;
+  height: 76px;
+  opacity: 0.55;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0,74 C130,8 290,120 450,74 C620,24 760,110 910,74 C1035,44 1130,94 1200,74 L1200,120 L0,120 Z'/%3E%3C/svg%3E");
+}
+
+.hero-wave-front {
+  bottom: -1px;
+  height: 64px;
+  opacity: 0.95;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath fill='%23f5f5f5' d='M0,66 C120,120 240,16 380,66 C540,124 680,12 820,66 C980,126 1080,22 1200,66 L1200,120 L0,120 Z'/%3E%3C/svg%3E");
 }
 
 /* تعريف الأنيميشن (نتركه هنا ليستخدمه الديسكتوب لاحقاً) */
@@ -400,7 +402,7 @@ color: var(--text-primary);
   }
 
   100% {
-    opacity: 0.8;
+    opacity: 0.5;
     /* شفافية النهائية */
     transform: translateX(0) skewX(0deg);
     /* تستقر في مكانها */
@@ -412,6 +414,7 @@ color: var(--text-primary);
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
+  margin-top: 50px;
   align-items: center;
   position: relative;
   z-index: 2;
@@ -461,21 +464,7 @@ color: var(--text-secondary);
   opacity: 0.7;
   animation: carDriveInMobile 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
-[data-theme="light"] .hero-car-img {
-  /* brightness(1.2): زيادة السطوع بنسبة 20% لجعلها أفتح
-       contrast(0.9): تقليل التباين قليلاً لجعل الظلال أقل حدة
-       saturate(1.1): زيادة بسيطة في تشبع الألوان لتعويض البهتان
-    */
-    filter: brightness(0.7) contrast(0.95) saturate(1) opacity(0.9);
-  
-    /* يمكنك أيضاً تجربة drop-shadow خفيف لدمجها */
-    /* filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); */
-}
-[data-theme="light"] .free-car-object,
-[data-theme="light"] .free-car-object-2 {
-  /* هي أصلاً رمادية، نزيد سطوعها لتصبح رمادي فاتح جداً */
-  filter: grayscale(50%) brightness(1) opacity(0.7) !important;
-} 
+
 @keyframes carDriveInMobile {
   0% {
     /* تبدأ خارج الشاشة من اليسار تماماً */
@@ -588,9 +577,7 @@ background: var(--bg-solid);
   gap: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
-[data-theme="dark"] .offer-badge {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-}
+
 .offer-info {
   width: 100%;
   order: 2;
@@ -611,25 +598,7 @@ background: var(--bg-solid);
 .offer-info .currency {
   font-size: 1.5rem;
 color: var(--text-primary);}
-.theme-toggle-btn {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  border: none;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  transition: 0.3s;
-  color: var(--primary-yellow);
-}
 
-.theme-toggle-btn:hover {
-  background: var(--bg-hover);
-}
 .offer-info p {
   color: var(--text-gray);
   margin-bottom: 25px;
@@ -965,10 +934,8 @@ color: var(--text-secondary);  font-size: 1.1rem;
   height: 200px;
   border-radius: 16px;
   border: 0;
-  filter: grayscale(1) invert(1);
-  opacity: 0.8;
-}
-[data-theme="light"] .map-preview iframe {
+
+    opacity: 0.9;
   filter: grayscale(0) invert(0);
 }
 .social-icons {
@@ -1159,22 +1126,19 @@ color: var(--text-secondary);  font-size: 1.1rem;
   .hero-blur-bg,
   .hero-overlay,
   .blue-effect,
-  .smooth-overlay {
+  .hero-wave-wrap {
     display: block;
     /* إظهارها الآن */
   }
 
   .blue-effect {
     /* استعادة خصائص الديسكتوب التي كانت لديك */
-    top: 15%;
-    left: 10%;
-    width: 45%;
-    height: 65%;
-    border-radius: 100%;
-    filter: blur(100px);
+    background: linear-gradient(to top, #02aefd 0%, #ffffff 100%); 
+    left: 0%;
+    width: 100%;
+    height: 100%;
     opacity: 0;
     /* نبدأ بصفر لكي يعمل الأنيميشن */
-
     /* إلغاء توسيط الجوال وتطبيق الأنيميشن */
     transform: none;
     animation: ShineInFromLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;

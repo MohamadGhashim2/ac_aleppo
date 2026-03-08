@@ -1,8 +1,7 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { useJsonLd, useSeoMeta } from "./seo";
 import { LOCATION_LINK, PHONE, SITE_URL, getWhatsAppUrl } from "./siteConfig";
-import BestCarAcRepairRiyadhPage from "./BestCarAcRepairRiyadhPage";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -129,24 +128,6 @@ export default function App() {
     fireAdsConversion(ADS_CONV_CALL, url);
   };
 
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme === "dark" || savedTheme === "light") {
-      return savedTheme;
-    }
-
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-    return systemPrefersDark ? "dark" : "light";
-  });
-
-  useLayoutEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    document.documentElement.style.colorScheme = theme;
-  }, [theme]);
-
   const galleryItems = [
     {
       src: "/gallery/ابو-حلب.webp",
@@ -177,25 +158,9 @@ export default function App() {
   const visibleItems = showAll ? galleryItems : galleryItems.slice(0, 5);
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
-
-    // تحسين إعادة الرسم في متصفحات الجوال التي قد تؤخر تحديث الخلفية
-    document.body.style.transform = "translateZ(0)";
-    requestAnimationFrame(() => {
-      document.body.style.transform = "";
-    });
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
-  };
-
-  useEffect(() => {
     document.body.classList.toggle("no-scroll", menuOpen);
   }, [menuOpen]);
-  if (isLandingPage) {
-    return <BestCarAcRepairRiyadhPage />;
-  }
+
   return (
     <>
       {/* السيارات الجانبية (Free Objects) */}
@@ -240,14 +205,6 @@ export default function App() {
           </nav>
 
           <div className="desktop-actions">
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle-btn"
-              aria-label="تبديل الوضع"
-            >
-              {theme === "dark" ? "☀️" : "🌙"}
-            </button>
-
             <span className="phone-number text-white ml-2">{phone}</span>
 
             {/* ✅ WhatsApp tracked */}
@@ -278,19 +235,6 @@ export default function App() {
           </div>
 
           <div className="menu-btn">
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle-btn"
-              style={{
-                width: "35px",
-                height: "35px",
-                fontSize: "1rem",
-                marginLeft: "5px",
-              }}
-            >
-              {theme === "dark" ? "☀️" : "🌙"}
-            </button>
-
             {/* ✅ Call tracked */}
             <a
               href={`tel:${phone}`}
@@ -306,13 +250,7 @@ export default function App() {
               onClick={() => setMenuOpen((v) => !v)}
               aria-label="القائمة"
             >
-              <img
-                src="/icons/menu.svg"
-                alt=""
-                width="24"
-                height="24"
-                style={{ filter: theme === "dark" ? "invert(1)" : "none" }}
-              />
+              <img src="/icons/menu.svg" alt="" width="24" height="24" />
             </button>
           </div>
         </div>
@@ -352,8 +290,10 @@ export default function App() {
           <div className="hero-blur-bg" aria-hidden="true"></div>
           <div className="hero-overlay" aria-hidden="true"></div>
           <div className="blue-effect" aria-hidden="true"></div>
-          <div className="smooth-overlay" aria-hidden="true"></div>
-
+          <div className="hero-wave-wrap" aria-hidden="true">
+            <div className="hero-wave hero-wave-back"></div>
+            <div className="hero-wave hero-wave-front"></div>
+          </div>
           <div className="container grid hero-grid">
             <div className="hero-text-content animate-pop-in">
               <h1 className="hero-title">ابو حلب للتكييف</h1>
