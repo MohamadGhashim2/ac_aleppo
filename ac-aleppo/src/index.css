@@ -433,7 +433,7 @@ button {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  margin-top: 30px;
+  margin-top: 80px;
   align-items: center;
   position: relative;
   z-index: 2;
@@ -442,7 +442,7 @@ button {
 .hero-text-content {
   text-align: center;
   z-index: 2;
-  margin-top: 24px;
+  margin-top: 28px;
   width: min(100%, 32rem);
   margin-left: auto;
   margin-right: auto;
@@ -476,6 +476,61 @@ button {
   margin-right: auto;
 
 }
+.installment-bubbles {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto 18px;
+  text-align: center;
+}
+.installment-bubbles img {
+scale: 3.5;
+}
+.installment-note {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  
+  margin-bottom: 10px;
+}
+
+.installment-bubbles-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.installment-bubble {
+  border-radius: 999px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.07);
+}
+
+.installment-logo {
+  width: auto;
+  height: 22px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.installment-bubble small {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.installment-bubble.tamara {
+  border-color: rgba(110, 67, 245, 0.25);
+}
+
+.installment-bubble.tabby {
+  border-color: rgba(0, 179, 125, 0.25);
+}
+
 
 .hero-car-container {
   position: relative;
@@ -486,7 +541,7 @@ button {
   width: 200%;
   max-width: 85%;
   /* تصغير العرض */
-  margin: 0 auto -4px;
+  margin: -100px auto -4px;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
   opacity: 0.7;
   animation: carDriveInMobile 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -522,15 +577,17 @@ button {
 
 
 .actions-primary-group {
-  display: flex;
-  flex-direction: column;
   /* ترتيب عمودي دائماً */
   width: 100%;
-  gap: 8px;
   /* مسافة بسيطة بين الموقع والزر */
 }
 
-
+.hero-cta-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+}
 .hero-actions {
   display: flex;
   flex-direction: column;
@@ -1287,13 +1344,26 @@ button {
   }
 
   .hero-actions {
-    flex-direction: row;
-    align-items: flex-end;
+flex-direction: column;
+  align-items: stretch;
     /* ✅ مهم جداً: محاذاة الأزرار من الأسفل ليكونوا على نفس السطر */
     margin: 0;
     max-width: 500px;
   }
+    .hero-cta-row {
+      width: 100%;
+      max-width: 500px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+.installment-bubbles {
+  max-width: 500px;
+  margin: 0 0 22px;
+}
 
+.installment-note {
+  text-align: right;
+  font-size: 1rem;
+}
   .btn {
     padding: 16px 30px;
     min-height: 0;

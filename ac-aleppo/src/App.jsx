@@ -13,7 +13,8 @@ export default function App() {
   const businessName = "أبو حلب لتكييف السيارات";
   const baseUrl = SITE_URL.replace(/\/+$/, "");
   const landingPath = "/best-car-ac-repair-riyadh";
-
+  const TAMARA_LOGO_URL = "public/icons/Tamara2-01.svg";
+  const TABBY_LOGO_URL = "public/icons/tabby.svg";
   const currentPath =
     typeof window !== "undefined"
       ? window.location.pathname.replace(/\/+$/, "") || "/"
@@ -304,39 +305,75 @@ export default function App() {
                 إلكتروني، سرعة وجودة بأسعار مناسبة.
               </p>
 
+              <div
+                className="installment-bubbles"
+                aria-label="خيارات الدفع بالتقسيط"
+              >
+                <p className="installment-note">
+                  الدفع بالتقسيط متاح مباشرة داخل الورشة
+                </p>
+                <div className="installment-bubbles-row">
+                  <span className="installment-bubble tamara">
+                    <img
+                      src={TAMARA_LOGO_URL}
+                      alt="Tamara"
+                      className="installment-logo"
+                      loading="lazy"
+                    />
+                    <small>قسم فاتورتك على دفعات مريحة</small>
+                  </span>
+                  <span className="installment-bubble tabby">
+                    <img
+                      src={TABBY_LOGO_URL}
+                      alt="Tabby"
+                      className="installment-logo"
+                      loading="lazy"
+                    />
+                    <small>ادفع الآن أو قسمها بكل سهولة</small>
+                  </span>
+                </div>
+              </div>
+
               <div className="hero-actions">
-                <div className="actions-primary-group">
+                <a
+                  href={locationLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="location-hint"
+                >
+                  <img src="/icons/pin.svg" width="16" height="16" alt="" />
+                  <span>صناعية النسيم - الرياض</span>
+                </a>
+
+                <div className="hero-cta-row">
                   <a
-                    href={locationLink}
+                    href="https://maps.app.goo.gl/CzjpBuBtyrdPdMyT7"
                     target="_blank"
                     rel="noreferrer"
-                    className="location-hint"
+                    className="btn btn-white btn-block"
                   >
-                    <img src="/icons/pin.svg" width="16" height="16" alt="" />
-                    <span>صناعية النسيم - الرياض</span>
+                    الحصول على الاتجاه
                   </a>
 
-                  <a
-                    href={getWhatsAppUrl(
-                      "السلام عليكم، أرغب بحجز موعد صيانة تكييف",
-                    )}
-                    onClick={(e) =>
-                      handleWhatsAppClick(
-                        e,
+                  <div className="actions-primary-group">
+                    <a
+                      href={getWhatsAppUrl(
                         "السلام عليكم، أرغب بحجز موعد صيانة تكييف",
-                        "hero_book_btn",
-                      )
-                    }
-                    className="btn btn-red btn-block"
-                    rel="noreferrer"
-                  >
-                    احجز موعد صيانة
-                  </a>
+                      )}
+                      onClick={(e) =>
+                        handleWhatsAppClick(
+                          e,
+                          "السلام عليكم، أرغب بحجز موعد صيانة تكييف",
+                          "hero_book_btn",
+                        )
+                      }
+                      className="btn btn-red btn-block"
+                      rel="noreferrer"
+                    >
+                      احجز موعد صيانة
+                    </a>
+                  </div>
                 </div>
-
-                <a href="#services" className="btn btn-white btn-block">
-                  شاهد خدماتنا
-                </a>
               </div>
             </div>
 
@@ -446,7 +483,6 @@ export default function App() {
                   desc: "استبدال أو لحام مواسير التكييف",
                   icon: "/icons/wrench.svg",
                 },
-                
               ].map((srv, i) => (
                 <div key={i} className="home-service-card" data-aos="fade-up">
                   <img
