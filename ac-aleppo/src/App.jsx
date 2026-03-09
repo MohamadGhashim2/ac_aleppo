@@ -13,8 +13,8 @@ export default function App() {
   const businessName = "أبو حلب لتكييف السيارات";
   const baseUrl = SITE_URL.replace(/\/+$/, "");
   const landingPath = "/best-car-ac-repair-riyadh";
-  const TAMARA_LOGO_URL = "public/icons/Tamara2-01.svg";
-  const TABBY_LOGO_URL = "public/icons/tabby.svg";
+  const TAMARA_LOGO_URL = "/icons/Tamara2-01.svg";
+  const TABBY_LOGO_URL = "/icons/tabby.svg";
   const currentPath =
     typeof window !== "undefined"
       ? window.location.pathname.replace(/\/+$/, "") || "/"
