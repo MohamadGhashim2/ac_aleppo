@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSeoMeta } from "../seo";
+import { useJsonLd, useSeoMeta } from "../seo";
 import { PHONE, SITE_URL, getWhatsAppUrl } from "../siteConfig";
 import { trackLeadClick, trackPageView } from "../analytics";
 import InnerPageLayout from "../components/InnerPageLayout";
@@ -22,7 +22,23 @@ export default function SimpleArticlePage({
   useEffect(() => {
     trackPageView("article", title);
   }, [title]);
-
+  useJsonLd(
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: title,
+      inLanguage: "ar",
+      description,
+      mainEntityOfPage: canonical,
+      author: {
+        "@type": "Organization",
+        name: "العاصمة حلب لتكييف السيارات",
+      },
+      articleSection: sections.map((section) => section.heading),
+      articleBody: sections.flatMap((section) => section.paragraphs).join(" "),
+    },
+    `article-jsonld-${slug.replaceAll("/", "-")}`,
+  );
   return (
     <InnerPageLayout>
       <main className="article-layout container">
