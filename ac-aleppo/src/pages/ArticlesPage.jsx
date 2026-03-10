@@ -20,6 +20,17 @@ const articles = [
     slug: "/articles/ac-cycles-on-off-riyadh",
     excerpt: "أسباب الفصل المتكرر وعلاقته بالحساس أو ضغط الفريون.",
   },
+  {
+    title: "ضعف تبريد المكيف وقت الظهر",
+    slug: "/articles/ac-cooling-weak-at-noon-riyadh",
+    excerpt:
+      "كيف تؤثر حرارة الرياض العالية على كفاءة التكييف ومتى تكون المشكلة من المراوح؟",
+  },
+  {
+    title: "ظهور رائحة من المكيف عند التشغيل",
+    slug: "/articles/ac-smell-when-starting-riyadh",
+    excerpt: "أسباب الرائحة المزعجة مع بداية التشغيل وخطوات المعالجة الصحيحة.",
+  },
 ];
 
 export default function ArticlesPage() {

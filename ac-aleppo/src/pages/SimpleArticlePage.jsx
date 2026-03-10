@@ -4,7 +4,12 @@ import { PHONE, SITE_URL, getWhatsAppUrl } from "../siteConfig";
 import { trackLeadClick, trackPageView } from "../analytics";
 import InnerPageLayout from "../components/InnerPageLayout";
 
-export default function SimpleArticlePage({ title, slug, description }) {
+export default function SimpleArticlePage({
+  title,
+  slug,
+  description,
+  sections = [],
+}) {
   const canonical = `${SITE_URL}${slug}`;
 
   useSeoMeta({
@@ -26,10 +31,14 @@ export default function SimpleArticlePage({ title, slug, description }) {
         </nav>
         <h1>{title}</h1>
         <p className="lead">{description}</p>
-        <p>
-          هذه الصفحة جزء من خطة المحتوى SEO لاستهداف بحث العملاء في الرياض. يمكن
-          توسيعها لاحقًا بمقال كامل وحالات عملية.
-        </p>
+        {sections.map((section) => (
+          <section key={section.heading} className="article-section">
+            <h2>{section.heading}</h2>
+            {section.paragraphs.map((paragraph, idx) => (
+              <p key={`${section.heading}-${idx}`}>{paragraph}</p>
+            ))}
+          </section>
+        ))}
         <div className="cta-row">
           <a
             className="btn btn-green"
