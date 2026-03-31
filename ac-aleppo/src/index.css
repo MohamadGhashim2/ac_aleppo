@@ -1193,6 +1193,21 @@ select {
 }
 
 @media (max-width: 1023px) {
+  .hero {
+    height: auto;
+    min-height: 100svh;
+    align-items: flex-start;
+    padding-top: clamp(98px, 13vh, 130px);
+  }
+
+  .hero-grid {
+    margin-top: clamp(24px, 4vh, 44px);
+  }
+
+  .hero-text-content {
+    margin-top: 0;
+  }
+
   .free-car-object,
   .free-car-object-2 {
     display: none !important;
