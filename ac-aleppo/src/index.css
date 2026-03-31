@@ -299,12 +299,12 @@ select {
 /* --- HERO SECTION --- */
 .hero {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 102vh;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -489,6 +489,7 @@ select {
 }
 .installment-bubbles img {
   scale: 3.5;
+  transform-origin: center;
 }
 .installment-note {
   color: var(--text-primary);
@@ -510,6 +511,7 @@ select {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  overflow: hidden;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.07);
@@ -543,9 +545,9 @@ select {
 /* --- السيارة (الجوال: مرفوعة ومصغرة) --- */
 .hero-car-img {
   width: 200%;
-  max-width: 85%;
+  max-width: 100%;
   /* تصغير العرض */
-  margin: -100px auto -4px;
+  margin: -56px auto -4px;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
   opacity: 0.7;
   animation: carDriveInMobile 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -559,7 +561,7 @@ select {
 
   100% {
     /* تستقر في مكانها (في الوسط) */
-    transform: scaleX(-1) translateY(-70%) scale(3.5) translateX(20%);
+    transform: scaleX(-1) translateY(-42%) scale(2.8) translateX(12%);
   }
 }
 
@@ -1190,6 +1192,13 @@ select {
   will-change: scale;
 }
 
+@media (max-width: 1023px) {
+  .free-car-object,
+  .free-car-object-2 {
+    display: none !important;
+  }
+}
+
 /* --- تنسيق نص الـ SEO في الفوتر --- */
 .footer-seo-text {
   text-align: center;
@@ -1306,8 +1315,8 @@ select {
   }
 
   .hero-title {
-    font-size: 4.5rem;
-    line-height: 1.2;
+    font-size: clamp(2.8rem, 3.8vw, 3.35rem);
+    line-height: 1.16;
   }
 
   .hero-subtitle {
@@ -1461,7 +1470,8 @@ select {
   }
 
   .hero-title {
-    font-size: 5.5rem;
+    font-size: clamp(3.1rem, 3.3vw, 3.8rem);
+    line-height: 1.14;
   }
 
   /* تكبير السيارة للشاشات العملاقة */

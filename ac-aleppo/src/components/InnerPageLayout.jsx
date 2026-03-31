@@ -24,13 +24,6 @@ export default function InnerPageLayout({ children }) {
             >
               تواصل واتساب
             </a>
-            <a
-              className="btn btn-red inner-btn"
-              href={`tel:${PHONE}`}
-              onClick={() => trackLeadClick("call", "inner_nav")}
-            >
-              اتصال
-            </a>
           </div>
         </div>
       </header>
