@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useJsonLd, useSeoMeta } from "../seo";
-import { PHONE, SITE_URL, getWhatsAppUrl } from "../siteConfig";
+import { SITE_URL, getWhatsAppUrl } from "../siteConfig";
 import { trackLeadClick, trackPageView } from "../analytics";
 import InnerPageLayout from "../components/InnerPageLayout";
 
@@ -108,14 +108,16 @@ export default function ArticleNotCoolingPage() {
           </a>
           <a
             className="btn btn-white"
-            href={`tel:${PHONE}`}
+            href={getWhatsAppUrl(
+              "السلام عليكم، أريد حجز فحص بسبب ضعف تبريد المكيف",
+            )}
             onClick={() =>
-              trackLeadClick("call", "article_not_cooling", {
+              trackLeadClick("whatsapp", "article_not_cooling_secondary", {
                 article_slug: "why-ac-not-cooling-riyadh",
               })
             }
           >
-            اتصال مباشر
+            اطلب الخدمة عبر واتساب
           </a>
         </div>
       </main>

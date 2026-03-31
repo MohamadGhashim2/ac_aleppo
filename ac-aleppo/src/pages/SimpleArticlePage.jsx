@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useJsonLd, useSeoMeta } from "../seo";
-import { PHONE, SITE_URL, getWhatsAppUrl } from "../siteConfig";
+import { SITE_URL, getWhatsAppUrl } from "../siteConfig";
 import { trackLeadClick, trackPageView } from "../analytics";
 import InnerPageLayout from "../components/InnerPageLayout";
 
@@ -69,12 +69,14 @@ export default function SimpleArticlePage({
           </a>
           <a
             className="btn btn-white"
-            href={`tel:${PHONE}`}
+            href={getWhatsAppUrl(`السلام عليكم، أريد حجز خدمة بخصوص: ${title}`)}
             onClick={() =>
-              trackLeadClick("call", "simple_article", { article_slug: slug })
+              trackLeadClick("whatsapp", "simple_article_secondary", {
+                article_slug: slug,
+              })
             }
           >
-            اتصال
+            احجز عبر واتساب
           </a>
         </div>
       </main>

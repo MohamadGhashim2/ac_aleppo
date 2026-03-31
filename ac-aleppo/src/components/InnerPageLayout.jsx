@@ -1,4 +1,4 @@
-import { PHONE, getWhatsAppUrl } from "../siteConfig";
+import { getWhatsAppUrl } from "../siteConfig";
 import { trackLeadClick } from "../analytics";
 
 export default function InnerPageLayout({ children }) {
@@ -22,7 +22,7 @@ export default function InnerPageLayout({ children }) {
               href={getWhatsAppUrl("السلام عليكم، عندي استفسار")}
               onClick={() => trackLeadClick("whatsapp", "inner_nav")}
             >
-              واتساب
+              تواصل واتساب
             </a>
             <a
               className="btn btn-red inner-btn"
@@ -74,7 +74,7 @@ export default function InnerPageLayout({ children }) {
         aria-label="تواصل واتساب"
         rel="noreferrer"
       >
-        <span className="whatsapp-fab-note">اتصل الآن</span>
+        <span className="whatsapp-fab-note">راسلنا واتساب</span>
         <img src="/icons/whatsapp.svg" width="38" height="38" alt="" />
       </a>
     </>

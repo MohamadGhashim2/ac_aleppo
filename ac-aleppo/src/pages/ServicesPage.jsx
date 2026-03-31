@@ -99,10 +99,14 @@ export default function ServicesPage() {
           </a>
           <a
             className="btn btn-white"
-            href={`tel:${PHONE}`}
-            onClick={() => trackLeadClick("call", "services_page")}
+            href={getWhatsAppUrl(
+              "السلام عليكم، أريد حجز خدمة تكييف سيارات في الرياض",
+            )}
+            onClick={() =>
+              trackLeadClick("whatsapp", "services_page_secondary")
+            }
           >
-            حجز موعد اتصال
+            احجز عبر واتساب
           </a>
         </div>
 

@@ -1,7 +1,22 @@
 import { useEffect, useState } from "react";
 import { useJsonLd, useSeoMeta } from "./seo";
 import { LOCATION_LINK, PHONE, SITE_URL, getWhatsAppUrl } from "./siteConfig";
-
+function WhatsAppIcon({ size = 20 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        fill="currentColor"
+        d="M12.04 2C6.51 2 2.03 6.48 2.03 12c0 1.77.46 3.5 1.34 5.03L2 22l5.12-1.34A9.95 9.95 0 0 0 12.04 22C17.56 22 22 17.52 22 12S17.56 2 12.04 2Zm0 18.18c-1.54 0-3.05-.4-4.37-1.16l-.31-.18-3.04.8.81-2.96-.2-.3A8.1 8.1 0 0 1 3.86 12a8.18 8.18 0 1 1 8.18 8.18Zm4.49-6.14c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.2-.7-.62-1.17-1.39-1.31-1.62-.14-.24-.01-.36.1-.48.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.77-.2-.48-.41-.41-.56-.42h-.48c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 1.99 0 1.17.86 2.3.98 2.46.12.16 1.69 2.58 4.09 3.61.57.25 1.02.4 1.37.51.58.18 1.1.16 1.52.1.46-.07 1.4-.57 1.6-1.11.2-.55.2-1.02.14-1.11-.06-.1-.22-.16-.46-.28Z"
+      />
+    </svg>
+  );
+}
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
@@ -66,7 +81,6 @@ export default function App() {
   );
 
   const ADS_CONV_WHATSAPP = "AW-17079539386/TB95CNNH4fgbELqt1NA_";
-  const ADS_CONV_CALL = "AW-17079539386/Bt6YCNKH4fgbELqt1NA_";
 
   const fireGAEvent = (eventName, params = {}) => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
@@ -109,21 +123,6 @@ export default function App() {
     });
 
     fireAdsConversion(ADS_CONV_WHATSAPP, url);
-  };
-
-  const handleCallClick = (e, source = "unknown") => {
-    if (e) e.preventDefault();
-
-    const cleanPhone = phone.replace(/\D/g, "");
-    const url = `tel:${phone}`;
-
-    fireGAEvent("call_click", {
-      method: "tel",
-      phone: cleanPhone,
-      source,
-    });
-
-    fireAdsConversion(ADS_CONV_CALL, url);
   };
 
   const galleryItems = [
@@ -238,12 +237,19 @@ export default function App() {
 
           <div className="menu-btn">
             <a
-              href={`tel:${phone}`}
-              onClick={(e) => handleCallClick(e, "mobile_call_icon")}
-              className="icon-btn call-mobile"
-              aria-label="اتصال"
+              href={getWhatsAppUrl("السلام عليكم، أرغب بالتواصل السريع")}
+              onClick={(e) =>
+                handleWhatsAppClick(
+                  e,
+                  "السلام عليكم، أرغب بالتواصل السريع",
+                  "mobile_whatsapp_icon",
+                )
+              }
+              className="icon-btn whatsapp-mobile"
+              aria-label="تواصل واتساب"
+              rel="noreferrer"
             >
-              <img src="/icons/phone.svg" width="22" height="22" alt="" />
+              <WhatsAppIcon size={20} />
             </a>
 
             <button
@@ -276,11 +282,19 @@ export default function App() {
               الأسئلة
             </a>
             <a
-              href="#contact"
+              href={getWhatsAppUrl("السلام عليكم، أريد حجز خدمة تكييف سيارات")}
               className="btn btn-red"
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => {
+                setMenuOpen(false);
+                handleWhatsAppClick(
+                  e,
+                  "السلام عليكم، أريد حجز خدمة تكييف سيارات",
+                  "mobile_drawer_cta",
+                );
+              }}
+              rel="noreferrer"
             >
-              تواصل
+              تواصل واتساب
             </a>
           </nav>
         </>
@@ -652,10 +666,21 @@ export default function App() {
               <span>صناعية النسيم - الرياض</span>
             </a>
 
-            <div className="footer-contact-row">
-              <img src="/icons/phone.svg" width="20" height="20" alt="" />
+            <a
+              href={getWhatsAppUrl("السلام عليكم، أريد الاستفسار عن الخدمة")}
+              onClick={(e) =>
+                handleWhatsAppClick(
+                  e,
+                  "السلام عليكم، أريد الاستفسار عن الخدمة",
+                  "footer_whatsapp_number",
+                )
+              }
+              className="footer-contact-row hover-effect"
+              rel="noreferrer"
+            >
+              <img src="/icons/whatsapp.svg" width="20" height="20" alt="" />
               <span>{phone}</span>
-            </div>
+            </a>
           </div>
 
           <div className="footer-col links-col">
@@ -748,7 +773,7 @@ export default function App() {
         aria-label="تواصل واتساب"
         rel="noreferrer"
       >
-        <span className="whatsapp-fab-note">اتصل الآن</span>
+        <span className="whatsapp-fab-note">راسلنا واتساب</span>
         <img src="/icons/whatsapp.svg" width="38" height="38" alt="" />
       </a>
     </>
