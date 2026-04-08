@@ -313,10 +313,12 @@ export default function App() {
           <div className="container grid hero-grid">
             <div className="hero-text-content animate-pop-in">
               <h1 className="hero-title">{businessName}</h1>
-              <p className="hero-subtitle">أفضل ورشة مكيفات سيارات بالرياض</p>
+              <p className="hero-subtitle">
+                يوجد جميع أنواع الكمبروسورات جديد وتشليح
+              </p>
               <p className="hero-desc">
                 صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
-                إلكتروني، سرعة وجودة بأسعار مناسبة.
+                إلكتروني، جميع أنواع الكمبروسورات مع تركيب وضمان.
               </p>
 
               <div
@@ -751,6 +753,11 @@ export default function App() {
             {businessName} في الرياض متخصصة في إصلاح مكيفات جميع السيارات:
             كامري، كورولا، يارس، النترا، سوناتا، لكزس، مرسيدس، بي إم دبليو،
             جينيسس. نخدم صناعية النسيم، غرب الرياض وشرق الرياض.
+          </p>
+          <p className="footer-seo-text">أفضل ورشة مكيفات سيارات بالرياض</p>
+          <p className="footer-seo-text">
+            صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
+            إلكتروني، سرعة وجودة بأسعار مناسبة.
           </p>
         </div>
 

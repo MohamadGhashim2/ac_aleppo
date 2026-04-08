@@ -308,7 +308,7 @@ select {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 80px;
+  padding-top: 60px;
   overflow: hidden;
 }
 
