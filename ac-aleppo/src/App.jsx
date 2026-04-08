@@ -314,10 +314,9 @@ export default function App() {
             <div className="hero-text-content animate-pop-in">
               <h1 className="hero-title">{businessName}</h1>
               <p className="hero-subtitle">
-                <br></br>
                 <p> يوجد جميع أنواع الكمرسرات</p>
                 <p> (كوري, ياباني, صيني, أمريكي) </p>
-                <p>جديد وتشليح مع التركيب وضمان على التركيب</p>{" "}
+                <p>جديد وتشليح مع التركيب وضمان على التركيب</p>
               </p>
               <p className="hero-desc">
                 صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
