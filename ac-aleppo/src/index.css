@@ -310,6 +310,7 @@ select {
   align-items: center;
   padding-top: 60px;
   overflow: hidden;
+  margin-top: -14px;
 }
 
 /* ============================================================
@@ -438,7 +439,7 @@ select {
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 32px;
   margin-top: 80px;
   align-items: center;
   position: relative;
@@ -448,7 +449,7 @@ select {
 .hero-text-content {
   text-align: center;
   z-index: 2;
-  margin-top: 28px;
+  margin-top: 12px;
   width: min(100%, 32rem);
   margin-left: auto;
   margin-right: auto;
@@ -465,7 +466,7 @@ select {
 .hero-subtitle {
   color: var(--primary-red);
   font-size: clamp(1.375rem, 5.8vw, 1.625rem);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   font-weight: 700;
   line-height: 1.35;
   text-wrap: balance;
@@ -476,7 +477,7 @@ select {
   /* تعديل */
   font-size: clamp(0.9375rem, 3.9vw, 1rem);
   line-height: 1.8;
-  margin-bottom: 26px;
+  margin-bottom: 12px;
   max-width: 36ch;
   margin-left: auto;
   margin-right: auto;
@@ -765,7 +766,7 @@ select {
 .section-header {
   text-align: right;
   font-size: 2.5rem;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   position: relative;
 }
 

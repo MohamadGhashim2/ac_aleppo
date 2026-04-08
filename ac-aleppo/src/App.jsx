@@ -314,11 +314,11 @@ export default function App() {
             <div className="hero-text-content animate-pop-in">
               <h1 className="hero-title">{businessName}</h1>
               <p className="hero-subtitle">
-                يوجد جميع أنواع الكمبروسورات جديد وتشليح
+               يوجد جميع أنواع الكمبروسورات جديد وتشليح مع التركيب وضمان على التركيب
               </p>
               <p className="hero-desc">
                 صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
-                إلكتروني، جميع أنواع الكمبروسورات مع تركيب وضمان.
+                إلكتروني.
               </p>
 
               <div
