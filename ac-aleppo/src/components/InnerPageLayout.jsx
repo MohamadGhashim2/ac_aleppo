@@ -1,5 +1,6 @@
 import { getWhatsAppUrl } from "../siteConfig";
 import { trackLeadClick } from "../analytics";
+import DeveloperCredit from "./DeveloperCredit";
 
 export default function InnerPageLayout({ children }) {
   return (
@@ -57,6 +58,8 @@ export default function InnerPageLayout({ children }) {
               حجز عبر واتساب
             </a>
           </div>
+
+          <DeveloperCredit />
         </div>
       </footer>
 

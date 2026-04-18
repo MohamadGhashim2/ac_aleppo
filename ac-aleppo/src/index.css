@@ -1120,6 +1120,23 @@ select {
   padding-top: 30px;
 }
 
+.developer-credit {
+  margin: 14px 0 0;
+  text-align: center;
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.developer-credit a {
+  color: var(--primary-red);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.developer-credit a:hover {
+  text-decoration: underline;
+}
+
 /* WhatsApp Floating */
 .whatsapp-fab {
   position: fixed;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import DeveloperCredit from "./components/DeveloperCredit";
 import { useJsonLd, useSeoMeta } from "./seo";
 import { LOCATION_LINK, PHONE, SITE_URL, getWhatsAppUrl } from "./siteConfig";
 function WhatsAppIcon({ size = 20 }) {
@@ -767,6 +768,8 @@ export default function App() {
           © {new Date().getFullYear()} {shortName} – ورشة تكييف سيارات في
           الرياض.
         </div>
+
+        <DeveloperCredit />
       </footer>
 
       <a
