@@ -1,8 +1,10 @@
-import { getWhatsAppUrl } from "../siteConfig";
+import { PHONE, getWhatsAppUrl } from "../siteConfig";
 import { trackLeadClick } from "../analytics";
 import DeveloperCredit from "./DeveloperCredit";
 
 export default function InnerPageLayout({ children }) {
+  const callHref = `tel:${PHONE.replace(/\s/g, "")}`;
+
   return (
     <>
       <header className="inner-nav">
@@ -62,6 +64,17 @@ export default function InnerPageLayout({ children }) {
           <DeveloperCredit />
         </div>
       </footer>
+
+      <a
+        className="call-fab"
+        href={callHref}
+        onClick={() => trackLeadClick("phone", "inner_call_fab")}
+        aria-label="اتصال مباشر"
+        rel="noreferrer"
+      >
+        <span className="call-fab-note">اتصل الآن</span>
+        <img src="/icons/phone.svg" width="32" height="32" alt="" />
+      </a>
 
       <a
         className="whatsapp-fab"
