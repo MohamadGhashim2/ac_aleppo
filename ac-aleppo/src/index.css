@@ -368,21 +368,13 @@ select {
   position: absolute;
   z-index: 0;
   pointer-events: none;
-  /* لكي لا تمنع الضغط على الأزرار */
-  /* زيادة التمويه للنعومة */
   background: linear-gradient(to top, #7fd6ff 0%, #bfeaff 45%, #ffffff 100%);
   left: 50%;
-  filter: blur(50px);
-  /* شكل دائري */
-  opacity: 0.68;
-  /* شفافية متوسطة للجوال لكي لا تغطي النص */
+  filter: blur(30px);
+  opacity: 0.5;
   width: 100%;
   height: 100%;
-  /* مكانها في الجوال: خلف السيارة في الوسط تقريباً */
   transform: translateX(-50%);
-  /* توسيط أفقي */
-
-  /* لا يوجد أنيميشن حركة هنا لتجنب القص */
 }
 
 .hero-wave-wrap {
@@ -456,7 +448,7 @@ select {
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 8.4vw, 2.8rem);
+  font-size: clamp(1.9rem, 7vw, 2.4rem);
   font-weight: 800;
   margin-bottom: 12px;
   line-height: 1.14;
@@ -465,7 +457,7 @@ select {
 
 .hero-subtitle {
   color: var(--primary-red);
-  font-size: clamp(1.375rem, 5.8vw, 1.625rem);
+  font-size: clamp(1.05rem, 4.2vw, 1.3rem);
   margin-bottom: 12px;
   font-weight: 700;
   line-height: 1.35;
@@ -474,9 +466,8 @@ select {
 
 .hero-desc {
   color: var(--text-secondary);
-  /* تعديل */
-  font-size: clamp(0.9375rem, 3.9vw, 1rem);
-  line-height: 1.8;
+  font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+  line-height: 1.7;
   margin-bottom: 12px;
   max-width: 36ch;
   margin-left: auto;
@@ -604,17 +595,17 @@ select {
 
 /* Buttons */
 .btn {
-  padding: 14px 24px;
+  padding: 12px 20px;
   border-radius: 50px;
   font-weight: 700;
   text-align: center;
-  font-size: clamp(1rem, 4.1vw, 1.125rem);
-  min-height: 54px;
+  font-size: clamp(0.88rem, 3.6vw, 1rem);
+  min-height: 48px;
   border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   transition: 0.3s;
 }
 
@@ -676,7 +667,7 @@ select {
 /* النص ينزل تحت الصورة */
 
 .offer-info h3 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   color: var(--primary-yellow);
   font-weight: 800;
   line-height: 1;
@@ -765,8 +756,8 @@ select {
 /* --- SERVICES --- */
 .section-header {
   text-align: right;
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  font-size: 1.75rem;
+  margin-bottom: 18px;
   position: relative;
 }
 
@@ -782,9 +773,8 @@ select {
 .section-sub {
   text-align: right;
   color: var(--text-secondary);
-  /* تعديل */
-  margin-bottom: 60px;
-  font-size: 1.1rem;
+  margin-bottom: 40px;
+  font-size: 0.95rem;
 }
 
 .services-grid {
@@ -795,17 +785,13 @@ select {
 
 .home-service-card {
   background: var(--bg-card);
-  /* تعديل */
-  border-radius: 20px;
-  padding: 58px 30px 40px;
+  border-radius: 16px;
+  padding: 44px 24px 30px;
   position: relative;
   border: 1px solid var(--border-color);
-  /* تعديل */
   transition: 0.3s;
   text-align: right;
   box-shadow: 0 4px 6px var(--shadow-color);
-  /* إضافة ظل خفيف */
-  backdrop-filter: blur(10px);
 }
 
 .home-service-card:hover {
@@ -818,9 +804,9 @@ select {
   position: absolute;
   top: 10px;
   left: 18px;
-  width: 60px;
-  height: 60px;
-  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+  width: 42px;
+  height: 42px;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
   transition: 0.3s;
 }
 
@@ -830,15 +816,14 @@ select {
 }
 
 .home-service-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  margin-top: 15px;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  margin-top: 12px;
   color: var(--text-primary);
-  /* تعديل */
 }
 
 .home-service-card p {
-  font-size: 1rem;
+  font-size: 0.88rem;
   color: var(--text-gray);
   line-height: 1.6;
 }
@@ -879,12 +864,11 @@ select {
 }
 
 .why-icon-circle {
-  width: 90px;
-  height: 90px;
+  width: 64px;
+  height: 64px;
   background: var(--bg-hover);
-  /* لون أفتح قليلاً */
   border-radius: 50%;
-  margin: 0 auto 20px;
+  margin: 0 auto 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -892,7 +876,7 @@ select {
 }
 
 .why-icon-circle img {
-  width: 45px;
+  width: 32px;
 }
 
 /* --- GALLERY --- */
@@ -1218,14 +1202,8 @@ select {
 .free-car-object,
 .free-car-object-2,
 .hero-car-container {
-  /* 3s = مدة النبضة الواحدة (كلما زاد الرقم صارت أبطأ وأنعم)
-     infinite = تكرار لا نهائي
-     ease-in-out = حركة ناعمة في البداية والنهاية 
-  */
-  animation: car-pulse-animation 9s infinite ease-in-out;
-
-  /* تحسين الأداء للحركة */
-  will-change: scale;
+  animation: none;
+  will-change: auto;
 }
 
 @media (max-width: 1023px) {
@@ -1287,6 +1265,16 @@ select {
 .services-section {
   position: relative;
   z-index: 2;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+#whyus,
+#gallery,
+#faq,
+.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 /* =========================================
@@ -1295,6 +1283,59 @@ select {
 @media (min-width: 1024px) {
   body {
     background-attachment: fixed;
+  }
+
+  .section-header {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .section-sub {
+    margin-bottom: 60px;
+    font-size: 1.1rem;
+  }
+
+  .home-service-card {
+    border-radius: 20px;
+    padding: 58px 30px 40px;
+    backdrop-filter: blur(10px);
+  }
+
+  .home-service-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .home-service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    margin-top: 15px;
+  }
+
+  .home-service-card p {
+    font-size: 1rem;
+  }
+
+  .why-icon-circle {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 20px;
+  }
+
+  .why-icon-circle img {
+    width: 45px;
+  }
+
+  .free-car-object,
+  .free-car-object-2,
+  .hero-car-container {
+    animation: car-pulse-animation 9s infinite ease-in-out;
+    will-change: scale;
+  }
+
+  .blue-effect {
+    filter: blur(50px);
+    opacity: 0.68;
   }
 
   /* استعادة شكل الهيدر للكمبيوتر */
