@@ -2,7 +2,10 @@ import { PHONE, getWhatsAppUrl } from "../siteConfig";
 import { trackLeadClick } from "../analytics";
 import DeveloperCredit from "./DeveloperCredit";
 
-export default function InnerPageLayout({ children }) {
+export default function InnerPageLayout({
+  children,
+  businessName = "العاصمة حلب لتكييف السيارات",
+}) {
   const callHref = `tel:${PHONE.replace(/\s/g, "")}`;
 
   return (
@@ -10,7 +13,7 @@ export default function InnerPageLayout({ children }) {
       <header className="inner-nav">
         <div className="container inner-wrap">
           <a href="/" className="logo-container">
-            <img src="/images/logo.webp" alt="ابو حلب" width="92" height="46" />
+            <img src="/images/logo.webp" alt={businessName} width="92" height="46" />
           </a>
 
           <nav className="inner-links">
@@ -46,7 +49,7 @@ export default function InnerPageLayout({ children }) {
       <footer className="footer inner-footer">
         <div className="container">
           <p className="footer-desc">
-            العاصمة حلب لتكييف السيارات - خدمة سريعة داخل الرياض.
+            {businessName} - خدمة سريعة داخل الرياض.
           </p>
           <div className="inner-footer-actions">
             <a className="btn btn-white" href="/">

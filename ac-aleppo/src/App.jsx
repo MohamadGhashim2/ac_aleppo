@@ -303,11 +303,11 @@ export default function App() {
           <div className="container grid hero-grid">
             <div className="hero-text-content animate-pop-in">
               <h1 className="hero-title">{businessName}</h1>
-              <p className="hero-subtitle">
+              <div className="hero-subtitle">
                 <p> يوجد جميع أنواع الكمرسرات</p>
                 <p> (كوري, ياباني, صيني, أمريكي) </p>
                 <p>جديد وتشليح مع التركيب وضمان على التركيب</p>
-              </p>
+              </div>
               <p className="hero-desc">
                 صيانة وتعبئة فريون، كشف تهريب، تغيير كمبروسر، تنظيف ثلاجة، فحص
                 إلكتروني.
@@ -391,7 +391,7 @@ export default function App() {
                 alt="سيارة بي إم دبليو"
                 width="857"
                 height="381"
-                fetchpriority="high"
+                fetchPriority="high"
                 className="hero-car-img"
                 style={{ width: "85%", height: "auto", maxWidth: "800px" }}
               />
@@ -400,6 +400,36 @@ export default function App() {
         </section>
 
         <section className="section banner-section">
+          <div className="container home-r1234yf-promo">
+            <div className="home-r1234yf-copy" data-aos="fade-up">
+              <span className="landing-eyebrow">خدمة جديدة للسيارات الحديثة</span>
+              <h2>وصلت خدمة فريون R1234yf للسيارات الحديثة</h2>
+              <p>
+                الآن في أبو حلب لتكييف السيارات نوفر تعبئة وفحص فريون R1234yf
+                للسيارات الحديثة في الرياض - صناعية النسيم.
+              </p>
+
+              <div className="home-r1234yf-actions">
+                <a
+                  href="/r1234yf-car-ac-gas-riyadh"
+                  className="btn btn-red"
+                >
+                  اعرف تفاصيل الخدمة
+                </a>
+              </div>
+            </div>
+
+            <div className="home-r1234yf-image" data-aos="zoom-in">
+              <img
+                src="/assets/r1234yf/r1234yf-photo-3.webp"
+                alt="خدمة تعبئة فريون R1234yf للسيارات الحديثة"
+                width="420"
+                height="320"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
           <div className="container">
             <div
               className="offer-badge"

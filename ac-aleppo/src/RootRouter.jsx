@@ -4,6 +4,7 @@ import ServicesPage from "./pages/ServicesPage";
 import ArticlesPage from "./pages/ArticlesPage";
 import ArticleNotCoolingPage from "./pages/ArticleNotCoolingPage";
 import SimpleArticlePage from "./pages/SimpleArticlePage";
+import R1234yfLandingPage from "./pages/R1234yfLandingPage";
 import { captureFirstTouch, trackEvent } from "./analytics";
 
 export default function RootRouter() {
@@ -15,6 +16,7 @@ export default function RootRouter() {
   const path = typeof window !== "undefined" ? window.location.pathname : "/";
 
   if (path === "/services") return <ServicesPage />;
+  if (path === "/r1234yf-car-ac-gas-riyadh") return <R1234yfLandingPage />;
   if (path === "/articles") return <ArticlesPage />;
   if (path === "/articles/why-ac-not-cooling-riyadh") {
     return <ArticleNotCoolingPage />;
