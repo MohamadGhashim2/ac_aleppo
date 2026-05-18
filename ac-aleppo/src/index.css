@@ -1820,12 +1820,15 @@ select {
   margin-top: 22px;
 }
 
-.home-r1234yf-image img {
+.home-r1234yf-image img,
+.home-r1234yf-image video {
   width: 100%;
   height: min(56vw, 320px);
+  display: block;
   object-fit: cover;
   border-radius: 16px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  background: #111;
 }
 
 .r1234yf-page {

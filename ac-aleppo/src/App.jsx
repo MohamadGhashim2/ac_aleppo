@@ -420,12 +420,15 @@ export default function App() {
             </div>
 
             <div className="home-r1234yf-image" data-aos="zoom-in">
-              <img
-                src="/assets/r1234yf/r1234yf-photo-3.webp"
-                alt="خدمة تعبئة فريون R1234yf للسيارات الحديثة"
-                width="420"
-                height="320"
-                loading="lazy"
+              <video
+                src="/assets/r1234yf/r1234yf-service.mp4"
+                poster="/assets/r1234yf/r1234yf-photo-3.webp"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="فيديو خدمة تعبئة فريون R1234yf للسيارات الحديثة في أبو حلب لتكييف السيارات"
               />
             </div>
           </div>
