@@ -4,7 +4,29 @@ import { LOCATION_LINK, PHONE, getWhatsAppUrl } from "../siteConfig";
 import { trackLeadClick, trackPageView } from "../analytics";
 import InnerPageLayout from "../components/InnerPageLayout";
 
-const canonical = "https://www.abu-halab.com/r1234yf-car-ac-gas-riyadh";
+const canonical = "https://abu-halab.com/r1234yf-car-ac-gas-riyadh";
+const seoTitle =
+  "تعبئة فريون R1234yf في الرياض | فريون السيارات الحديثة | أبو حلب";
+const seoDescription =
+  "تعبئة فريون R1234yf للسيارات الحديثة في الرياض - صناعية النسيم لدى أبو حلب لتكييف السيارات. فحص ضغط المكيف، كشف تهريب الفريون، واتساب واتصال مباشر.";
+const seoKeywords = [
+  "تعبئة فريون R1234yf الرياض",
+  "فريون R1234yf الرياض",
+  "فريون السيارات الحديثة",
+  "تعبئة فريون سيارات حديثة",
+  "فحص فريون R1234yf",
+  "كشف تهريب فريون السيارة",
+  "فحص ضغط مكيف السيارة",
+  "صيانة مكيف سيارات الرياض",
+  "تعبئة فريون صناعية النسيم",
+  "ورشة مكيفات سيارات الرياض",
+  "أبو حلب لتكييف السيارات",
+  "فريون R1234yf كامري",
+  "فريون R1234yf لكزس",
+  "فريون R1234yf مرسيدس",
+  "R1234yf Riyadh",
+  "Car AC R1234yf Riyadh",
+];
 const whatsappMessage = `السلام عليكم، أريد الاستفسار عن تعبئة فريون R1234yf للسيارة.
 نوع السيارة:
 موديل السيارة:`;
@@ -75,6 +97,17 @@ const faqs = [
     question: "هل أستطيع الحجز عبر واتساب؟",
     answer: "نعم، يمكنك التواصل مباشرة عبر واتساب أو الاتصال.",
   },
+];
+
+const searchIntentTerms = [
+  "تعبئة فريون R1234yf الرياض",
+  "فريون R1234yf صناعية النسيم",
+  "فحص مكيف سيارات حديثة",
+  "كشف تهريب فريون السيارة",
+  "تعبئة فريون سيارات أوروبية",
+  "تعبئة فريون سيارات يابانية",
+  "فريون R1234yf لكزس ومرسيدس",
+  "ورشة فريون R1234yf في الرياض",
 ];
 
 function R1234yfMediaSection() {
@@ -158,17 +191,15 @@ function R1234yfMediaSection() {
 
 export default function R1234yfLandingPage() {
   useSeoMeta({
-    title: "تعبئة فريون R1234yf بالرياض | أبو حلب لتكييف السيارات",
-    description:
-      "خدمة تعبئة فريون R1234yf للسيارات الحديثة في الرياض لدى أبو حلب لتكييف السيارات. فحص مكيف السيارة، كشف تهريب، واتصال أو واتساب مباشر.",
+    title: seoTitle,
+    description: seoDescription,
+    keywords: seoKeywords.join(", "),
     canonical,
-    ogTitle: "تعبئة فريون R1234yf بالرياض | أبو حلب لتكييف السيارات",
-    ogDescription:
-      "خدمة تعبئة فريون R1234yf للسيارات الحديثة في الرياض لدى أبو حلب لتكييف السيارات. فحص مكيف السيارة، كشف تهريب، واتصال أو واتساب مباشر.",
+    ogTitle: seoTitle,
+    ogDescription: seoDescription,
     ogUrl: canonical,
-    twitterTitle: "تعبئة فريون R1234yf بالرياض | أبو حلب لتكييف السيارات",
-    twitterDescription:
-      "خدمة تعبئة فريون R1234yf للسيارات الحديثة في الرياض لدى أبو حلب لتكييف السيارات. فحص مكيف السيارة، كشف تهريب، واتصال أو واتساب مباشر.",
+    twitterTitle: seoTitle,
+    twitterDescription: seoDescription,
   });
 
   useJsonLd(
@@ -176,6 +207,8 @@ export default function R1234yfLandingPage() {
       "@context": "https://schema.org",
       "@type": "Service",
       name: "تعبئة فريون R1234yf للسيارات الحديثة",
+      description: seoDescription,
+      image: `${canonical.replace("/r1234yf-car-ac-gas-riyadh", "")}/assets/r1234yf/r1234yf-photo-1.webp`,
       provider: {
         "@type": "AutoRepair",
         name: "أبو حلب لتكييف السيارات",
@@ -184,9 +217,57 @@ export default function R1234yfLandingPage() {
       },
       areaServed: "Riyadh",
       serviceType: "Car AC R1234yf Refrigerant Recharge",
+      additionalType: "https://schema.org/AutoRepair",
+      keywords: seoKeywords.join(", "),
+      mainEntityOfPage: canonical,
       url: canonical,
     },
     "r1234yf-service-jsonld",
+  );
+
+  useJsonLd(
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      inLanguage: "ar",
+      mainEntity: faqs.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+    "r1234yf-faq-jsonld",
+  );
+
+  useJsonLd(
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "الرئيسية",
+          item: "https://abu-halab.com/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "الخدمات",
+          item: "https://abu-halab.com/services",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "تعبئة فريون R1234yf في الرياض",
+          item: canonical,
+        },
+      ],
+    },
+    "r1234yf-breadcrumb-jsonld",
   );
 
   useEffect(() => {
@@ -304,6 +385,21 @@ export default function R1234yfLandingPage() {
           <p className="landing-note">
             يتم التأكد من نوع الفريون المناسب قبل التعبئة.
           </p>
+        </section>
+
+        <section className="seo-card landing-section">
+          <h2>تبحث عن فريون R1234yf في الرياض؟</h2>
+          <p>
+            إذا كنت تبحث عن تعبئة فريون R1234yf للسيارات الحديثة، أو فحص ضغط
+            مكيف السيارة، أو كشف تهريب الفريون في الرياض، يمكنك زيارة أبو حلب
+            لتكييف السيارات في صناعية النسيم لفحص نوع الفريون المناسب قبل
+            التعبئة.
+          </p>
+          <div className="car-chip-list" aria-label="كلمات بحث مرتبطة بالخدمة">
+            {searchIntentTerms.map((term) => (
+              <span key={term}>{term}</span>
+            ))}
+          </div>
         </section>
 
         <section className="landing-section">

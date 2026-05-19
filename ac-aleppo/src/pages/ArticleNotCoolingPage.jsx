@@ -6,13 +6,32 @@ import InnerPageLayout from "../components/InnerPageLayout";
 
 export default function ArticleNotCoolingPage() {
   const canonical = `${SITE_URL}/articles/why-ac-not-cooling-riyadh`;
+  const businessName = "أبو حلب لتكييف السيارات";
+  const seoTitle = "ليش مكيف السيارة ما يبرد؟ أسباب ضعف التبريد في الرياض";
+  const seoDescription =
+    "تعرف على أسباب ضعف تبريد مكيف السيارة في الرياض: نقص الفريون، تهريب الفريون، اتساخ الفلتر، ضعف الكمبروسر، ومتى تحتاج فحص مكيف السيارة في صناعية النسيم.";
+  const keywords = [
+    "ليش مكيف السيارة ما يبرد",
+    "مكيف السيارة ما يبرد الرياض",
+    "ضعف تبريد مكيف السيارة",
+    "نقص فريون السيارة",
+    "تهريب فريون مكيف السيارة",
+    "فحص مكيف السيارة الرياض",
+    "تصليح مكيف سيارات الرياض",
+    "ورشة مكيفات سيارات صناعية النسيم",
+    "أبو حلب لتكييف السيارات",
+  ];
 
   useSeoMeta({
-    title: "ليش مكيف السيارة ما يبرد؟ أهم الأسباب والحل في الرياض",
-    description:
-      "تعرف على أشهر أسباب ضعف تبريد مكيف السيارة في الرياض: نقص الفريون، اتساخ الثلاجة، عطل الكمبروسر، ومتى تحتاج فني تكييف فورًا.",
+    title: seoTitle,
+    description: seoDescription,
+    keywords: keywords.join(", "),
     canonical,
+    ogTitle: seoTitle,
+    ogDescription: seoDescription,
     ogUrl: canonical,
+    twitterTitle: seoTitle,
+    twitterDescription: seoDescription,
   });
 
   useJsonLd(
@@ -21,14 +40,49 @@ export default function ArticleNotCoolingPage() {
       "@type": "Article",
       headline: "ليش مكيف السيارة ما يبرد؟",
       inLanguage: "ar",
+      description: seoDescription,
       author: {
         "@type": "Organization",
-        name: "العاصمة حلب لتكييف السيارات",
+        name: businessName,
       },
-      about: ["مكيف السيارة", "فريون", "أعطال التكييف", "الرياض"],
+      publisher: {
+        "@type": "Organization",
+        name: businessName,
+      },
+      datePublished: "2026-03-10",
+      dateModified: "2026-05-19",
+      keywords: keywords.join(", "),
+      about: keywords,
       mainEntityOfPage: canonical,
     },
     "article-jsonld",
+  );
+  useJsonLd(
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "الرئيسية",
+          item: `${SITE_URL}/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "المقالات",
+          item: `${SITE_URL}/articles`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "ليش مكيف السيارة ما يبرد؟",
+          item: canonical,
+        },
+      ],
+    },
+    "article-not-cooling-breadcrumb-jsonld",
   );
 
   useEffect(() => {
@@ -90,6 +144,20 @@ export default function ArticleNotCoolingPage() {
             <li>إذا فيه صوت غير طبيعي عند تشغيل المكيف.</li>
             <li>إذا شمّيت ريحة غريبة أو لاحظت تسريب حول المواسير.</li>
           </ul>
+        </section>
+
+        <section className="seo-card landing-section">
+          <h2>كلمات بحث مرتبطة بضعف تبريد مكيف السيارة</h2>
+          <p>
+            إذا كنت تبحث عن سبب ضعف تبريد مكيف السيارة أو نقص الفريون في
+            الرياض، فالأفضل فحص ضغط المكيف والتأكد من عدم وجود تهريب قبل
+            تغيير القطع.
+          </p>
+          <div className="car-chip-list" aria-label="كلمات بحث مرتبطة بالمقال">
+            {keywords.slice(0, 8).map((term) => (
+              <span key={term}>{term}</span>
+            ))}
+          </div>
         </section>
 
         <div className="cta-row">

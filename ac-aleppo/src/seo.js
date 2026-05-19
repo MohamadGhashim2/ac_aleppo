@@ -39,6 +39,7 @@ export const useSeoMeta = ({
   ogUrl,
   twitterTitle,
   twitterDescription,
+  keywords,
 }) => {
   useEffect(() => {
     const previousTitle = document.title;
@@ -46,6 +47,12 @@ export const useSeoMeta = ({
     const descTag = ensureMetaTag('meta[name="description"]', {
       name: "description",
     });
+    const keywordsTag =
+      keywords === undefined
+        ? null
+        : ensureMetaTag('meta[name="keywords"]', {
+            name: "keywords",
+          });
     const canonicalTag = ensureLinkTag('link[rel="canonical"]', {
       rel: "canonical",
     });
@@ -73,6 +80,7 @@ export const useSeoMeta = ({
 
     const prev = {
       desc: getAttr(descTag, "content"),
+      keywords: getAttr(keywordsTag, "content"),
       canonical: getAttr(canonicalTag, "href"),
       ogTitle: getAttr(ogTitleTag, "content"),
       ogDescription: getAttr(ogDescriptionTag, "content"),
@@ -84,6 +92,9 @@ export const useSeoMeta = ({
     };
 
     descTag.setAttribute("content", description);
+    if (keywordsTag) {
+      keywordsTag.setAttribute("content", keywords);
+    }
     canonicalTag.setAttribute("href", canonical);
     ogTitleTag.setAttribute("content", ogTitle || title);
     ogDescriptionTag.setAttribute("content", ogDescription || description);
@@ -100,6 +111,9 @@ export const useSeoMeta = ({
     return () => {
       document.title = previousTitle;
       descTag.setAttribute("content", prev.desc);
+      if (keywordsTag) {
+        keywordsTag.setAttribute("content", prev.keywords);
+      }
       canonicalTag.setAttribute("href", prev.canonical);
       ogTitleTag.setAttribute("content", prev.ogTitle);
       ogDescriptionTag.setAttribute("content", prev.ogDescription);
@@ -112,6 +126,7 @@ export const useSeoMeta = ({
   }, [
     canonical,
     description,
+    keywords,
     ogDescription,
     ogTitle,
     ogUrl,

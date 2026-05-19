@@ -4,7 +4,7 @@ import DeveloperCredit from "./DeveloperCredit";
 
 export default function InnerPageLayout({
   children,
-  businessName = "العاصمة حلب لتكييف السيارات",
+  businessName = "أبو حلب لتكييف السيارات",
 }) {
   const callHref = `tel:${PHONE.replace(/\s/g, "")}`;
 
