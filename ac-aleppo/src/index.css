@@ -60,6 +60,48 @@ body.no-scroll {
   overflow: hidden;
 }
 
+.site-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  direction: rtl;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+}
+
+.site-loader-logo {
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12));
+}
+
+.site-loader-spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid rgba(229, 57, 53, 0.16);
+  border-top-color: var(--primary-red);
+  border-radius: 50%;
+  animation: loaderSpin 0.85s linear infinite;
+}
+
+.site-loader p {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+@keyframes loaderSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -649,14 +691,49 @@ select {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 30px 20px;
-  /* الترتيب العمودي للجوال */
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas:
+    "blue yellow"
+    "cta cta";
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
   text-align: center;
   margin-top: 150px;
-  gap: 20px;
+  gap: 14px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  direction: ltr;
+}
+
+.offer-card {
+  width: 100%;
+  max-width: 360px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+  direction: rtl;
+}
+
+.offer-card-blue {
+  grid-area: blue;
+}
+
+.offer-card-yellow {
+  grid-area: yellow;
+}
+
+.offer-shared-action {
+  grid-area: cta;
+  direction: rtl;
+  display: flex;
+  justify-content: center;
 }
 
 .offer-info {
@@ -666,8 +743,9 @@ select {
 
 /* النص ينزل تحت الصورة */
 
-.offer-info h3 {
-  font-size: 2.5rem;
+.offer-info h3,
+.offer-price h3 {
+  font-size: clamp(1.8rem, 8vw, 2.5rem);
   color: var(--primary-yellow);
   font-weight: 800;
   line-height: 1;
@@ -675,20 +753,30 @@ select {
   animation: subtlePulse 2s infinite ease-in-out;
 }
 
-.offer-info .currency {
-  font-size: 1.5rem;
+.offer-info .currency,
+.offer-price .currency {
+  font-size: 0.58em;
   color: var(--text-primary);
 }
 
-.offer-info p {
+.offer-info p,
+.offer-price p {
   color: var(--text-gray);
-  margin-bottom: 25px;
-  font-size: 1rem;
+  margin-bottom: 8px;
+  font-size: clamp(0.76rem, 3vw, 1rem);
+  line-height: 1.6;
+}
+
+.offer-refrigerant-type {
+  color: var(--text-primary) !important;
+  font-size: clamp(1.1rem, 4vw, 1.45rem) !important;
+  font-weight: 900;
+  line-height: 1.2 !important;
 }
 
 .offer-img-wrap {
   order: 1;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .animate-pop-in {
@@ -716,16 +804,24 @@ select {
 }
 
 .offer-img-wrap img {
-  width: 120px;
+  width: min(28vw, 120px);
+  max-height: 200px;
+  object-fit: contain;
   transform: rotate(0deg);
   /* إلغاء الدوران في الجوال */
 }
 
-.offer-info .btn-green {
-  width: 100%;
+.offer-card-yellow .offer-img-wrap img {
+  width: min(34vw, 138px);
+}
+
+.offer-info .btn-green,
+.offer-card .btn-green,
+.offer-shared-action .btn-green {
+  width: min(100%, 330px);
   justify-content: center;
   padding: 12px;
-  margin-top: 15px;
+  margin-top: 0;
   border-radius: 50px;
   background-color: var(--primary-green);
   color: black;
@@ -735,7 +831,8 @@ select {
   gap: 10px;
 }
 
-.offer-info .btn-green:hover {
+.offer-info .btn-green:hover,
+.offer-card .btn-green:hover {
   background-color: #fff !important;
   color: var(--primary-green) !important;
   transform: translateY(-5px);
@@ -930,6 +1027,7 @@ select {
   .call-fab,
   .whatsapp-fab,
   .offer-info h3,
+  .site-loader-spinner,
   .service-card,
   .why-card,
   .social-icons a {
@@ -1484,10 +1582,12 @@ select {
 
   /* استعادة شكل كرت العرض (جانب بعض) */
   .offer-badge {
-    flex-direction: row;
-    /* رجوع للأفقي */
-    text-align: right;
-    justify-content: space-between;
+    grid-template-areas:
+      "blue yellow"
+      "cta cta";
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    text-align: center;
+    justify-items: center;
     padding: 40px;
   }
 
@@ -1507,17 +1607,26 @@ select {
     /* تعديل */
   }
 
-  .offer-info h3 {
+  .offer-info h3,
+  .offer-price h3 {
     font-size: 4rem;
   }
 
   .offer-img-wrap img {
     width: 150px;
-    transform: rotate(-10deg);
+    transform: none;
   }
 
-  .offer-info .btn-green {
+  .offer-card-yellow .offer-img-wrap img {
+    width: 185px;
+    max-height: 250px;
+  }
+
+  .offer-info .btn-green,
+  .offer-card .btn-green,
+  .offer-shared-action .btn-green {
     width: auto;
+    min-width: 220px;
   }
 
   /* الزر يرجع لحجمه الطبيعي */

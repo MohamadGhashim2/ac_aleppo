@@ -2,9 +2,26 @@ import { useEffect, useState } from "react";
 import DeveloperCredit from "./components/DeveloperCredit";
 import { useJsonLd, useSeoMeta } from "./seo";
 import { LOCATION_LINK, PHONE, SITE_URL, getWhatsAppUrl } from "./siteConfig";
+
+const HOME_PRELOAD_IMAGES = [
+  "/images/logo.webp",
+  "/images/Air-conditioning-repair.webp",
+  "/images/Air-conditioning-repairman.webp",
+  "/images/Best-repairs-in-East-Riyadh.webp",
+  "/images/Machine.webp",
+  "/images/Machine-yellow.webp",
+  "/assets/r1234yf/r1234yf-photo-3.webp",
+  "/gallery/ابو-حلب.webp",
+  "/gallery/افضل-مصلح.webp",
+  "/gallery/العاصمة-حلب.webp",
+  "/gallery/النترا.webp",
+  "/gallery/فحص-فريون-جهاز.webp",
+];
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [assetsReady, setAssetsReady] = useState(false);
 
   const phone = PHONE;
   const callHref = `tel:${phone.replace(/\s/g, "")}`;
@@ -172,6 +189,48 @@ export default function App() {
   const visibleItems = showAll ? galleryItems : galleryItems.slice(0, 5);
 
   useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    let cancelled = false;
+
+    const loadImage = (src) =>
+      new Promise((resolve) => {
+        const img = new window.Image();
+        img.decoding = "async";
+        img.onload = resolve;
+        img.onerror = resolve;
+        img.src = src;
+
+        if (img.complete) resolve();
+      });
+
+    const renderedImages = Array.from(window.document.images)
+      .map((img) => img.currentSrc || img.src)
+      .filter(Boolean);
+    const imageSources = [
+      ...new Set([...HOME_PRELOAD_IMAGES, ...renderedImages]),
+    ];
+    const preloadImages = Promise.allSettled(imageSources.map(loadImage));
+    const minimumLoaderTime = new Promise((resolve) =>
+      window.setTimeout(resolve, 450),
+    );
+    const failSafeTime = new Promise((resolve) =>
+      window.setTimeout(resolve, 3500),
+    );
+
+    Promise.race([
+      Promise.all([preloadImages, minimumLoaderTime]),
+      failSafeTime,
+    ]).then(() => {
+      if (!cancelled) setAssetsReady(true);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
     document.body.classList.toggle("no-scroll", menuOpen);
 
     return () => {
@@ -181,6 +240,20 @@ export default function App() {
 
   return (
     <>
+      {!assetsReady && (
+        <div className="site-loader" role="status" aria-live="polite">
+          <img
+            src="/images/logo.webp"
+            alt="أبو حلب لتكييف السيارات"
+            className="site-loader-logo"
+            width="120"
+            height="60"
+          />
+          <span className="site-loader-spinner" aria-hidden="true"></span>
+          <p>جاري تحميل الصور...</p>
+        </div>
+      )}
+
       <img
         src="/images/Air-conditioning-repair.webp"
         alt="سيارة جانبية"
@@ -460,21 +533,52 @@ export default function App() {
               data-aos="zoom-in"
               data-aos-delay="100"
             >
-              <div className="offer-info">
-                <h3>
-                  99 <span className="currency">ريال</span>
-                </h3>
-                <p>عرض خاص: تعبئة فريون بأحدث الأجهزة</p>
+              <article className="offer-card offer-card-blue">
+                <div className="offer-img-wrap">
+                  <img
+                    src="/images/Machine.webp"
+                    alt="جهاز تعبئة فريون أزرق"
+                    width="150"
+                    height="235"
+                    loading="eager"
+                  />
+                </div>
+                <div className="offer-price">
+                  <h3>
+                    99 <span className="currency">ريال</span>
+                  </h3>
+                  <p className="offer-refrigerant-type">فريون R134a</p>
+                </div>
+              </article>
 
+              <article className="offer-card offer-card-yellow">
+                <div className="offer-img-wrap">
+                  <img
+                    src="/images/Machine-yellow.webp"
+                    alt="جهاز تعبئة فريون أصفر"
+                    width="150"
+                    height="235"
+                    loading="eager"
+                  />
+                </div>
+                <div className="offer-price">
+                  <h3>
+                    150 <span className="currency">ريال</span>
+                  </h3>
+                  <p className="offer-refrigerant-type">فريون R1234yf</p>
+                </div>
+              </article>
+
+              <div className="offer-shared-action">
                 <a
                   href={getWhatsAppUrl(
-                    "السلام عليكم، أرغب بحجز عرض تعبئة الفريون بـ 99 ريال",
+                    "السلام عليكم، أرغب بحجز عرض تعبئة الفريون. أريد الاستفسار عن R134a أو R1234yf",
                   )}
                   onClick={(e) =>
                     handleWhatsAppClick(
                       e,
-                      "السلام عليكم، أرغب بحجز عرض تعبئة الفريون بـ 99 ريال",
-                      "offer_99_btn",
+                      "السلام عليكم، أرغب بحجز عرض تعبئة الفريون. أريد الاستفسار عن R134a أو R1234yf",
+                      "offer_shared_btn",
                     )
                   }
                   className="btn btn-green"
@@ -488,16 +592,6 @@ export default function App() {
                     alt=""
                   />
                 </a>
-              </div>
-
-              <div className="offer-img-wrap">
-                <img
-                  src="/images/Machine.webp"
-                  alt="جهاز الفريون"
-                  width="150"
-                  height="235"
-                  loading="lazy"
-                />
               </div>
             </div>
           </div>
