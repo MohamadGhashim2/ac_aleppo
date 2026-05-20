@@ -544,10 +544,7 @@ export default function App() {
                   />
                 </div>
                 <div className="offer-price">
-                  <h3>
-                    99 <span className="currency">ريال</span>
-                  </h3>
-                  <p className="offer-refrigerant-type">فريون R134a</p>
+                  <h3 className="offer-refrigerant-name">فريون R134a</h3>
                 </div>
               </article>
 
@@ -562,10 +559,7 @@ export default function App() {
                   />
                 </div>
                 <div className="offer-price">
-                  <h3>
-                    150 <span className="currency">ريال</span>
-                  </h3>
-                  <p className="offer-refrigerant-type">فريون R1234yf</p>
+                  <h3 className="offer-refrigerant-name">فريون R1234yf</h3>
                 </div>
               </article>
 

@@ -753,6 +753,22 @@ select {
   animation: subtlePulse 2s infinite ease-in-out;
 }
 
+.offer-price .offer-refrigerant-name {
+  font-size: clamp(1.32rem, 5vw, 2.25rem);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.offer-card-blue .offer-refrigerant-name {
+  color: #1687e8;
+  text-shadow: 0 0 14px rgba(22, 135, 232, 0.3);
+}
+
+.offer-card-yellow .offer-refrigerant-name {
+  color: var(--primary-yellow);
+  text-shadow: 0 0 15px rgba(255, 214, 0, 0.5);
+}
+
 .offer-info .currency,
 .offer-price .currency {
   font-size: 0.58em;
@@ -1610,6 +1626,10 @@ select {
   .offer-info h3,
   .offer-price h3 {
     font-size: 4rem;
+  }
+
+  .offer-price .offer-refrigerant-name {
+    font-size: clamp(2rem, 3vw, 3.15rem);
   }
 
   .offer-img-wrap img {
