@@ -911,17 +911,6 @@ export default function App() {
       </footer>
 
       <a
-        className="call-fab"
-        href={callHref}
-        onClick={() => handlePhoneClick("call_fab")}
-        aria-label="اتصال مباشر"
-        rel="noreferrer"
-      >
-        <span className="call-fab-note">اتصل الآن</span>
-        <img src="/icons/phone.svg" width="32" height="32" alt="" />
-      </a>
-
-      <a
         className="whatsapp-fab"
         href={getWhatsAppUrl("السلام عليكم، عندي استفسار بخصوص مكيف السيارة")}
         onClick={(e) =>

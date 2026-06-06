@@ -1040,7 +1040,6 @@ select {
   .hero-car-container,
   .gallery-item img,
   .btn,
-  .call-fab,
   .whatsapp-fab,
   .offer-info h3,
   .site-loader-spinner,
@@ -1237,8 +1236,7 @@ select {
 }
 
 /* Floating Contact Buttons */
-.whatsapp-fab,
-.call-fab {
+.whatsapp-fab {
   position: fixed;
   right: 30px;
   width: 65px;
@@ -1259,24 +1257,12 @@ select {
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
 }
 
-.call-fab {
-  bottom: 110px;
-  background: var(--bg-black);
-  box-shadow: 0 4px 20px rgba(17, 17, 17, 0.32);
-}
-
-.whatsapp-fab:hover,
-.call-fab:hover {
+.whatsapp-fab:hover {
   transform: scale(1.1);
 }
 
 .whatsapp-fab img {
   width: 38px;
-}
-
-.call-fab img {
-  width: 32px;
-  height: 32px;
 }
 
 /* القائمة الجانبية (Drawer) */
@@ -2170,8 +2156,7 @@ select {
   flex-wrap: wrap;
 }
 
-.whatsapp-fab-note,
-.call-fab-note {
+.whatsapp-fab-note {
   position: absolute;
   right: 78px;
   white-space: nowrap;
@@ -2184,8 +2169,7 @@ select {
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
-.whatsapp-fab-note::after,
-.call-fab-note::after {
+.whatsapp-fab-note::after {
   content: "";
   position: absolute;
   right: -6px;
@@ -2245,8 +2229,7 @@ select {
     width: 100%;
   }
 
-  .whatsapp-fab,
-  .call-fab {
+  .whatsapp-fab {
     right: 16px;
     width: 58px;
     height: 58px;
@@ -2256,12 +2239,7 @@ select {
     bottom: 18px;
   }
 
-  .call-fab {
-    bottom: 88px;
-  }
-
-  .whatsapp-fab-note,
-  .call-fab-note {
+  .whatsapp-fab-note {
     right: 68px;
     font-size: 0.8rem;
     padding: 7px 10px;
